@@ -1,0 +1,113 @@
+PODS:
+  - Amplify (1.29.2):
+    - Amplify/Default (= 1.29.2)
+  - Amplify/Default (1.29.2)
+  - amplify_auth_cognito_ios (0.0.1):
+    - Amplify (= 1.29.2)
+    - amplify_flutter_ios
+    - Flutter
+  - amplify_flutter_ios (0.0.1):
+    - Amplify (= 1.29.2)
+    - AWSPluginsCore (= 1.29.2)
+    - Flutter
+  - amplify_secure_storage (0.0.1):
+    - Flutter
+  - AWSCore (2.30.4)
+  - AWSPluginsCore (1.29.2):
+    - Amplify (= 1.29.2)
+    - AWSCore (~> 2.30.1)
+  - connectivity_plus (0.0.1):
+    - Flutter
+    - ReachabilitySwift
+  - device_info_plus (0.0.1):
+    - Flutter
+  - Flutter (1.0.0)
+  - flutter_native_splash (0.0.1):
+    - Flutter
+  - flutter_secure_storage (6.0.0):
+    - Flutter
+  - FMDB (2.7.5):
+    - FMDB/standard (= 2.7.5)
+  - FMDB/standard (2.7.5)
+  - package_info_plus (0.4.5):
+    - Flutter
+  - path_provider_foundation (0.0.1):
+    - Flutter
+    - FlutterMacOS
+  - ReachabilitySwift (5.0.0)
+  - sqflite (0.0.2):
+    - Flutter
+    - FMDB (>= 2.7.5)
+  - url_launcher_ios (0.0.1):
+    - Flutter
+
+DEPENDENCIES:
+  - amplify_auth_cognito_ios (from `.symlinks/plugins/amplify_auth_cognito_ios/ios`)
+  - amplify_flutter_ios (from `.symlinks/plugins/amplify_flutter_ios/ios`)
+  - amplify_secure_storage (from `.symlinks/plugins/amplify_secure_storage/ios`)
+  - connectivity_plus (from `.symlinks/plugins/connectivity_plus/ios`)
+  - device_info_plus (from `.symlinks/plugins/device_info_plus/ios`)
+  - Flutter (from `Flutter`)
+  - flutter_native_splash (from `.symlinks/plugins/flutter_native_splash/ios`)
+  - flutter_secure_storage (from `.symlinks/plugins/flutter_secure_storage/ios`)
+  - package_info_plus (from `.symlinks/plugins/package_info_plus/ios`)
+  - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/darwin`)
+  - sqflite (from `.symlinks/plugins/sqflite/ios`)
+  - url_launcher_ios (from `.symlinks/plugins/url_launcher_ios/ios`)
+
+SPEC REPOS:
+  trunk:
+    - Amplify
+    - AWSCore
+    - AWSPluginsCore
+    - FMDB
+    - ReachabilitySwift
+
+EXTERNAL SOURCES:
+  amplify_auth_cognito_ios:
+    :path: ".symlinks/plugins/amplify_auth_cognito_ios/ios"
+  amplify_flutter_ios:
+    :path: ".symlinks/plugins/amplify_flutter_ios/ios"
+  amplify_secure_storage:
+    :path: ".symlinks/plugins/amplify_secure_storage/ios"
+  connectivity_plus:
+    :path: ".symlinks/plugins/connectivity_plus/ios"
+  device_info_plus:
+    :path: ".symlinks/plugins/device_info_plus/ios"
+  Flutter:
+    :path: Flutter
+  flutter_native_splash:
+    :path: ".symlinks/plugins/flutter_native_splash/ios"
+  flutter_secure_storage:
+    :path: ".symlinks/plugins/flutter_secure_storage/ios"
+  package_info_plus:
+    :path: ".symlinks/plugins/package_info_plus/ios"
+  path_provider_foundation:
+    :path: ".symlinks/plugins/path_provider_foundation/darwin"
+  sqflite:
+    :path: ".symlinks/plugins/sqflite/ios"
+  url_launcher_ios:
+    :path: ".symlinks/plugins/url_launcher_ios/ios"
+
+SPEC CHECKSUMS:
+  Amplify: 955400b4b5f29832357f682e15c659d049028306
+  amplify_auth_cognito_ios: 34fde9ef483cc1a822086d70b6b3dc29e4dd8fba
+  amplify_flutter_ios: 9da0b5e66278d761b28a6df6af4e6df4829536d9
+  amplify_secure_storage: 501cbdac671a050090d48dfcc002d5637d3f4a55
+  AWSCore: 19b8233fe2d0ed3ccf5cff833a615814282cdc90
+  AWSPluginsCore: 787b6199af91f6662171cbd66ad9a876530aed50
+  connectivity_plus: 413a8857dd5d9f1c399a39130850d02fe0feaf7e
+  device_info_plus: e5c5da33f982a436e103237c0c85f9031142abed
+  Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
+  flutter_native_splash: 52501b97d1c0a5f898d687f1646226c1f93c56ef
+  flutter_secure_storage: 23fc622d89d073675f2eaa109381aefbcf5a49be
+  FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
+  package_info_plus: 6c92f08e1f853dc01228d6f553146438dafcd14e
+  path_provider_foundation: c68054786f1b4f3343858c1e1d0caaded73f0be9
+  ReachabilitySwift: 985039c6f7b23a1da463388634119492ff86c825
+  sqflite: 6d358c025f5b867b29ed92fc697fd34924e11904
+  url_launcher_ios: 08a3dfac5fb39e8759aeb0abbd5d9480f30fc8b4
+
+PODFILE CHECKSUM: 1df1bb3ed89ef4be6115286519e24a9fad12e640
+
+COCOAPODS: 1.12.0
