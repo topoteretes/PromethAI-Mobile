@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:prometh_ai/screens/result/delivery_card.dart';
-import 'package:prometh_ai/state/delivery.dart';
+import 'package:prometh_ai/api/delivery_api.dart';
 import 'package:prometh_ai/state/factor.dart';
 import 'package:prometh_ai/widget/progress.dart';
 import 'package:prometh_ai/widget/texts/normal_body.dart';

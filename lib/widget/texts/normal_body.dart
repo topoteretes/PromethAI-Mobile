@@ -18,7 +18,6 @@ class NormalBody extends StatelessWidget {
   Widget build(BuildContext context) => Text(
         title,
         style: tt(context).bodyMedium!.copyWith(color: color ?? (inverted ? C.back : C.front)),
-        softWrap: false,
-        overflow: TextOverflow.fade,
+        softWrap: true,
       );
 }

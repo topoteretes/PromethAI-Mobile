@@ -1,15 +1,15 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:prometh_ai/api/dio/dio_ext.dart';
 import 'package:prometh_ai/model/delivery_request.dart';
 import 'package:prometh_ai/model/delivery_response.dart';
 import 'package:prometh_ai/model/name_amount.dart';
 import 'package:prometh_ai/state/error.dart';
 import 'package:prometh_ai/state/session_id.dart';
-import 'package:prometh_ai/utils/dio/dio_ext.dart';
 
 import 'api.dart';
-import 'mode_speed.dart';
-import 'user_id.dart';
+import '../state/mode_speed.dart';
+import '../state/user_id.dart';
 
 CancelToken? _token;
 

@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:prometh_ai/utils/dio/dio_debug.dart';
+import 'package:prometh_ai/api/dio/dio_debug.dart';
 
 import '../env/.env.dart';
 

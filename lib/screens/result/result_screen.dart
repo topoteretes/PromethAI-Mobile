@@ -10,8 +10,9 @@ import 'package:prometh_ai/widget/base_screen.dart';
 import 'package:prometh_ai/widget/texts/display_small.dart';
 
 import '../../widget/texts/normal_title.dart';
+import 'recipe_result.dart';
 
-enum ResultType { delivery, restaurant }
+enum ResultType { delivery, recipes, restaurant }
 
 class ResultScreen extends HookConsumerWidget {
   const ResultScreen({super.key});
@@ -54,6 +55,7 @@ class ResultScreen extends HookConsumerWidget {
               ),
               segments: const [
                 ButtonSegment(value: ResultType.delivery, label: DisplaySmall('Delivery')),
+                ButtonSegment(value: ResultType.recipes, label: DisplaySmall('Recipes')),
                 ButtonSegment(value: ResultType.restaurant, label: DisplaySmall('Restaurant')),
               ],
               selected: {selectedSegment.value},
@@ -68,6 +70,7 @@ class ResultScreen extends HookConsumerWidget {
                   physics: const NeverScrollableScrollPhysics(),
                   children: const [
                     DeliveryResult(),
+                    RecipeResult(),
                     RestaurantResult(),
                   ],
                 ),

@@ -1,4 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:prometh_ai/api/api.dart';
+import 'package:prometh_ai/api/dio/dio_ext.dart';
 import 'package:prometh_ai/ext/list_ext.dart';
 import 'package:prometh_ai/model/diet_goal_request.dart';
 import 'package:prometh_ai/model/diet_goal_response.dart';
@@ -9,9 +11,7 @@ import 'package:prometh_ai/model/tree.dart';
 import 'package:prometh_ai/state/app_state.dart';
 import 'package:prometh_ai/state/mode_speed.dart';
 import 'package:prometh_ai/state/user_id.dart';
-import 'package:prometh_ai/utils/dio/dio_ext.dart';
 
-import 'api.dart';
 import 'path.dart';
 import 'session_id.dart';
 

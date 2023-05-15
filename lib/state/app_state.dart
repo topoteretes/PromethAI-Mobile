@@ -6,6 +6,7 @@ enum AppState {
   goal,
   prevJourneys,
   result,
+  recipeDetail,
 }
 
 class AppStateNotifier extends StateNotifier<AppState> {
@@ -19,4 +20,5 @@ class AppStateNotifier extends StateNotifier<AppState> {
   start() => state = AppState.start;
   prevJourneys() => state = AppState.prevJourneys;
   result() => state = AppState.result;
+  recipeDetail() => state = AppState.recipeDetail;
 }

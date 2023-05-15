@@ -13,6 +13,7 @@ import 'package:prometh_ai/utils/page_creator.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'loading_screen.dart';
+import 'result/recipe_detail.dart';
 
 class HomeScreen extends HookConsumerWidget {
   const HomeScreen({super.key});
@@ -30,6 +31,7 @@ class HomeScreen extends HookConsumerWidget {
         if (appState.index >= AppState.goal.index) ...levels.mapp((i) => pageCreator(GoalScreen(pathTop: i), key: i.toString())),
         if (appState == AppState.prevJourneys) pageCreator(const PreviousJourneysScreen()),
         if (appState.index >= AppState.result.index) pageCreator(const ResultScreen()),
+        if (appState.index >= AppState.recipeDetail.index) pageCreator(const RecipeDetailScreen()),
         if (error != null) pageCreator(const ErrorScreen()),
       ],
     );

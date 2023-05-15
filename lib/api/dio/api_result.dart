@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:prometh_ai/utils/dio/api_error.dart';
-import 'package:prometh_ai/utils/logger.dart';
+
+import 'api_error.dart';
 
 abstract class ApiResult<T> {
   static const String _jsonNodeData = "response";
@@ -12,7 +12,6 @@ abstract class ApiResult<T> {
     if (responseData[_jsonNodeErrors] != null) {
       return ServerError.fromResponse(response);
     } else if (responseData[_jsonNodeData] != null) {
-      L.d("----->response.data[_jsonNodeData]: ${response.data[_jsonNodeData]}");
       return Success(mapper(response.data[_jsonNodeData]));
     } else {
       return InternalError();
