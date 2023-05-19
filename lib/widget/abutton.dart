@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:prometh_ai/settings.dart';
 import 'package:prometh_ai/theme.dart';
+import 'package:prometh_ai/widget/texts/button_title.dart';
 import 'package:prometh_ai/widget/theme_selectors.dart';
-
-import 'texts/normal_body.dart';
 
 class AButton extends StatelessWidget {
   final bool inverted;
@@ -23,7 +22,7 @@ class AButton extends StatelessWidget {
           outlinedButtonTheme: OutlinedButtonThemeData(
             style: OutlinedButton.styleFrom(
                 shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(R.normal)),
+                  borderRadius: BorderRadius.all(Radius.circular(R.xxx)),
                 ),
                 side: BorderSide(color: inverted ? C.back : C.front, width: 2),
                 backgroundColor: inverted ? C.back : C.front),
@@ -35,7 +34,7 @@ class AButton extends StatelessWidget {
             width: double.infinity,
             height: 65,
             child: Center(
-              child: NormalBody(
+              child: ButtonTitle(
                 title,
                 inverted: !inverted,
               ),

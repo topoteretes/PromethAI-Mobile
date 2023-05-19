@@ -56,7 +56,7 @@ class InputText extends HookWidget {
       this.error,
       this.backgroundColor = C.back,
       this.borderColor = C.front,
-      this.cornerRadius = 12})
+      this.cornerRadius = 24})
       : super(key: key);
 
   static InputDecoration getDecoration(
@@ -79,6 +79,7 @@ class InputText extends HookWidget {
         errorMaxLines: 2,
         fillColor: backgroundColor,
         hintText: placeholder,
+        hintStyle: tt(context).labelMedium!.copyWith(color: C.grey3),
         labelStyle: tt(context).labelSmall,
         filled: true,
         border: OutlineInputBorder(
@@ -121,7 +122,7 @@ class InputText extends HookWidget {
           textInputAction: textInputAction,
           autocorrect: false,
           onEditingComplete: onEditingComplete,
-          style: tt(context).labelMedium!.copyWith(color: C.front),
+          style: tt(context).labelMedium,
           inputFormatters: inputFormatters,
           onFieldSubmitted: onFieldSubmitted,
           autofocus: autofocus,

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:prometh_ai/settings.dart';
 import 'package:prometh_ai/theme.dart';
-import 'package:prometh_ai/widget/aicon_button.dart';
-import 'package:prometh_ai/widget/texts/normal_body.dart';
+import 'package:prometh_ai/widget/input_text.dart';
+import 'package:prometh_ai/widget/svg_button.dart';
 
 class PromptBox extends HookConsumerWidget {
   final String title;
@@ -15,29 +15,32 @@ class PromptBox extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) => SizedBox(
         height: 51,
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            if (restart) AIconButton(onPressed: () {}, icon: Icons.refresh),
-            if (restart) const SizedBox(width: M.normal),
+            const SizedBox(width: M.normal),
             Expanded(
-              child: Container(
-                padding: const EdgeInsets.all(M.normal),
-                decoration: BoxDecoration(
-                  border: Border.all(width: 1, color: C.grey),
-                  borderRadius: const BorderRadius.all(Radius.circular(R.normal)),
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    NormalBody(title, color: C.grey2),
-                    const Spacer(),
-                    AIconButton(onPressed: () {}, icon: Icons.mic),
-                    const SizedBox(width: M.small),
-                    AIconButton(onPressed: () {}, icon: Icons.camera_alt),
-                  ],
-                ),
-              ),
-            ),
+                child: InputText(
+                    onChanged: (_) {},
+                    backgroundColor: C.grey2,
+                    placeholder: "Ask something",
+                    borderColor: C.grey2,
+                    suffixIcon: SVGButton(
+                      onPressed: () {},
+                      icon: 'assets/svgs/mic.svg.vec',
+                      color: C.grey,
+                      iconSize: 17,
+                      size: 32,
+                    ))),
+            if (restart) const SizedBox(width: M.normal),
+            if (restart)
+              SVGButton(
+                onPressed: () {},
+                icon: 'assets/svgs/reload.svg.vec',
+                color: C.grey,
+                iconSize: 24,
+                size: 32,
+              )
           ],
         ),
       );

@@ -27,11 +27,9 @@ class TreeNotifier extends StateNotifier<Tree> {
 
   start() async {
     final topLevelGoals = await _getTopLevelGoals();
-    state = state.copyWith(children: topLevelGoals);
-    ref.read(PathNotifier.provider.notifier).change(state.children.first.name);
 
-    final appStateNotifier = ref.read(AppStateNotifier.provider.notifier);
-    appStateNotifier.goal();
+    state = state.copyWith(children: topLevelGoals);
+
     await _updateGoals([], topLevelGoals);
   }
 
@@ -42,8 +40,14 @@ class TreeNotifier extends StateNotifier<Tree> {
 
   goDown(Tree node) async {
     final path = ref.read(PathNotifier.provider);
+    final pathNotifier = ref.read(PathNotifier.provider.notifier);
+
     final selected = state.findSelected(path);
-    ref.read(PathNotifier.provider.notifier).add(node.name);
+    pathNotifier.add(node.name);
+
+    final appStateNotifier = ref.read(AppStateNotifier.provider.notifier);
+    appStateNotifier.goal();
+
     await _updateGoals(path, selected.children);
   }
 

@@ -13,12 +13,14 @@ import 'package:prometh_ai/state/journey.dart';
 import 'package:prometh_ai/state/path.dart';
 import 'package:prometh_ai/state/tree.dart';
 import 'package:prometh_ai/theme.dart';
+import 'package:prometh_ai/utils/after_delay.dart';
 import 'package:prometh_ai/widget/abutton.dart';
 import 'package:prometh_ai/widget/aicon_button.dart';
-import 'package:prometh_ai/widget/base_screen.dart';
 import 'package:prometh_ai/widget/confirm_dialog.dart';
 import 'package:prometh_ai/widget/ex_cent_progress.dart';
+import 'package:prometh_ai/widget/slide_switcher.dart';
 import 'package:prometh_ai/widget/prompt_box.dart';
+import 'package:prometh_ai/widget/slide_switcher.dart';
 
 class GoalScreen extends HookConsumerWidget {
   final int pathTop;
@@ -34,9 +36,10 @@ class GoalScreen extends HookConsumerWidget {
     final tree = ref.watch(TreeNotifier.provider);
     final fullPath = ref.watch(PathNotifier.provider);
 
+    final selectedSegment = useState(0);
+
     final previousFullPath = usePrevious(fullPath);
     final path = (fullPath.length < pathTop ? (previousFullPath ?? []) : fullPath).sublist(0, pathTop);
-
     final selectedGoal = tree.findSelected(path);
     final menuGoals = tree.findMenu(path);
 
@@ -66,60 +69,67 @@ class GoalScreen extends HookConsumerWidget {
 
     final hasGoals = menuGoals.first.children.isNotEmpty;
 
-    return BaseScreen(
-        child: SizedBox(
-      width: double.infinity,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          AIconButton(
-            onPressed: path.length == 1 ? appStateNotifier.start : pathNotifier.back,
-            icon: Icons.keyboard_arrow_up_rounded,
-            size: 32,
-          ),
-          const SizedBox(height: M.small),
-          GoalMenu(path: path),
-          const SizedBox(height: M.normal),
-          (menuGoals.isEmpty)
-              ? const ExCentProgress()
-              : Flexible(
-                  child: Container(
-                    color: C.grey3,
-                    padding: const EdgeInsets.all(M.normal),
-                    child: Column(
-                      children: [
-                        const PromptBox(
-                          title: "Question",
-                          restart: true,
-                        ),
-                        const SizedBox(height: M.large),
-                        Expanded(
-                          child: PageView(
-                            physics: const NeverScrollableScrollPhysics(),
-                            controller: pageController,
-                            children: menuGoals.mapp((g) => OneGoal(node: g)),
-                          ),
-                        )
-                      ],
+    return Scaffold(
+      body: SafeArea(
+        top: false,
+        child: (menuGoals.isEmpty)
+            ? const ExCentProgress()
+            : Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  GoalMenu(path: path),
+                  const SizedBox(height: M.normal),
+                  const PromptBox(
+                    title: "Question",
+                    restart: true,
+                  ),
+                  const SizedBox(height: M.large),
+                  Container(
+                    width: 134,
+                    height: 33,
+                    margin: const EdgeInsets.only(left: M.normal),
+                    child: SlideSwitcher(
+                      onChange: (value) => async(() => selectedSegment.value = value)(),
+                      options: const [SlideSwitcherOption("Range", 0), SlideSwitcherOption("Select", 1)],
                     ),
                   ),
-                ),
-          Padding(
-            padding: const EdgeInsets.only(top: M.normal, left: M.normal, right: M.normal),
-            child: Column(
-              children: [
-                if (hasGoals) AButton(title: "Show results", onPressed: appStateNotifier.result),
-                AButton(
-                  title: "Exit & save journey",
-                  onPressed: () => confirmDialog(context, onSure: journeyNotifier.exitAndSave),
-                  inverted: true,
-                ),
-              ],
-            ),
-          ),
-        ],
+                  const SizedBox(height: M.large),
+                  Expanded(
+                    child: PageView(
+                      physics: const NeverScrollableScrollPhysics(),
+                      controller: pageController,
+                      children: menuGoals.mapp((g) => OneGoal(node: g, isSelect: selectedSegment.value == 1)),
+                    ),
+                  ),
+                  if (hasGoals)
+                    Padding(
+                      padding: const EdgeInsets.all(M.normal),
+                      child: Row(
+                        children: [
+                          AIconButton(
+                              onPressed: pathNotifier.back,
+                              icon: Icons.keyboard_arrow_up_rounded,
+                              size: 64,
+                              iconSize: 32,
+                              color: C.grey,
+                              hasBorder: true),
+                          const SizedBox(width: M.normal),
+                          Flexible(child: AButton(title: "Show results", onPressed: appStateNotifier.result)),
+                        ],
+                      ),
+                    ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: M.normal, right: M.normal),
+                    child: AButton(
+                      title: "Exit & save journey",
+                      onPressed: () => confirmDialog(context, onSure: journeyNotifier.exitAndSave),
+                      inverted: true,
+                    ),
+                  ),
+                ],
+              ),
       ),
-    ));
+    );
   }
 }

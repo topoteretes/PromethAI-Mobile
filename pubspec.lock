@@ -185,14 +185,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.3.1+7"
-  back_button_interceptor:
-    dependency: "direct main"
-    description:
-      name: back_button_interceptor
-      sha256: e47660f2178a4392eb72001f9594d3fdcb5efde93e59d2819d61fda499e781c8
-      url: "https://pub.dev"
-    source: hosted
-    version: "6.0.2"
   boolean_selector:
     dependency: transitive
     description:
@@ -385,14 +377,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.17.2"
-  cupertino_icons:
-    dependency: "direct main"
-    description:
-      name: cupertino_icons
-      sha256: e35129dc44c9118cee2a5603506d823bab99c68393879edb440e0090d07586be
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.0.5"
   dart_style:
     dependency: transitive
     description:
@@ -516,7 +500,7 @@ packages:
     source: sdk
     version: "0.0.0"
   flutter_native_splash:
-    dependency: "direct main"
+    dependency: "direct dev"
     description:
       name: flutter_native_splash
       sha256: af665ef80a213a9ed502845a3d7a61b9acca4100ee7e9f067a7440bc3acd6730
@@ -592,14 +576,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  flutter_use:
-    dependency: "direct main"
-    description:
-      name: flutter_use
-      sha256: "920801bd3c4b961187fc8575f286fc4c1f112d38352b45712a6bee265b38a65f"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.0.3"
   flutter_web_plugins:
     dependency: transitive
     description: flutter
@@ -758,7 +734,7 @@ packages:
     source: hosted
     version: "0.6.7"
   json_annotation:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: json_annotation
       sha256: c33da08e136c3df0190bd5bbe51ae1df4a7d96e7954d1d7249fea2968a72d317
@@ -1090,6 +1066,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.99"
+  slide_switcher:
+    dependency: "direct main"
+    description:
+      name: slide_switcher
+      sha256: "5fda4741919814b33971d12392f24edc92c5b39b8656367b38a19d4c578be4f4"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.1.2"
   smithy:
     dependency: transitive
     description:

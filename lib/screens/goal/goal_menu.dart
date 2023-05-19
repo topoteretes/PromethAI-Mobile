@@ -7,6 +7,7 @@ import 'package:prometh_ai/model/tree.dart';
 import 'package:prometh_ai/settings.dart';
 import 'package:prometh_ai/state/path.dart';
 import 'package:prometh_ai/state/tree.dart';
+import 'package:prometh_ai/theme.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 import 'goal_title.dart';
@@ -39,9 +40,9 @@ class GoalMenu extends HookConsumerWidget {
       return null;
     }, []);
 
-    return SizedBox(
-      height: 28,
-      width: double.infinity,
+    return Container(
+      height: 100,
+      color: C.front,
       child: Center(
         child: ScrollablePositionedList.builder(
           itemCount: menuGoals.length,

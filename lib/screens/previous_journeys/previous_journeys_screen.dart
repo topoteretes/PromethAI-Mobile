@@ -20,6 +20,7 @@ class PreviousJourneysScreen extends HookConsumerWidget {
     final journey = ref.watch(JourneyNotifier.provider);
 
     return BaseScreen(
+      bottomPadding: false,
       child: Padding(
         padding: const EdgeInsets.all(M.normal),
         child: Column(

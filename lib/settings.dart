@@ -16,7 +16,9 @@ class M {
 }
 
 class R {
+  static const xxx = 32.0;
   static const huge = 24.0;
+  static const big = 16.0;
   static const normal = 8.0;
   static const small = normal / 2;
   static const tiny = small / 2;

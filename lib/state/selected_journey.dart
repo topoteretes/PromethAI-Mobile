@@ -9,6 +9,7 @@ class SelectedJourneyNotifier extends StateNotifier<Journey?> {
   SelectedJourneyNotifier(this.ref) : super(null);
 
   store(Journey journey) => state = journey;
+
   open() {
     state = null;
     final appStateNotifier = ref.read(AppStateNotifier.provider.notifier);

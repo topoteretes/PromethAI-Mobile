@@ -37,7 +37,6 @@ class JourneyNotifier extends HydratedStateNotifier<List<Journey>> {
   }
 
   @override
-  @override
   List<Journey> fromJson(Map<String, dynamic> json) =>
       json[key] == null ? [] : (json[key] as List<dynamic>).mapp((m) => Journey.fromJson(m));
 
@@ -45,12 +44,11 @@ class JourneyNotifier extends HydratedStateNotifier<List<Journey>> {
   Map<String, dynamic> toJson(List<Journey> state) => {key: state};
 
   startNew() async {
-    final appStateNotifier = ref.read(AppStateNotifier.provider.notifier);
-    appStateNotifier.initialGoals();
+    final selectedJourneyNotifier = ref.read(SelectedJourneyNotifier.provider.notifier);
 
     final journey = Journey(tree: Tree.empty, created: DateTimeExt.timestamp(), path: [], modified: DateTimeExt.timestamp());
     state = [...state, journey]..sort(_sorter);
-    ref.read(SelectedJourneyNotifier.provider.notifier).store(journey);
+    selectedJourneyNotifier.store(journey);
 
     await _updateNotifiers(journey);
   }

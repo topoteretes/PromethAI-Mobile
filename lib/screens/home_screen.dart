@@ -12,7 +12,6 @@ import 'package:prometh_ai/state/path.dart';
 import 'package:prometh_ai/utils/page_creator.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import 'loading_screen.dart';
 import 'result/recipe_detail.dart';
 
 class HomeScreen extends HookConsumerWidget {
@@ -27,7 +26,6 @@ class HomeScreen extends HookConsumerWidget {
       onPopPage: (route, result) => false,
       pages: [
         if (appState.index >= AppState.start.index) pageCreator(const StartScreen()),
-        if (appState == AppState.initialGoals) pageCreator(const LoadingScreen()),
         if (appState.index >= AppState.goal.index) ...levels.mapp((i) => pageCreator(GoalScreen(pathTop: i), key: i.toString())),
         if (appState == AppState.prevJourneys) pageCreator(const PreviousJourneysScreen()),
         if (appState.index >= AppState.result.index) pageCreator(const ResultScreen()),

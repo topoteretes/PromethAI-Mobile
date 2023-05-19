@@ -13,26 +13,21 @@ dependencies:
   amplify_authenticator: any
   amplify_flutter: any
   async: any
-  back_button_interceptor: any
   cached_network_image: any
   collection: any
   collection_ext: any
   connectivity_plus: any
-  cupertino_icons: any
   device_info_plus: any
   dio: any
   flutter_hooks: any
-  flutter_native_splash: any
   flutter_riverpod: any
   flutter_secure_storage: any
   flutter_svg: any
-  flutter_use: any
   freezed_annotation: any
   google_fonts: any
   hooks_riverpod: any
   hydrated_riverpod: any
   intl: any
-  json_annotation: any
   logger: any
   path: any
   path_provider: any
@@ -49,6 +44,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_native_splash: any
   flutter_lints: ^2.0.0
   image_res: any
   build_runner: any
