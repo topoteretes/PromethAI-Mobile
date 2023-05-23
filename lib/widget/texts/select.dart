@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:prometh_ai/settings.dart';
 import 'package:prometh_ai/theme.dart';
-import 'package:prometh_ai/widget/slide_switcher.dart';
 
 class Select extends HookConsumerWidget {
   final bool selected;

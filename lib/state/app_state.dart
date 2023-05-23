@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 enum AppState {
   start,
   goal,
-  prevJourneys,
   result,
   recipeDetail,
 }
@@ -16,7 +15,6 @@ class AppStateNotifier extends StateNotifier<AppState> {
 
   goal() => state = AppState.goal;
   start() => state = AppState.start;
-  prevJourneys() => state = AppState.prevJourneys;
   result() => state = AppState.result;
   recipeDetail() => state = AppState.recipeDetail;
 }

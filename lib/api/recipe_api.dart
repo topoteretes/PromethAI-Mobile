@@ -14,7 +14,7 @@ CancelToken? _token;
 
 final recipeAPI = FutureProvider.autoDispose.family<RecipeResponse, List<NameAmount>>((ref, factors) async {
   final payload = RecipeRequest(
-    userId: ref.read(UserIdNotifier.provider),
+    userId: ref.read(UserIdNotifier.provider)!,
     sessionId: ref.read(sessionId)!,
     factors: factors,
   );

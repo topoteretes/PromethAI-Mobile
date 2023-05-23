@@ -11,6 +11,7 @@ class C {
   static const grey2 = Color(0xFFF2F2F2);
   static const grey3 = Color(0xFF9A9A9A);
   static const grey4 = Color(0xFFE9E9E9);
+  static const purple = Color(0xFF550879);
   static const grey5 = Color.fromARGB(255, 228, 228, 228);
 }
 

@@ -7,7 +7,6 @@ import 'package:prometh_ai/state/tree.dart';
 import 'package:prometh_ai/theme.dart';
 import 'package:prometh_ai/widget/aicon_button.dart';
 import 'package:prometh_ai/widget/pill_button.dart';
-import 'package:prometh_ai/widget/texts/normal_body.dart';
 import 'package:prometh_ai/widget/texts/select.dart';
 import 'package:prometh_ai/widget/theme_selectors.dart';
 

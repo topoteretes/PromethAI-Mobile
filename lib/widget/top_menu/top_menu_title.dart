@@ -5,11 +5,11 @@ import 'package:prometh_ai/settings.dart';
 import 'package:prometh_ai/theme.dart';
 import 'package:prometh_ai/widget/theme_selectors.dart';
 
-class GoalTitle extends StatelessWidget {
+class TopMenuTitle extends StatelessWidget {
   final Tree node;
   final bool selected;
 
-  const GoalTitle({super.key, required this.node, required this.selected});
+  const TopMenuTitle({super.key, required this.node, required this.selected});
 
   @override
   Widget build(BuildContext context) => Container(

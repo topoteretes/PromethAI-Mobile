@@ -10,11 +10,11 @@ import 'package:prometh_ai/state/tree.dart';
 import 'package:prometh_ai/theme.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
-import 'goal_title.dart';
+import 'top_menu_title.dart';
 
-class GoalMenu extends HookConsumerWidget {
+class TopMenu extends HookConsumerWidget {
   final List<String> path;
-  const GoalMenu({super.key, required this.path});
+  const TopMenu({super.key, required this.path});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -41,7 +41,7 @@ class GoalMenu extends HookConsumerWidget {
     }, []);
 
     return Container(
-      height: 100,
+      height: 48,
       color: C.front,
       child: Center(
         child: ScrollablePositionedList.builder(
@@ -53,7 +53,7 @@ class GoalMenu extends HookConsumerWidget {
             return InkWell(
               key: ValueKey(goal.goal.name),
               onTap: () => pathNotifier.change(goal.name),
-              child: GoalTitle(node: goal, selected: selectedGoal.goal == goal.goal),
+              child: TopMenuTitle(node: goal, selected: selectedGoal.goal == goal.goal),
             );
           },
           itemScrollController: itemScrollController.value,

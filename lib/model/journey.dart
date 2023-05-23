@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:prometh_ai/ext/date_time_ext.dart';
 
 import 'tree.dart';
 
@@ -7,8 +8,6 @@ part 'journey.g.dart';
 
 @freezed
 class Journey with _$Journey {
-  static Journey root = Journey(created: 0, modified: 0, path: [], tree: Tree.empty);
-
   const factory Journey({
     required Tree tree,
     required int created,
@@ -17,4 +16,7 @@ class Journey with _$Journey {
   }) = _Journey;
 
   factory Journey.fromJson(Map<String, dynamic> json) => _$JourneyFromJson(json);
+
+  static starter() => Journey(
+      tree: Tree.starter, created: DateTimeExt.timestamp(), path: [Tree.starter.children.first.name], modified: DateTimeExt.timestamp());
 }

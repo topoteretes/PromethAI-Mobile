@@ -1066,14 +1066,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.99"
-  slide_switcher:
-    dependency: "direct main"
-    description:
-      name: slide_switcher
-      sha256: "5fda4741919814b33971d12392f24edc92c5b39b8656367b38a19d4c578be4f4"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.1.2"
   smithy:
     dependency: transitive
     description:

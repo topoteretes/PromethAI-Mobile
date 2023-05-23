@@ -15,7 +15,7 @@ CancelToken? _token;
 
 final restaurantAPI = FutureProvider.autoDispose.family<RestaurantResponse, List<NameAmount>>((ref, factors) async {
   final payload = RestaurantRequest(
-    userId: ref.read(UserIdNotifier.provider),
+    userId: ref.read(UserIdNotifier.provider)!,
     sessionId: ref.read(sessionId)!,
     modelSpeed: ref.read(modelSpeed),
     factors: factors,

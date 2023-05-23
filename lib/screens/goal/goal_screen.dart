@@ -4,8 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:prometh_ai/ext/list_ext.dart';
+import 'package:prometh_ai/hook/use_path.dart';
 import 'package:prometh_ai/model/tree.dart';
-import 'package:prometh_ai/screens/goal/goal_menu.dart';
+import 'package:prometh_ai/widget/top_menu/top_menu.dart';
 import 'package:prometh_ai/screens/goal/one_goal.dart';
 import 'package:prometh_ai/settings.dart';
 import 'package:prometh_ai/state/app_state.dart';
@@ -20,7 +21,6 @@ import 'package:prometh_ai/widget/confirm_dialog.dart';
 import 'package:prometh_ai/widget/ex_cent_progress.dart';
 import 'package:prometh_ai/widget/slide_switcher.dart';
 import 'package:prometh_ai/widget/prompt_box.dart';
-import 'package:prometh_ai/widget/slide_switcher.dart';
 
 class GoalScreen extends HookConsumerWidget {
   final int pathTop;
@@ -34,14 +34,12 @@ class GoalScreen extends HookConsumerWidget {
     final pathNotifier = ref.read(PathNotifier.provider.notifier);
 
     final tree = ref.watch(TreeNotifier.provider);
-    final fullPath = ref.watch(PathNotifier.provider);
 
     final selectedSegment = useState(0);
+    final path = usePath(ref, pathTop);
 
-    final previousFullPath = usePrevious(fullPath);
-    final path = (fullPath.length < pathTop ? (previousFullPath ?? []) : fullPath).sublist(0, pathTop);
-    final selectedGoal = tree.findSelected(path);
-    final menuGoals = tree.findMenu(path);
+    final selectedGoal = tree.findSelected(path.value);
+    final menuGoals = tree.findMenu(path.value);
 
     final pageController = usePageController();
 
@@ -78,7 +76,8 @@ class GoalScreen extends HookConsumerWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  GoalMenu(path: path),
+                  Container(height: 63, color: C.front),
+                  TopMenu(path: path.value),
                   const SizedBox(height: M.normal),
                   const PromptBox(
                     title: "Question",

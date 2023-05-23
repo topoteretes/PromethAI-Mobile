@@ -15,7 +15,7 @@ CancelToken? _token;
 
 final deliveryAPI = FutureProvider.autoDispose.family<DeliveryResponse, List<NameAmount>>((ref, factors) async {
   final payload = DeliveryRequest(
-    userId: ref.read(UserIdNotifier.provider),
+    userId: ref.read(UserIdNotifier.provider)!,
     sessionId: ref.read(sessionId)!,
     modelSpeed: ref.read(modelSpeed),
     factors: factors,

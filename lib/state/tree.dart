@@ -2,8 +2,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:prometh_ai/api/api.dart';
 import 'package:prometh_ai/api/dio/dio_ext.dart';
 import 'package:prometh_ai/ext/list_ext.dart';
-import 'package:prometh_ai/model/diet_goal_request.dart';
-import 'package:prometh_ai/model/diet_goal_response.dart';
 import 'package:prometh_ai/model/diet_sub_goal_request.dart';
 import 'package:prometh_ai/model/diet_sub_goal_response.dart';
 import 'package:prometh_ai/model/name_amount.dart';
@@ -23,22 +21,19 @@ class TreeNotifier extends StateNotifier<Tree> {
   final Ref ref;
   static final provider = StateNotifierProvider<TreeNotifier, Tree>(TreeNotifier.new);
 
-  TreeNotifier(this.ref) : super(Tree.empty);
-
-  start() async {
-    final topLevelGoals = await _getTopLevelGoals();
-
-    state = state.copyWith(children: topLevelGoals);
-
-    await _updateGoals([], topLevelGoals);
-  }
+  TreeNotifier(this.ref) : super(Tree.starter);
 
   updateAmount(NameAmount goal) {
     final path = ref.read(PathNotifier.provider);
     state = state.updateAmount([...path, goal.name], goal.amount);
   }
 
-  goDown(Tree node) async {
+  goDown(Tree node, {int? forceAmount}) async {
+    final treeNotifier = ref.read(TreeNotifier.provider.notifier);
+    if (forceAmount != null) {
+      treeNotifier.updateAmount(node.goal.copyWith(amount: 100));
+    }
+
     final path = ref.read(PathNotifier.provider);
     final pathNotifier = ref.read(PathNotifier.provider.notifier);
 
@@ -66,20 +61,9 @@ class TreeNotifier extends StateNotifier<Tree> {
     return topLevelNodes.map((g) => g.copyWith(children: nodeMapByGoalName[g.name]!)).toList();
   }
 
-  Future<List<Tree>> _getTopLevelGoals() async {
-    final payload = DietGoalRequest(
-      userId: ref.read(UserIdNotifier.provider),
-      sessionId: ref.read(sessionId)!,
-      modelSpeed: ref.read(modelSpeed),
-    );
-    final result =
-        await ref.read(dio).safePost('/generate-diet-goal', DietGoalResponse.fromJson, data: {'payload': payload.toJson()}, ref: ref);
-    return result.goals.mapp((name) => Tree(goal: NameAmount(name: name, amount: 0), children: []))..sort(_sorter);
-  }
-
   Future<Map<String, List<Tree>>> _getGoals(List<Tree> factors) async {
     final payload = DietSubGoalRequest(
-      userId: ref.read(UserIdNotifier.provider),
+      userId: ref.read(UserIdNotifier.provider)!,
       sessionId: ref.read(sessionId)!,
       modelSpeed: ref.read(modelSpeed),
       factors: factors.mapp((n) => n.goal),

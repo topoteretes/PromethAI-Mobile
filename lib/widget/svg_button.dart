@@ -40,7 +40,6 @@ class SVGButton extends StatelessWidget {
             onTap: onPressed,
             child: SvgPicture(
               AssetBytesLoader(icon),
-              colorFilter: ColorFilter.mode(color, BlendMode.color),
               height: iconSize,
             ),
           ),

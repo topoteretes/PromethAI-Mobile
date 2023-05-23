@@ -3,7 +3,6 @@ import 'package:prometh_ai/ext/int_ext.dart';
 import 'package:prometh_ai/ext/list_ext.dart';
 import 'package:prometh_ai/screens/error_screen.dart';
 import 'package:prometh_ai/screens/goal/goal_screen.dart';
-import 'package:prometh_ai/screens/previous_journeys/previous_journeys_screen.dart';
 import 'package:prometh_ai/screens/result/result_screen.dart';
 import 'package:prometh_ai/screens/start/start_screen.dart';
 import 'package:prometh_ai/state/app_state.dart';
@@ -27,7 +26,6 @@ class HomeScreen extends HookConsumerWidget {
       pages: [
         if (appState.index >= AppState.start.index) pageCreator(const StartScreen()),
         if (appState.index >= AppState.goal.index) ...levels.mapp((i) => pageCreator(GoalScreen(pathTop: i), key: i.toString())),
-        if (appState == AppState.prevJourneys) pageCreator(const PreviousJourneysScreen()),
         if (appState.index >= AppState.result.index) pageCreator(const ResultScreen()),
         if (appState.index >= AppState.recipeDetail.index) pageCreator(const RecipeDetailScreen()),
         if (error != null) pageCreator(const ErrorScreen()),

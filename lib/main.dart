@@ -26,7 +26,7 @@ void main() async {
   }
 
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-      statusBarColor: C.back, // Color for Android
+      statusBarColor: C.front, // Color for Android
       statusBarBrightness: Brightness.light // Dark == white status bar -- for IOS.
       ));
 

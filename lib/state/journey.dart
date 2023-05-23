@@ -1,9 +1,9 @@
 import 'package:amplify_flutter/amplify_flutter.dart';
+import 'package:collection/collection.dart';
 import 'package:hydrated_riverpod/hydrated_riverpod.dart';
 import 'package:prometh_ai/ext/date_time_ext.dart';
 import 'package:prometh_ai/ext/list_ext.dart';
 import 'package:prometh_ai/model/journey.dart';
-import 'package:prometh_ai/model/tree.dart';
 import 'package:prometh_ai/state/selected_journey.dart';
 
 import 'app_state.dart';
@@ -21,19 +21,15 @@ class JourneyNotifier extends HydratedStateNotifier<List<Journey>> {
   JourneyNotifier(this.ref) : super([]);
 
   _updateNotifiers(Journey journey) async {
-    final user = await Amplify.Auth.getCurrentUser();
-    // Set userid on the first use
-    ref.read(UserIdNotifier.provider.notifier).state = user.userId;
-
     final pathNotifier = ref.read(PathNotifier.provider.notifier);
     final treeNotifier = ref.read(TreeNotifier.provider.notifier);
 
-    pathNotifier.reset([...journey.path]);
     treeNotifier.reset(journey.tree);
+    pathNotifier.reset([...journey.path]);
 
-    if (journey.path.isEmpty) {
-      await treeNotifier.start();
-    }
+    final userNotifier = ref.read(UserIdNotifier.provider.notifier);
+    final user = await Amplify.Auth.getCurrentUser();
+    userNotifier.state = user.userId;
   }
 
   @override
@@ -43,17 +39,12 @@ class JourneyNotifier extends HydratedStateNotifier<List<Journey>> {
   @override
   Map<String, dynamic> toJson(List<Journey> state) => {key: state};
 
-  startNew() async {
-    final selectedJourneyNotifier = ref.read(SelectedJourneyNotifier.provider.notifier);
-
-    final journey = Journey(tree: Tree.empty, created: DateTimeExt.timestamp(), path: [], modified: DateTimeExt.timestamp());
-    state = [...state, journey]..sort(_sorter);
-    selectedJourneyNotifier.store(journey);
-
-    await _updateNotifiers(journey);
-  }
-
   _updateStateWithJourney(Journey journey) => state = [...state.where((j) => j.created != journey.created), journey]..sort(_sorter);
+
+  start() {
+    final selectedJourney = ref.read(SelectedJourneyNotifier.provider);
+    _updateNotifiers(selectedJourney);
+  }
 
   deleteAll() => state = [];
 
@@ -61,14 +52,19 @@ class JourneyNotifier extends HydratedStateNotifier<List<Journey>> {
     final appStateNotifier = ref.read(AppStateNotifier.provider.notifier);
     final selectedJourney = ref.read(SelectedJourneyNotifier.provider);
     final path = ref.read(PathNotifier.provider);
+    final selectedJourneyNotifier = ref.read(SelectedJourneyNotifier.provider.notifier);
 
-    if (selectedJourney != null && path.isNotEmpty) {
+    if (path.isNotEmpty) {
       final tree = ref.read(TreeNotifier.provider);
-      final updatedJourney = state.firstWhere((j) => j.created == selectedJourney.created);
+      final updatedJourney = state.firstWhereOrNull((j) => j.created == selectedJourney.created) ?? selectedJourney;
       final journeyToSave = updatedJourney.copyWith(tree: tree, path: path, modified: DateTimeExt.timestamp());
       _updateStateWithJourney(journeyToSave);
     }
+
     appStateNotifier.start();
+    final newJourney = Journey.starter();
+    _updateNotifiers(newJourney);
+    selectedJourneyNotifier.store(newJourney);
   }
 
   resume(Journey j) {
