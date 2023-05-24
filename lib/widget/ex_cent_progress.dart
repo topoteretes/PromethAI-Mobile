@@ -3,8 +3,10 @@ import 'package:flutter/widgets.dart';
 import 'progress.dart';
 
 class ExCentProgress extends StatelessWidget {
-  const ExCentProgress({super.key});
+  final bool inverted;
+
+  const ExCentProgress({super.key, this.inverted = false});
 
   @override
-  Widget build(BuildContext context) => const Expanded(child: Center(child: Progress()));
+  Widget build(BuildContext context) => Expanded(child: Center(child: Progress(inverted: inverted)));
 }

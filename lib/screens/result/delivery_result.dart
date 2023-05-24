@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:prometh_ai/screens/result/delivery_card.dart';
 import 'package:prometh_ai/api/delivery_api.dart';
+import 'package:prometh_ai/settings.dart';
 import 'package:prometh_ai/state/factor.dart';
 import 'package:prometh_ai/widget/progress.dart';
 import 'package:prometh_ai/widget/texts/normal_body.dart';
@@ -15,13 +16,16 @@ class DeliveryResult extends HookConsumerWidget {
     final factors = ref.watch(factorNotifier);
     final response = ref.watch(deliveryAPI(factors));
 
-    return response.map(
-      data: (data) => InkWell(
-        onTap: () => launchUrl(Uri.parse(data.value.url)),
-        child: DeliveryCard(response: data.value, size: "large"),
+    return Padding(
+      padding: const EdgeInsets.only(left: M.normal, right: M.normal),
+      child: response.map(
+        data: (data) => InkWell(
+          onTap: () => launchUrl(Uri.parse(data.value.url)),
+          child: DeliveryCard(response: data.value, size: "large"),
+        ),
+        error: (error) => const Center(child: NormalBody("No delivery found, try to refine your factors!")),
+        loading: (_) => const Center(child: Progress(inverted: true)),
       ),
-      error: (error) => const Center(child: NormalBody("No delivery found, try to refine your factors!")),
-      loading: (_) => const Center(child: Progress()),
     );
   }
 }

@@ -1,7 +1,7 @@
 name: prometh_ai
 description: PromethAI.
 publish_to: 'none'
-version: 1.0.6+6
+version: 1.0.7+7
 
 environment:
   sdk: '>=2.19.6 <3.0.0'
@@ -34,6 +34,7 @@ dependencies:
   pexels_api: any
   pretty_dio_logger: any
   scrollable_positioned_list: any
+  smooth_page_indicator: any
   throttling: any
   url_launcher: any
   uuid: any

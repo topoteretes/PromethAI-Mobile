@@ -8,8 +8,8 @@ class Progress extends StatelessWidget {
   const Progress({super.key, this.inverted = false, this.color});
 
   @override
-  Widget build(BuildContext context) => const CircularProgressIndicator(
-        color: C.front,
+  Widget build(BuildContext context) => CircularProgressIndicator(
+        color: inverted ? C.back : C.front,
         strokeWidth: 4,
       );
 }

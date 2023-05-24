@@ -24,7 +24,6 @@ class StartScreen extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final journeyNotifier = ref.read(JourneyNotifier.provider.notifier);
-    final treeNotifier = ref.read(TreeNotifier.provider.notifier);
     final journey = ref.watch(JourneyNotifier.provider);
 
     final userId = ref.watch(UserIdNotifier.provider);
@@ -34,6 +33,7 @@ class StartScreen extends HookConsumerWidget {
 
     useEffect(async((journeyNotifier.start)), []);
 
+    final renderProgress = userId == null || selectedGoal.children.isEmpty;
     return Scaffold(
       backgroundColor: C.back,
       body: SafeArea(
@@ -53,9 +53,9 @@ class StartScreen extends HookConsumerWidget {
             ),
             TopMenu(path: path.value),
             const Spacer(),
-            if (userId == null) const ExCentProgress(),
-            if (userId != null)
-              ...selectedGoal.children.mapp((c) => PillButton(title: c.name, onPressed: () => treeNotifier.goDown(c, forceAmount: 100))),
+            if (renderProgress) const ExCentProgress(),
+            if (!renderProgress)
+              ...selectedGoal.children.mapp((c) => PillButton(title: c.name, onPressed: () => journeyNotifier.newJourney(c))),
             Align(
               alignment: Alignment.centerLeft,
               child: Padding(

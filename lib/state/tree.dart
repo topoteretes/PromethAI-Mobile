@@ -28,12 +28,7 @@ class TreeNotifier extends StateNotifier<Tree> {
     state = state.updateAmount([...path, goal.name], goal.amount);
   }
 
-  goDown(Tree node, {int? forceAmount}) async {
-    final treeNotifier = ref.read(TreeNotifier.provider.notifier);
-    if (forceAmount != null) {
-      treeNotifier.updateAmount(node.goal.copyWith(amount: 100));
-    }
-
+  goDown(Tree node) async {
     final path = ref.read(PathNotifier.provider);
     final pathNotifier = ref.read(PathNotifier.provider.notifier);
 
@@ -43,12 +38,12 @@ class TreeNotifier extends StateNotifier<Tree> {
     final appStateNotifier = ref.read(AppStateNotifier.provider.notifier);
     appStateNotifier.goal();
 
-    await _updateGoals(path, selected.children);
+    await updateGoals(path, selected.children);
   }
 
   reset(Tree tree) => state = tree;
 
-  Future<void> _updateGoals(List<String> path, List<Tree> topLevelGoals) async {
+  Future<void> updateGoals(List<String> path, List<Tree> topLevelGoals) async {
     if (topLevelGoals.first.children.isNotEmpty) {
       return;
     }

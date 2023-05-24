@@ -21,6 +21,7 @@ import 'package:prometh_ai/widget/confirm_dialog.dart';
 import 'package:prometh_ai/widget/ex_cent_progress.dart';
 import 'package:prometh_ai/widget/slide_switcher.dart';
 import 'package:prometh_ai/widget/prompt_box.dart';
+import 'package:collection/collection.dart';
 
 class GoalScreen extends HookConsumerWidget {
   final int pathTop;
@@ -65,7 +66,7 @@ class GoalScreen extends HookConsumerWidget {
       return null;
     }, [selectedGoal]);
 
-    final hasGoals = menuGoals.first.children.isNotEmpty;
+    final hasGoals = menuGoals.firstOrNull?.children.isNotEmpty ?? false;
 
     return Scaffold(
       body: SafeArea(

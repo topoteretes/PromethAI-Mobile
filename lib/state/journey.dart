@@ -4,6 +4,7 @@ import 'package:hydrated_riverpod/hydrated_riverpod.dart';
 import 'package:prometh_ai/ext/date_time_ext.dart';
 import 'package:prometh_ai/ext/list_ext.dart';
 import 'package:prometh_ai/model/journey.dart';
+import 'package:prometh_ai/model/tree.dart';
 import 'package:prometh_ai/state/selected_journey.dart';
 
 import 'app_state.dart';
@@ -30,6 +31,8 @@ class JourneyNotifier extends HydratedStateNotifier<List<Journey>> {
     final userNotifier = ref.read(UserIdNotifier.provider.notifier);
     final user = await Amplify.Auth.getCurrentUser();
     userNotifier.state = user.userId;
+
+    treeNotifier.updateGoals([], journey.tree.children);
   }
 
   @override
@@ -68,9 +71,19 @@ class JourneyNotifier extends HydratedStateNotifier<List<Journey>> {
   }
 
   resume(Journey j) {
-    ref.read(SelectedJourneyNotifier.provider.notifier).store(j);
+    final selectedJourneyNotifier = ref.read(SelectedJourneyNotifier.provider.notifier);
+    selectedJourneyNotifier.store(j);
     final appStateNotifier = ref.read(AppStateNotifier.provider.notifier);
     appStateNotifier.goal();
     _updateNotifiers(j);
+  }
+
+  newJourney(Tree tree) {
+    final selectedJourney = ref.read(SelectedJourneyNotifier.provider);
+    final selectedJourneyNotifier = ref.read(SelectedJourneyNotifier.provider.notifier);
+    selectedJourneyNotifier.store(selectedJourney.copyWith(created: DateTimeExt.timestamp(), modified: DateTimeExt.timestamp()));
+
+    final treeNotifier = ref.read(TreeNotifier.provider.notifier);
+    treeNotifier.goDown(tree);
   }
 }

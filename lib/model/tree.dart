@@ -1,4 +1,3 @@
-import 'package:collection/collection.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:prometh_ai/model/name_amount.dart';
 
@@ -6,21 +5,21 @@ part 'tree.freezed.dart';
 
 part 'tree.g.dart';
 
+class TreeRoot {
+  static const String cook = "Cook";
+  static const String order = "Order";
+  static const String eatOut = "Eat out";
+}
+
 @freezed
 class Tree with _$Tree {
   static const rootName = "ROOT_NAME";
   static const rootAmount = -1000;
 
-  static List<Tree> base = [
-    const Tree(goal: NameAmount(name: "Composition", amount: 0), children: []),
-    const Tree(goal: NameAmount(name: "Access", amount: 0), children: []),
-    const Tree(goal: NameAmount(name: "Cuisine", amount: 0), children: []),
-  ];
-
-  static Tree starter = Tree(goal: const NameAmount(name: rootName, amount: rootAmount), children: [
-    Tree(goal: const NameAmount(name: "Cook", amount: 0), children: base),
-    Tree(goal: const NameAmount(name: "Order", amount: 0), children: base),
-    Tree(goal: const NameAmount(name: "Eat out", amount: 0), children: base),
+  static Tree starter = const Tree(goal: NameAmount(name: rootName, amount: rootAmount), children: [
+    Tree(goal: NameAmount(name: TreeRoot.cook, amount: 50), children: []),
+    Tree(goal: NameAmount(name: TreeRoot.order, amount: 50), children: []),
+    Tree(goal: NameAmount(name: TreeRoot.eatOut, amount: 50), children: []),
   ]);
 
   const factory Tree({
@@ -70,7 +69,7 @@ extension Ext on Tree {
   Tree findSelected(List<String> path) {
     var result = this;
     for (var segment in path) {
-      result = result.children.firstWhereOrNull((c) => c.name == segment) ?? Tree.starter;
+      result = result.children.firstWhere((c) => c.name == segment);
     }
     return result;
   }

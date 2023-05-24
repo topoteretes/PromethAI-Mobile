@@ -6,12 +6,14 @@ import 'package:prometh_ai/widget/theme_selectors.dart';
 
 class AButton extends StatelessWidget {
   final bool inverted;
+  final bool outline;
   final String title;
   final VoidCallback onPressed;
 
   const AButton({
     super.key,
     this.inverted = false,
+    this.outline = false,
     required this.title,
     required this.onPressed,
   });
@@ -24,7 +26,7 @@ class AButton extends StatelessWidget {
                 shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(R.xxx)),
                 ),
-                side: BorderSide(color: inverted ? C.back : C.front, width: 2),
+                side: BorderSide(color: outline ? C.back.withAlpha(128) : (inverted ? C.back : C.front), width: 2),
                 backgroundColor: inverted ? C.back : C.front),
           ),
         ),
