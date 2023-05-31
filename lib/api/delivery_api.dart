@@ -26,7 +26,7 @@ final deliveryAPI = FutureProvider.autoDispose.family<DeliveryResponse, List<Nam
   _token = CancelToken();
 
   try {
-    final result = await ref.watch(dio).safePost(
+    final result = await ref.read(dio).safePost(
           '/delivery-request',
           DeliveryResponse.fromJson,
           cancelToken: _token,

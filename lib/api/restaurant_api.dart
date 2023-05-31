@@ -24,7 +24,7 @@ final restaurantAPI = FutureProvider.autoDispose.family<RestaurantResponse, List
   _token = CancelToken();
 
   try {
-    final result = await ref.watch(dio).safePost(
+    final result = await ref.read(dio).safePost(
           '/restaurant-request',
           RestaurantResponse.fromJson,
           cancelToken: _token,

@@ -1,7 +1,7 @@
 name: prometh_ai
 description: PromethAI.
 publish_to: 'none'
-version: 1.0.7+7
+version: 1.0.9+9
 
 environment:
   sdk: '>=2.19.6 <3.0.0'
@@ -31,16 +31,19 @@ dependencies:
   logger: any
   path: any
   path_provider: any
+  permission_handler: any
   pexels_api: any
   pretty_dio_logger: any
   scrollable_positioned_list: any
   smooth_page_indicator: any
+  sound_stream: any
   throttling: any
   url_launcher: any
   uuid: any
+  vector_graphics: any
   vector_graphics_compiler: any
   vector_math: any
-  vector_graphics: any
+  web_socket_channel: any
 
 dev_dependencies:
   flutter_test:

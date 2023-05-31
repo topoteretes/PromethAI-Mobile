@@ -6,6 +6,8 @@ class A {
 
 class S {
   static const normal = 16.0;
+  static const deepgramURL = 'wss://api.deepgram.com/v1/listen?encoding=linear16&sample_rate=16000&language=en-GB';
+  static const deepgramApiKey = '45936a44402c7e5cf730897807c3368684b1a43c';
 }
 
 class M {

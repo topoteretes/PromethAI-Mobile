@@ -10,6 +10,7 @@ class InputText extends HookWidget {
   final String? placeholder;
   final bool obscureText;
   final bool enabled;
+  final bool readOnly;
   final bool nonEditable;
   final ValueChanged<String> onChanged;
   final VoidCallback? onEditingComplete;
@@ -52,6 +53,7 @@ class InputText extends HookWidget {
       this.placeholder,
       this.autofocus = false,
       this.minLines,
+      this.readOnly = false,
       this.focusNode,
       this.error,
       this.backgroundColor = C.back,
@@ -73,7 +75,7 @@ class InputText extends HookWidget {
     return InputDecoration(
         labelText: title,
         prefixText: prefixText,
-        contentPadding: const EdgeInsets.fromLTRB(20, 0, 20, 16),
+        contentPadding: const EdgeInsets.fromLTRB(20, 0, 28, 16),
         suffixIcon: suffixIcon,
         errorText: error,
         errorMaxLines: 2,
@@ -118,6 +120,7 @@ class InputText extends HookWidget {
           obscureText: passwordVisible.value ? false : obscureText,
           keyboardType: keyboardType ?? TextInputType.multiline,
           enabled: enabled,
+          readOnly: readOnly,
           controller: controller,
           textInputAction: textInputAction,
           autocorrect: false,

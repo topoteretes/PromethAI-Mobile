@@ -30,7 +30,6 @@ class SVGButton extends StatelessWidget {
         child: Container(
           width: size,
           height: size,
-          margin: const EdgeInsets.only(right: M.normal),
           decoration: BoxDecoration(
             border: Border.all(width: 2, color: hasBorder ? C.front2 : Colors.transparent),
             borderRadius: const BorderRadius.all(Radius.circular(R.xxx)),

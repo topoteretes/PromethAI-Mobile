@@ -22,7 +22,7 @@ final recipeAPI = FutureProvider.autoDispose.family<RecipeResponse, List<NameAmo
   _token = CancelToken();
 
   try {
-    final result = await ref.watch(dio).safePost(
+    final result = await ref.read(dio).safePost(
           '/recipe-request',
           RecipeResponse.fromJson,
           cancelToken: _token,

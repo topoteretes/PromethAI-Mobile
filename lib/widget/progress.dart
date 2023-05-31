@@ -9,7 +9,7 @@ class Progress extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => CircularProgressIndicator(
-        color: inverted ? C.back : C.front,
+        color: color ?? (inverted ? C.back : C.front),
         strokeWidth: 4,
       );
 }

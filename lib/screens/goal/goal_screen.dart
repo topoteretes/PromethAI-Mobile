@@ -20,7 +20,7 @@ import 'package:prometh_ai/widget/aicon_button.dart';
 import 'package:prometh_ai/widget/confirm_dialog.dart';
 import 'package:prometh_ai/widget/ex_cent_progress.dart';
 import 'package:prometh_ai/widget/slide_switcher.dart';
-import 'package:prometh_ai/widget/prompt_box.dart';
+import 'package:prometh_ai/widget/prompt_box/prompt_box.dart';
 import 'package:collection/collection.dart';
 
 class GoalScreen extends HookConsumerWidget {
@@ -80,10 +80,7 @@ class GoalScreen extends HookConsumerWidget {
                   Container(height: 63, color: C.front),
                   TopMenu(path: path.value),
                   const SizedBox(height: M.normal),
-                  const PromptBox(
-                    title: "Question",
-                    restart: true,
-                  ),
+                  const PromptBox(title: "Ask something"),
                   const SizedBox(height: M.large),
                   Container(
                     width: 134,

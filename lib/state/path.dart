@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:prometh_ai/model/tree.dart';
 import 'package:prometh_ai/state/app_state.dart';
+import 'package:prometh_ai/state/deepgram.dart';
 
 class PathNotifier extends StateNotifier<List<String>> {
   final Ref ref;
@@ -14,7 +15,9 @@ class PathNotifier extends StateNotifier<List<String>> {
 
   back() {
     final appStateNotifier = ref.read(AppStateNotifier.provider.notifier);
+    final deepgramNotifier = ref.read(DeepgramNotifier.provider.notifier);
 
+    deepgramNotifier.stopRecord(true);
     state = [...state]..removeLast();
     if (state.length == 1) {
       appStateNotifier.start();
