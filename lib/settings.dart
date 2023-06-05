@@ -1,3 +1,5 @@
+import 'package:flutter/widgets.dart';
+
 class A {
   static var fast = const Duration(milliseconds: 300);
   static var normal = const Duration(milliseconds: 600);
@@ -15,6 +17,10 @@ class M {
   static const normal = 16.0;
   static const small = normal / 2;
   static const tiny = small / 2;
+}
+
+class CV {
+  static const normal = Curves.easeInOut;
 }
 
 class R {

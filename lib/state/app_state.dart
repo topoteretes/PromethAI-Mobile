@@ -1,8 +1,12 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'prompt.dart';
+
 enum AppState {
   start,
-  goal,
+  inputText,
+  inputVoice,
+  refine,
   result,
   recipeDetail,
 }
@@ -13,8 +17,15 @@ class AppStateNotifier extends StateNotifier<AppState> {
 
   AppStateNotifier(this.ref) : super(AppState.start);
 
-  goal() => state = AppState.goal;
   start() => state = AppState.start;
+  refine({String prompt = ""}) {
+    state = AppState.refine;
+    final promptNotifier = ref.read(PromptNotifier.provider.notifier);
+    promptNotifier.refresh(prompt: prompt);
+  }
+
   result() => state = AppState.result;
+  inputText() => state = AppState.inputText;
+  inputVoice() => state = AppState.inputVoice;
   recipeDetail() => state = AppState.recipeDetail;
 }

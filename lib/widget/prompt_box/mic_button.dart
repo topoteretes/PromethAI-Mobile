@@ -4,16 +4,19 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:prometh_ai/settings.dart';
 import 'package:prometh_ai/state/deepgram.dart';
 import 'package:prometh_ai/theme.dart';
+import 'package:prometh_ai/widget/circle_button.dart';
+import 'package:prometh_ai/widget/circle_well.dart';
 import 'package:prometh_ai/widget/progress.dart';
-import 'package:prometh_ai/widget/svg_button.dart';
 
 class MicButton extends HookConsumerWidget {
   final VoidCallback onStart;
+  final VoidCallback onStop;
   final RecordState recordState;
 
   const MicButton({
     super.key,
     required this.onStart,
+    required this.onStop,
     required this.recordState,
   });
 
@@ -31,17 +34,15 @@ class MicButton extends HookConsumerWidget {
       return null;
     }, [recordState]);
 
-    switch (recordState) {
-      case RecordState.idle:
-        return SVGButton(
-          onPressed: onStart,
-          icon: 'assets/svgs/mic.svg.vec',
-          color: C.grey,
+    return switch (recordState) {
+      RecordState.idle => CircleButton(
+          icon: "mic",
+          size: 40,
+          color: C.front,
           iconSize: 17,
-          size: 32,
-        );
-      case RecordState.loading:
-        return const SizedBox(
+          onPressed: onStart,
+        ),
+      RecordState.loading => const SizedBox(
           width: 32,
           height: 32,
           child: Center(
@@ -53,42 +54,43 @@ class MicButton extends HookConsumerWidget {
               ),
             ),
           ),
-        );
-      case RecordState.recording:
-        return AnimatedBuilder(
-          animation: controller,
-          builder: (BuildContext context, Widget? child) => SizedBox(
-            width: 32,
-            height: 32,
-            child: Stack(
-              alignment: Alignment.center,
-              children: [
-                Container(
-                  width: 16,
-                  height: 16,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: Colors.transparent,
-                    boxShadow: [
-                      BoxShadow(
-                        color: C.front,
-                        blurRadius: animation.value,
-                        spreadRadius: animation.value,
-                      )
-                    ],
+        ),
+      RecordState.recording => CircleWell(
+          onTap: onStop,
+          child: AnimatedBuilder(
+            animation: controller,
+            builder: (BuildContext context, Widget? child) => SizedBox(
+              width: 40,
+              height: 40,
+              child: Stack(
+                alignment: Alignment.center,
+                children: [
+                  Container(
+                    width: 40,
+                    height: 40,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Colors.transparent,
+                      boxShadow: [
+                        BoxShadow(
+                          color: C.front,
+                          blurRadius: animation.value,
+                          spreadRadius: animation.value,
+                        )
+                      ],
+                    ),
                   ),
-                ),
-                const SVGButton(
-                  onPressed: null,
-                  icon: 'assets/svgs/mic_white.svg.vec',
-                  color: Colors.red,
-                  iconSize: 17,
-                  size: 32,
-                ),
-              ],
+                  const CircleButton(
+                    icon: 'mic',
+                    color: Colors.red,
+                    iconSize: 17,
+                    size: 32,
+                  ),
+                ],
+              ),
             ),
           ),
-        );
-    }
+        ),
+    };
   }
 }

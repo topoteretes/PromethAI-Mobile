@@ -1,11 +1,10 @@
 name: prometh_ai
 description: PromethAI.
 publish_to: 'none'
-version: 1.0.9+9
+version: 1.0.10+10
 
 environment:
-  sdk: '>=2.19.6 <3.0.0'
-
+  sdk: '>=3.0.0 <4.0.0'
 dependencies:
   flutter:
     sdk: flutter

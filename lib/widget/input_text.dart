@@ -125,7 +125,7 @@ class InputText extends HookWidget {
           textInputAction: textInputAction,
           autocorrect: false,
           onEditingComplete: onEditingComplete,
-          style: tt(context).labelMedium,
+          style: tt(context).bodySmall,
           inputFormatters: inputFormatters,
           onFieldSubmitted: onFieldSubmitted,
           autofocus: autofocus,
