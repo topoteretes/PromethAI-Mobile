@@ -19,8 +19,7 @@ class TopMenuTitle extends StatelessWidget {
   Widget build(BuildContext context) => Container(
         alignment: Alignment.center,
         height: 24,
-        padding: const EdgeInsets.only(left: M.small, right: M.small, bottom: 2),
-        margin: const EdgeInsets.only(left: M.tiny, right: M.tiny),
+        padding: const EdgeInsets.only(left: M.normal, right: M.normal, bottom: 2),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(12),
             color: selected ? C.white : C.front,

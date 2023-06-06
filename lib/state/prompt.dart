@@ -23,13 +23,14 @@ class PromptNotifier extends StateNotifier<PromptResponse> {
 
   PromptNotifier(this.ref) : super(const PromptResponse(prompt: "", tree: []));
 
-  refresh({String prompt = ""}) async {
+  refresh({String promptMaybe = ""}) async {
     final topCategoryNotifier = ref.read(TopCategoryNotifier.provider.notifier);
-    state = PromptResponse(prompt: prompt, tree: []);
-
-    if (prompt.isBlank) {
+    final prompt = promptMaybe.isBlank ? state.prompt : promptMaybe.trim();
+    if (prompt == state.prompt) {
       return;
     }
+    state = PromptResponse(prompt: prompt, tree: []);
+
     final payload = PromptChooseRequest(
       userId: ref.read(UserIdNotifier.provider)!,
       sessionId: ref.read(sessionId)!,
@@ -40,6 +41,7 @@ class PromptNotifier extends StateNotifier<PromptResponse> {
     _token = CancelToken();
 
     try {
+      await Future.delayed(const Duration(seconds: 10));
       state = await ref.read(dio).safePost(
             '/prompt-to-choose-meal-tree',
             PromptResponse.fromJson,
@@ -55,13 +57,15 @@ class PromptNotifier extends StateNotifier<PromptResponse> {
     }
   }
 
-  updatePreference(Tree selectedTree, String preference) {
+  togglePreference(Tree selectedTree, String preference) {
     final topCategory = ref.read(TopCategoryNotifier.provider);
     final allPath = ref.read(PathNotifier.provider);
     final path = allPath[topCategory] ?? [];
     final topTree = state.tree.firstWhere((t) => t.category == topCategory);
 
-    final tree = topTree.updateSubTree(path, selectedTree.copyWith(preference: [preference]));
+    final updatedPreference =
+        selectedTree.preference.contains(preference) && selectedTree.category != topCategory ? <String>[] : [preference];
+    final tree = topTree.updateSubTree(path, selectedTree.copyWith(preference: updatedPreference));
     final from = selectedTree.preference.firstOrNull ?? selectedTree.category;
     final prompt = state.prompt.replaceAll(from, preference);
     state = state.copyWith(tree: state.tree.mapp((e) => e.category == topCategory ? tree : e), prompt: prompt);

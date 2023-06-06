@@ -6,11 +6,13 @@ import 'theme_selectors.dart';
 class RoundButton extends StatelessWidget {
   final VoidCallback? onPressed;
   final String title;
+  final Widget? rightIcon;
 
   const RoundButton({
     super.key,
     required this.onPressed,
     required this.title,
+    this.rightIcon,
   });
 
   @override
@@ -19,7 +21,7 @@ class RoundButton extends StatelessWidget {
         borderRadius: const BorderRadius.all(Radius.circular(32)),
         child: Container(
           height: 64,
-          padding: const EdgeInsets.only(left: 16, right: 16),
+          padding: const EdgeInsets.only(left: 24, right: 24),
           decoration: const BoxDecoration(
             borderRadius: BorderRadius.all(Radius.circular(32)),
             color: C.front,
@@ -31,11 +33,18 @@ class RoundButton extends StatelessWidget {
               ),
             ],
           ),
-          child: Center(
-            child: Text(
-              title,
-              style: tt(context).titleMedium!.copyWith(color: C.white),
-            ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Center(
+                child: Text(
+                  title,
+                  style: tt(context).titleMedium!.copyWith(color: C.white),
+                ),
+              ),
+              if (rightIcon != null) rightIcon!,
+            ],
           ),
         ),
       );

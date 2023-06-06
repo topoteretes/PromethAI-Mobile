@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:prometh_ai/theme.dart';
+import 'package:prometh_ai/utils/compose.dart';
 import 'package:prometh_ai/widget/circle_button.dart';
 import 'package:prometh_ai/widget/theme_selectors.dart';
 
@@ -51,10 +52,18 @@ class OptionRow extends HookConsumerWidget {
                   "coming soon",
                   style: tt(context).titleMedium!.copyWith(color: C.grey3, fontWeight: FontWeight.w300),
                 ),
-              if (hasOptions && !disabled)
+              if (hasOptions && !disabled && selected)
                 CircleButton(
-                  onPressed: onDetail,
-                  icon: !selected ? "close" : "down_arrow",
+                  onPressed: compose(onSelect, onDetail),
+                  icon: "down_arrow",
+                  size: 24,
+                  iconColor: C.front,
+                  iconSize: !selected ? 16 : 8,
+                  color: C.white,
+                ),
+              if (!disabled && !selected)
+                CircleButton(
+                  icon: "close",
                   size: 24,
                   iconColor: C.front,
                   iconSize: !selected ? 16 : 8,

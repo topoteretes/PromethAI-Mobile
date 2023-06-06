@@ -1,4 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:prometh_ai/state/deepgram.dart';
 
 import 'prompt.dart';
 
@@ -8,7 +9,6 @@ enum AppState {
   inputVoice,
   refine,
   result,
-  recipeDetail,
 }
 
 class AppStateNotifier extends StateNotifier<AppState> {
@@ -17,15 +17,22 @@ class AppStateNotifier extends StateNotifier<AppState> {
 
   AppStateNotifier(this.ref) : super(AppState.start);
 
-  start() => state = AppState.start;
+  start() {
+    final deepgramNotifier = ref.read(DeepgramNotifier.provider.notifier);
+    deepgramNotifier.stopRecord();
+    state = AppState.start;
+  }
+
   refine({String prompt = ""}) {
+    final deepgramNotifier = ref.read(DeepgramNotifier.provider.notifier);
+    deepgramNotifier.stopRecord();
+
     state = AppState.refine;
     final promptNotifier = ref.read(PromptNotifier.provider.notifier);
-    promptNotifier.refresh(prompt: prompt);
+    promptNotifier.refresh(promptMaybe: prompt);
   }
 
   result() => state = AppState.result;
   inputText() => state = AppState.inputText;
   inputVoice() => state = AppState.inputVoice;
-  recipeDetail() => state = AppState.recipeDetail;
 }

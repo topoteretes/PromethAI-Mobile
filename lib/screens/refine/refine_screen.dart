@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:prometh_ai/screens/refine/refine_body.dart';
+import 'package:prometh_ai/screens/refine/refine_progress.dart';
 import 'package:prometh_ai/state/prompt.dart';
-import 'package:prometh_ai/widget/ex_cent_progress.dart';
-import 'package:prometh_ai/widget/prompt_box/prompt_box.dart';
 
 import 'refine_bottom.dart';
 import 'refine_top.dart';
@@ -21,7 +20,7 @@ class RefineScreen extends HookConsumerWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const RefineTop(),
-          if (showProgress) const ExCentProgress(),
+          if (showProgress) const RefineProgress(),
           if (!showProgress) const RefineBody(),
           /*       if (!showProgress)
             const Padding(

@@ -5,16 +5,14 @@ import 'package:prometh_ai/state/prompt.dart';
 import 'package:prometh_ai/theme.dart';
 import 'package:prometh_ai/widget/round_card.dart';
 import 'package:prometh_ai/widget/theme_selectors.dart';
-import 'package:prometh_ai/widget/top_menu/top_menu.dart';
 
-class RefineTop extends HookConsumerWidget {
-  const RefineTop({super.key});
+class RecipeTop extends HookConsumerWidget {
+  const RecipeTop({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final appStateNotifier = ref.read(AppStateNotifier.provider.notifier);
     final prompt = ref.watch(PromptNotifier.provider);
-    final nodes = prompt.tree;
     return Container(
       padding: const EdgeInsets.only(
         left: 16,
@@ -31,28 +29,14 @@ class RefineTop extends HookConsumerWidget {
       child: SafeArea(
         bottom: false,
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             SizedBox(
               height: 44,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-/*                  Text(
-                    "Goal: Quick veggie meal",
-                    style: tt(context).titleMedium!.copyWith(color: C.white),
-                  ),*/
-                  IconButton(
-                      padding: EdgeInsets.zero,
-                      onPressed: appStateNotifier.start,
-                      icon: const Icon(
-                        Icons.close,
-                        color: C.white,
-                        size: 28,
-                      )),
-                ],
+              child: Text(
+                "Your Meal",
+                style: tt(context).titleMedium!.copyWith(color: C.white),
               ),
             ),
             RoundCard(
@@ -72,8 +56,21 @@ class RefineTop extends HookConsumerWidget {
                 ],
               ),
             ),
-            if (nodes.isNotEmpty) const SizedBox(height: 24),
-            nodes.isNotEmpty ? TopMenu(nodes: nodes) : const SizedBox()
+            const SizedBox(height: 16),
+            SizedBox(
+              height: 40,
+              width: double.infinity,
+              child: OutlinedButton(
+                  style: OutlinedButton.styleFrom(
+                    backgroundColor: C.front,
+                    side: const BorderSide(width: 2.0, color: C.white),
+                  ),
+                  onPressed: () => appStateNotifier.refine(),
+                  child: Text(
+                    "Change preferences",
+                    style: tt(context).bodyMedium!.copyWith(color: C.white),
+                  )),
+            ),
           ],
         ),
       ),

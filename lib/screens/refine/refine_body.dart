@@ -24,6 +24,7 @@ class RefineBody extends HookConsumerWidget {
       }
       return null;
     }, [topCategory]);
+
     return Expanded(
       child: Padding(
         padding: const EdgeInsets.fromLTRB(0, 24, 0, 24),
@@ -38,7 +39,6 @@ class RefineBody extends HookConsumerWidget {
                 style: tt(context).labelMedium,
               ),
             ),
-            const SizedBox(height: 16),
             Expanded(
               child: PageView(
                 controller: controller,
