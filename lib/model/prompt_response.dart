@@ -7,8 +7,7 @@ part 'prompt_response.g.dart';
 @freezed
 class PromptResponse with _$PromptResponse {
   const factory PromptResponse({
-    required String prompt,
-    required List<Tree> tree,
+    required List<Tree> results,
   }) = _PromptResponse;
 
   factory PromptResponse.fromJson(Map<String, dynamic> json) => _$PromptResponseFromJson(json);

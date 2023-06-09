@@ -13,6 +13,7 @@ class RecipeTop extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final appStateNotifier = ref.read(AppStateNotifier.provider.notifier);
     final prompt = ref.watch(PromptNotifier.provider);
+    // final prompt = ref.watch(TreeNotifier.provider);
     return Container(
       padding: const EdgeInsets.only(
         left: 16,
@@ -48,10 +49,7 @@ class RecipeTop extends HookConsumerWidget {
                     constraints: const BoxConstraints(
                       maxWidth: 310,
                     ),
-                    child: Text(
-                      prompt.prompt,
-                      style: tt(context).bodySmall,
-                    ),
+                    child: Text(prompt, style: tt(context).bodySmall),
                   ),
                 ],
               ),

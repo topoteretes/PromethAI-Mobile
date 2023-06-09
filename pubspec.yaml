@@ -1,7 +1,7 @@
 name: prometh_ai
 description: PromethAI.
 publish_to: 'none'
-version: 1.0.11+11
+version: 1.0.12+12
 
 environment:
   sdk: '>=3.0.0 <4.0.0'

@@ -1,16 +1,16 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'prompt_choose_request.freezed.dart';
-part 'prompt_choose_request.g.dart';
+part 'prompt_decompose_request.freezed.dart';
+part 'prompt_decompose_request.g.dart';
 
 @freezed
-class PromptChooseRequest with _$PromptChooseRequest {
-  const factory PromptChooseRequest({
+class PromptDecomposeRequest with _$PromptDecomposeRequest {
+  const factory PromptDecomposeRequest({
     @JsonKey(name: "model_speed") required String modelSpeed,
     @JsonKey(name: 'user_id') required String userId,
     @JsonKey(name: 'session_id') required String sessionId,
     required String prompt,
   }) = _PromptChooseRequest;
 
-  factory PromptChooseRequest.fromJson(Map<String, dynamic> json) => _$PromptChooseRequestFromJson(json);
+  factory PromptDecomposeRequest.fromJson(Map<String, dynamic> json) => _$PromptDecomposeRequestFromJson(json);
 }

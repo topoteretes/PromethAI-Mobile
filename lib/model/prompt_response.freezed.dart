@@ -20,8 +20,7 @@ PromptResponse _$PromptResponseFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$PromptResponse {
-  String get prompt => throw _privateConstructorUsedError;
-  List<Tree> get tree => throw _privateConstructorUsedError;
+  List<Tree> get results => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -35,7 +34,7 @@ abstract class $PromptResponseCopyWith<$Res> {
           PromptResponse value, $Res Function(PromptResponse) then) =
       _$PromptResponseCopyWithImpl<$Res, PromptResponse>;
   @useResult
-  $Res call({String prompt, List<Tree> tree});
+  $Res call({List<Tree> results});
 }
 
 /// @nodoc
@@ -51,17 +50,12 @@ class _$PromptResponseCopyWithImpl<$Res, $Val extends PromptResponse>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? prompt = null,
-    Object? tree = null,
+    Object? results = null,
   }) {
     return _then(_value.copyWith(
-      prompt: null == prompt
-          ? _value.prompt
-          : prompt // ignore: cast_nullable_to_non_nullable
-              as String,
-      tree: null == tree
-          ? _value.tree
-          : tree // ignore: cast_nullable_to_non_nullable
+      results: null == results
+          ? _value.results
+          : results // ignore: cast_nullable_to_non_nullable
               as List<Tree>,
     ) as $Val);
   }
@@ -75,7 +69,7 @@ abstract class _$$_PromptResponseCopyWith<$Res>
       __$$_PromptResponseCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String prompt, List<Tree> tree});
+  $Res call({List<Tree> results});
 }
 
 /// @nodoc
@@ -89,17 +83,12 @@ class __$$_PromptResponseCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? prompt = null,
-    Object? tree = null,
+    Object? results = null,
   }) {
     return _then(_$_PromptResponse(
-      prompt: null == prompt
-          ? _value.prompt
-          : prompt // ignore: cast_nullable_to_non_nullable
-              as String,
-      tree: null == tree
-          ? _value._tree
-          : tree // ignore: cast_nullable_to_non_nullable
+      results: null == results
+          ? _value._results
+          : results // ignore: cast_nullable_to_non_nullable
               as List<Tree>,
     ));
   }
@@ -108,26 +97,23 @@ class __$$_PromptResponseCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_PromptResponse implements _PromptResponse {
-  const _$_PromptResponse(
-      {required this.prompt, required final List<Tree> tree})
-      : _tree = tree;
+  const _$_PromptResponse({required final List<Tree> results})
+      : _results = results;
 
   factory _$_PromptResponse.fromJson(Map<String, dynamic> json) =>
       _$$_PromptResponseFromJson(json);
 
+  final List<Tree> _results;
   @override
-  final String prompt;
-  final List<Tree> _tree;
-  @override
-  List<Tree> get tree {
-    if (_tree is EqualUnmodifiableListView) return _tree;
+  List<Tree> get results {
+    if (_results is EqualUnmodifiableListView) return _results;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_tree);
+    return EqualUnmodifiableListView(_results);
   }
 
   @override
   String toString() {
-    return 'PromptResponse(prompt: $prompt, tree: $tree)';
+    return 'PromptResponse(results: $results)';
   }
 
   @override
@@ -135,14 +121,13 @@ class _$_PromptResponse implements _PromptResponse {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_PromptResponse &&
-            (identical(other.prompt, prompt) || other.prompt == prompt) &&
-            const DeepCollectionEquality().equals(other._tree, _tree));
+            const DeepCollectionEquality().equals(other._results, _results));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, prompt, const DeepCollectionEquality().hash(_tree));
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_results));
 
   @JsonKey(ignore: true)
   @override
@@ -159,17 +144,14 @@ class _$_PromptResponse implements _PromptResponse {
 }
 
 abstract class _PromptResponse implements PromptResponse {
-  const factory _PromptResponse(
-      {required final String prompt,
-      required final List<Tree> tree}) = _$_PromptResponse;
+  const factory _PromptResponse({required final List<Tree> results}) =
+      _$_PromptResponse;
 
   factory _PromptResponse.fromJson(Map<String, dynamic> json) =
       _$_PromptResponse.fromJson;
 
   @override
-  String get prompt;
-  @override
-  List<Tree> get tree;
+  List<Tree> get results;
   @override
   @JsonKey(ignore: true)
   _$$_PromptResponseCopyWith<_$_PromptResponse> get copyWith =>

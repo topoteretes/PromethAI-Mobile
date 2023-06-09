@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:prometh_ai/state/deepgram.dart';
 
-import 'prompt.dart';
+import 'tree.dart';
 
 enum AppState {
   start,
@@ -18,18 +18,20 @@ class AppStateNotifier extends StateNotifier<AppState> {
   AppStateNotifier(this.ref) : super(AppState.start);
 
   start() {
-    final deepgramNotifier = ref.read(DeepgramNotifier.provider.notifier);
-    deepgramNotifier.stopRecord();
+    _stopRecord();
     state = AppState.start;
   }
 
   refine({String prompt = ""}) {
+    _stopRecord();
+    final treeNotifier = ref.read(TreeNotifier.provider.notifier);
+    treeNotifier.refresh(promptMaybe: prompt);
+    state = AppState.refine;
+  }
+
+  _stopRecord() {
     final deepgramNotifier = ref.read(DeepgramNotifier.provider.notifier);
     deepgramNotifier.stopRecord();
-
-    state = AppState.refine;
-    final promptNotifier = ref.read(PromptNotifier.provider.notifier);
-    promptNotifier.refresh(promptMaybe: prompt);
   }
 
   result() => state = AppState.result;

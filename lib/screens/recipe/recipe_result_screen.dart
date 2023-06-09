@@ -18,7 +18,7 @@ class RecipeResultScreen extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final prompt = ref.watch(PromptNotifier.provider.select((value) => value.prompt));
+    final prompt = ref.watch(PromptNotifier.provider);
     final response = ref.watch(recipeAPI(prompt));
     final recipes = response.value?.recipes ?? [];
     final index = useState(0);

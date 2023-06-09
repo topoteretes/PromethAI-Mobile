@@ -6,7 +6,7 @@ import 'package:prometh_ai/model/tree.dart';
 import 'package:prometh_ai/screens/refine/one_subtree.dart';
 import 'package:prometh_ai/settings.dart';
 import 'package:prometh_ai/state/path.dart';
-import 'package:prometh_ai/state/prompt.dart';
+import 'package:prometh_ai/state/tree.dart';
 import 'package:prometh_ai/theme.dart';
 
 class OneCategory extends HookConsumerWidget {
@@ -16,10 +16,10 @@ class OneCategory extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final prompt = ref.watch(PromptNotifier.provider);
+    final tree = ref.watch(TreeNotifier.provider);
     final path = ref.watch(PathNotifier.provider.select((s) => s[category] ?? []));
 
-    final categoryRoot = prompt.tree.firstWhere((n) => n.category == category);
+    final categoryRoot = tree.firstWhere((n) => n.category == category);
     final trees = categoryRoot.getTreeList(path);
     final previousTrees = usePrevious(trees) ?? trees;
 

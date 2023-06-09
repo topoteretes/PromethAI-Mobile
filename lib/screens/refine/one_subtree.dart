@@ -4,7 +4,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:prometh_ai/ext/list_ext.dart';
 import 'package:prometh_ai/model/tree.dart';
 import 'package:prometh_ai/state/path.dart';
-import 'package:prometh_ai/state/prompt.dart';
+import 'package:prometh_ai/state/tree.dart';
 import 'package:prometh_ai/widget/option_row.dart';
 
 class OneSubTree extends HookConsumerWidget {
@@ -15,7 +15,7 @@ class OneSubTree extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final pathNotifier = ref.read(PathNotifier.provider.notifier);
-    final promptNotifier = ref.read(PromptNotifier.provider.notifier);
+    final treeNotifier = ref.read(TreeNotifier.provider.notifier);
 
     final nodes = tree.options;
 
@@ -27,7 +27,7 @@ class OneSubTree extends HookConsumerWidget {
             title: n.category,
             selected: tree.preference.contains(n.category),
             hasOptions: n.options.isNotEmpty,
-            onSelect: () => promptNotifier.togglePreference(tree, n.category),
+            onSelect: () => treeNotifier.togglePreference(tree, n.category),
             onDetail: () => pathNotifier.add(n.category),
           ),
         ));

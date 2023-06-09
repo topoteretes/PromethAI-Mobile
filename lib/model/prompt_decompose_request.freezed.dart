@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'prompt_choose_request.dart';
+part of 'prompt_decompose_request.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,12 +14,13 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-PromptChooseRequest _$PromptChooseRequestFromJson(Map<String, dynamic> json) {
+PromptDecomposeRequest _$PromptDecomposeRequestFromJson(
+    Map<String, dynamic> json) {
   return _PromptChooseRequest.fromJson(json);
 }
 
 /// @nodoc
-mixin _$PromptChooseRequest {
+mixin _$PromptDecomposeRequest {
   @JsonKey(name: "model_speed")
   String get modelSpeed => throw _privateConstructorUsedError;
   @JsonKey(name: 'user_id')
@@ -30,15 +31,15 @@ mixin _$PromptChooseRequest {
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $PromptChooseRequestCopyWith<PromptChooseRequest> get copyWith =>
+  $PromptDecomposeRequestCopyWith<PromptDecomposeRequest> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $PromptChooseRequestCopyWith<$Res> {
-  factory $PromptChooseRequestCopyWith(
-          PromptChooseRequest value, $Res Function(PromptChooseRequest) then) =
-      _$PromptChooseRequestCopyWithImpl<$Res, PromptChooseRequest>;
+abstract class $PromptDecomposeRequestCopyWith<$Res> {
+  factory $PromptDecomposeRequestCopyWith(PromptDecomposeRequest value,
+          $Res Function(PromptDecomposeRequest) then) =
+      _$PromptDecomposeRequestCopyWithImpl<$Res, PromptDecomposeRequest>;
   @useResult
   $Res call(
       {@JsonKey(name: "model_speed") String modelSpeed,
@@ -48,9 +49,10 @@ abstract class $PromptChooseRequestCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$PromptChooseRequestCopyWithImpl<$Res, $Val extends PromptChooseRequest>
-    implements $PromptChooseRequestCopyWith<$Res> {
-  _$PromptChooseRequestCopyWithImpl(this._value, this._then);
+class _$PromptDecomposeRequestCopyWithImpl<$Res,
+        $Val extends PromptDecomposeRequest>
+    implements $PromptDecomposeRequestCopyWith<$Res> {
+  _$PromptDecomposeRequestCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -88,7 +90,7 @@ class _$PromptChooseRequestCopyWithImpl<$Res, $Val extends PromptChooseRequest>
 
 /// @nodoc
 abstract class _$$_PromptChooseRequestCopyWith<$Res>
-    implements $PromptChooseRequestCopyWith<$Res> {
+    implements $PromptDecomposeRequestCopyWith<$Res> {
   factory _$$_PromptChooseRequestCopyWith(_$_PromptChooseRequest value,
           $Res Function(_$_PromptChooseRequest) then) =
       __$$_PromptChooseRequestCopyWithImpl<$Res>;
@@ -103,7 +105,7 @@ abstract class _$$_PromptChooseRequestCopyWith<$Res>
 
 /// @nodoc
 class __$$_PromptChooseRequestCopyWithImpl<$Res>
-    extends _$PromptChooseRequestCopyWithImpl<$Res, _$_PromptChooseRequest>
+    extends _$PromptDecomposeRequestCopyWithImpl<$Res, _$_PromptChooseRequest>
     implements _$$_PromptChooseRequestCopyWith<$Res> {
   __$$_PromptChooseRequestCopyWithImpl(_$_PromptChooseRequest _value,
       $Res Function(_$_PromptChooseRequest) _then)
@@ -164,7 +166,7 @@ class _$_PromptChooseRequest implements _PromptChooseRequest {
 
   @override
   String toString() {
-    return 'PromptChooseRequest(modelSpeed: $modelSpeed, userId: $userId, sessionId: $sessionId, prompt: $prompt)';
+    return 'PromptDecomposeRequest(modelSpeed: $modelSpeed, userId: $userId, sessionId: $sessionId, prompt: $prompt)';
   }
 
   @override
@@ -200,7 +202,7 @@ class _$_PromptChooseRequest implements _PromptChooseRequest {
   }
 }
 
-abstract class _PromptChooseRequest implements PromptChooseRequest {
+abstract class _PromptChooseRequest implements PromptDecomposeRequest {
   const factory _PromptChooseRequest(
       {@JsonKey(name: "model_speed") required final String modelSpeed,
       @JsonKey(name: 'user_id') required final String userId,

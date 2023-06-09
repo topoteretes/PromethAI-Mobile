@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:prometh_ai/state/app_state.dart';
 import 'package:prometh_ai/state/prompt.dart';
+import 'package:prometh_ai/state/tree.dart';
 import 'package:prometh_ai/theme.dart';
 import 'package:prometh_ai/widget/round_card.dart';
 import 'package:prometh_ai/widget/theme_selectors.dart';
@@ -14,7 +15,7 @@ class RefineTop extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final appStateNotifier = ref.read(AppStateNotifier.provider.notifier);
     final prompt = ref.watch(PromptNotifier.provider);
-    final nodes = prompt.tree;
+    final tree = ref.watch(TreeNotifier.provider);
     return Container(
       padding: const EdgeInsets.only(
         left: 16,
@@ -65,15 +66,15 @@ class RefineTop extends HookConsumerWidget {
                       maxWidth: 310,
                     ),
                     child: Text(
-                      prompt.prompt,
+                      prompt,
                       style: tt(context).bodySmall,
                     ),
                   ),
                 ],
               ),
             ),
-            if (nodes.isNotEmpty) const SizedBox(height: 24),
-            nodes.isNotEmpty ? TopMenu(nodes: nodes) : const SizedBox()
+            if (tree.isNotEmpty) const SizedBox(height: 24),
+            tree.isNotEmpty ? TopMenu(nodes: tree) : const SizedBox()
           ],
         ),
       ),

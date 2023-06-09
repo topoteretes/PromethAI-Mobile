@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'tree.freezed.dart';
@@ -36,8 +37,8 @@ extension Ext on Tree {
     for (var segment in path) {
       final topTree = result.last;
 
-      final nextTree = topTree.options.firstWhere((c) => c.category == segment);
-      result = [...result, nextTree];
+      final nextTree = topTree.options.firstWhereOrNull((c) => c.category == segment);
+      result = nextTree != null ? [...result, nextTree] : result;
     }
     return result;
   }
