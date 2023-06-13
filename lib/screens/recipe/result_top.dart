@@ -6,14 +6,14 @@ import 'package:prometh_ai/theme.dart';
 import 'package:prometh_ai/widget/round_card.dart';
 import 'package:prometh_ai/widget/theme_selectors.dart';
 
-class RecipeTop extends HookConsumerWidget {
-  const RecipeTop({super.key});
+class ResultTop extends HookConsumerWidget {
+  const ResultTop({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final appStateNotifier = ref.read(AppStateNotifier.provider.notifier);
     final prompt = ref.watch(PromptNotifier.provider);
-    // final prompt = ref.watch(TreeNotifier.provider);
+
     return Container(
       padding: const EdgeInsets.only(
         left: 16,
@@ -49,7 +49,7 @@ class RecipeTop extends HookConsumerWidget {
                     constraints: const BoxConstraints(
                       maxWidth: 310,
                     ),
-                    child: Text(prompt, style: tt(context).bodySmall),
+                    child: Text(prompt.current, style: tt(context).bodySmall),
                   ),
                 ],
               ),

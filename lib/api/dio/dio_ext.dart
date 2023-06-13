@@ -46,7 +46,7 @@ extension DioExtensions on Dio {
           "Error message: '$errorMessage'",
           "POST body: '${stringify(data)}'",
         ];
-        ref?.read(ErrorNotifier.provider.notifier).store(message.join("\n\n"));
+        ref?.read(ErrorNotifier.provider.notifier).reset(message.join("\n\n"));
       }
       throw ApiError(code: code, message: errorMessage);
     }

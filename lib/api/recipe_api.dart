@@ -4,6 +4,7 @@ import 'package:prometh_ai/api/dio/dio_ext.dart';
 import 'package:prometh_ai/model/recipe_request.dart';
 import 'package:prometh_ai/model/recipe_response.dart';
 import 'package:prometh_ai/state/error.dart';
+import 'package:prometh_ai/state/history.dart';
 import 'package:prometh_ai/state/mode_speed.dart';
 import 'package:prometh_ai/state/session_id.dart';
 import 'package:prometh_ai/state/user_id.dart';
@@ -30,6 +31,9 @@ final recipeAPI = FutureProvider.autoDispose.family<RecipeResponse, String>((ref
           data: {'payload': payload.toJson()},
           ref: ref,
         );
+
+    final historyNotifier = ref.read(HistoryNotifier.provider.notifier);
+    historyNotifier.addAll(result.recipes, prompt);
 
     return result;
   } on Exception catch (e) {

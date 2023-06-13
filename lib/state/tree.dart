@@ -48,13 +48,13 @@ class TreeNotifier extends StateNotifier<List<Tree>> {
     final categoryFetchedNotifier = ref.read(CategoryFetchedNotifier.provider.notifier);
 
     final currentPrompt = ref.read(PromptNotifier.provider);
-    final prompt = promptMaybe.isBlank ? currentPrompt : promptMaybe.trim();
-    if (prompt == currentPrompt) {
+    final prompt = promptMaybe.isBlank ? currentPrompt.current : promptMaybe.trim();
+    if (prompt == currentPrompt.current) {
       return;
     }
 
     categoryFetchedNotifier.reset();
-    promptNotifier.store(prompt);
+    promptNotifier.reset(prompt);
     state = [];
 
     final payload = PromptDecomposeRequest(
@@ -75,6 +75,9 @@ class TreeNotifier extends StateNotifier<List<Tree>> {
             ref: ref,
           );
       state = response.results;
+
+      final originalMap = {for (var e in state) e.category: e.preference.first};
+      promptNotifier.storeMap(originalMap);
       topCategoryNotifier.update(state.first.category);
       await getCategories();
       categoryFetchedNotifier.done();
@@ -104,7 +107,18 @@ class TreeNotifier extends StateNotifier<List<Tree>> {
             ref: ref,
           );
 
-      state = response.results;
+      final existingTopCategories = state.mapp((e) => e.category);
+
+      // filter out suggestions not within the decision points
+      final newTrees = response.results.where((e) => existingTopCategories.contains(e.category));
+
+      // merge new results with tree root, keeping the original option at the top
+      state = state.mapp((e) {
+        final newTree = newTrees.firstWhereOrNull((f) => f.category == e.category);
+        final newOptions = newTree?.options ?? [];
+        final options = [...newOptions, ...e.options]..sort((a, b) => a.category.toLowerCase().compareTo(b.category.toLowerCase()));
+        return e.copyWith(options: options, preference: [...e.preference]);
+      });
     } on Exception catch (e) {
       ref.read(ErrorNotifier.provider.notifier).store(e.toString());
       rethrow;
@@ -122,9 +136,8 @@ class TreeNotifier extends StateNotifier<List<Tree>> {
     final updatedPreference =
         selectedTree.preference.contains(preference) && selectedTree.category != topCategory ? <String>[] : [preference];
     final tree = topTree.updateSubTree(path, selectedTree.copyWith(preference: updatedPreference));
-    final from = selectedTree.preference.firstOrNull ?? selectedTree.category;
 
-    promptNotifier.rewrite(from, preference);
     state = state.mapp((e) => e.category == topCategory ? tree : e);
+    promptNotifier.rewrite();
   }
 }

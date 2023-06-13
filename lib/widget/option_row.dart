@@ -9,6 +9,7 @@ class OptionRow extends HookConsumerWidget {
   final bool selected;
   final bool disabled;
   final bool hasOptions;
+  final bool padded;
   final String title;
   final VoidCallback? onSelect;
   final VoidCallback? onDetail;
@@ -20,6 +21,7 @@ class OptionRow extends HookConsumerWidget {
     this.selected = false,
     this.disabled = false,
     this.hasOptions = false,
+    this.padded = false,
     required this.title,
   });
 
@@ -32,7 +34,7 @@ class OptionRow extends HookConsumerWidget {
           border: Border.all(color: disabled ? C.grey3 : C.front),
         ),
         padding: const EdgeInsets.fromLTRB(16, 8, 10, 8),
-        margin: const EdgeInsets.only(bottom: 16),
+        margin: padded ? const EdgeInsets.only(left: 16, right: 16, bottom: 16) : const EdgeInsets.only(bottom: 16),
         child: InkWell(
           onTap: onSelect,
           borderRadius: BorderRadius.circular(44),
@@ -61,14 +63,6 @@ class OptionRow extends HookConsumerWidget {
                   iconSize: !selected ? 16 : 8,
                   color: C.white,
                 ),
-              if (!disabled && !selected)
-                CircleButton(
-                  icon: "close",
-                  size: 24,
-                  iconColor: C.front,
-                  iconSize: !selected ? 16 : 8,
-                  color: C.white,
-                )
             ],
           ),
         ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:prometh_ai/ext/color_ext.dart';
 
 import 'settings.dart';
 
@@ -14,12 +15,14 @@ class C {
   static const grey3 = Color(0xFF9A9A9A);
   static const grey4 = Color(0xFFE9E9E9);
   static const grey5 = Color.fromARGB(255, 228, 228, 228);
+  static const grey6 = Color.fromARGB(255, 58, 58, 58);
   static const purple = Color(0xFF550879);
 }
 
 final theme = ThemeData(
   brightness: Brightness.light,
   scaffoldBackgroundColor: C.back,
+  primarySwatch: C.front.material,
   fontFamily: GoogleFonts.inter().fontFamily,
   outlinedButtonTheme: OutlinedButtonThemeData(
     style: OutlinedButton.styleFrom(
@@ -31,6 +34,41 @@ final theme = ThemeData(
         textStyle: const TextStyle(fontSize: 16, color: C.front),
         foregroundColor: C.back,
         backgroundColor: C.white),
+  ),
+  elevatedButtonTheme: ElevatedButtonThemeData(
+    style: OutlinedButton.styleFrom(
+        elevation: 0,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(40)),
+        ),
+        padding: const EdgeInsets.all(M.normal),
+        side: const BorderSide(color: C.front, width: 1),
+        textStyle: const TextStyle(fontSize: 16, color: C.front, fontWeight: FontWeight.w700),
+        foregroundColor: C.front,
+        backgroundColor: C.white),
+  ),
+  inputDecorationTheme: InputDecorationTheme(
+    border: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(8),
+      borderSide: const BorderSide(
+        color: Color(0xFFC6C6C6),
+        width: 1,
+      ),
+    ),
+    enabledBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(8),
+      borderSide: const BorderSide(
+        color: Color(0xFFC6C6C6),
+        width: 1,
+      ),
+    ),
+    focusedBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(8),
+      borderSide: const BorderSide(
+        color: C.front,
+        width: 2,
+      ),
+    ),
   ),
   textTheme: const TextTheme(
     bodyLarge: TextStyle(fontSize: 20, height: 1.4202273233, fontWeight: FontWeight.w700, color: C.black),

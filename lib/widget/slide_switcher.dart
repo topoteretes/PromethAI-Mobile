@@ -53,15 +53,15 @@ class SlideSwitcher<T> extends HookConsumerWidget {
     }, [selectedIndex.value]);
 
     return SizedBox(
-      height: 33,
+      height: 40,
       child: Stack(
         alignment: Alignment.centerLeft,
         fit: StackFit.expand,
         children: [
           Container(
             decoration: BoxDecoration(
-              color: C.grey2,
-              border: Border.all(width: 1, color: C.grey2),
+              color: C.grey4,
+              border: Border.all(width: 1, color: C.grey4),
               borderRadius: const BorderRadius.all(Radius.circular(R.xxx)),
             ),
             child: Row(
@@ -75,12 +75,12 @@ class SlideSwitcher<T> extends HookConsumerWidget {
                           splashColor: Colors.transparent,
                           onTap: () => selectedIndex.value = index,
                           child: SizedBox(
-                            height: 33,
+                            height: 40,
                             child: Center(
                               child: Text(
                                 t.title,
                                 textAlign: TextAlign.center,
-                                style: tt(context).displayMedium!.copyWith(height: 1, color: C.grey3, fontWeight: FontWeight.w500),
+                                style: tt(context).bodyMedium!.copyWith(height: 1, color: C.grey6, fontWeight: FontWeight.w500),
                               ),
                             ),
                           ),
@@ -96,8 +96,8 @@ class SlideSwitcher<T> extends HookConsumerWidget {
                 clipper: InvertedCircleClipper(animation.value),
                 child: Container(
                   decoration: BoxDecoration(
-                    color: Colors.white,
-                    border: Border.all(width: 1, color: Colors.white),
+                    color: C.front,
+                    border: Border.all(width: 1, color: C.front),
                     borderRadius: const BorderRadius.all(Radius.circular(R.xxx)),
                   ),
                   child: Row(
@@ -107,7 +107,7 @@ class SlideSwitcher<T> extends HookConsumerWidget {
                               child: Text(
                                 t.title,
                                 textAlign: TextAlign.center,
-                                style: tt(context).displayMedium!.copyWith(height: 1, color: C.front),
+                                style: tt(context).bodyMedium!.copyWith(height: 1, color: C.white),
                               ),
                             ))
                         .toList(growable: false),

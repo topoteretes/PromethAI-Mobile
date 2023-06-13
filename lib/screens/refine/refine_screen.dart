@@ -20,7 +20,7 @@ class RefineScreen extends HookConsumerWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const RefineTop(),
-          if (showProgress) const RefineProgress('Identifying decision points in your prompt. Just a couple of seconds!'),
+          if (showProgress) const RefineProgress('Identifying decision points in your prompt.\nJust a couple of seconds!'),
           if (!showProgress) const RefineBody(),
           if (!showProgress) const RefineBottom()
         ],

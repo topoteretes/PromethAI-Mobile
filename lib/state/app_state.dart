@@ -7,8 +7,13 @@ enum AppState {
   start,
   inputText,
   inputVoice,
+  settings,
+  history,
+  historyDetail,
   refine,
-  result,
+  recipe,
+  recipeDetail,
+  scheduleLater,
 }
 
 class AppStateNotifier extends StateNotifier<AppState> {
@@ -34,7 +39,12 @@ class AppStateNotifier extends StateNotifier<AppState> {
     deepgramNotifier.stopRecord();
   }
 
-  result() => state = AppState.result;
+  result() => state = AppState.recipe;
   inputText() => state = AppState.inputText;
   inputVoice() => state = AppState.inputVoice;
+  recipeDetail() => state = AppState.recipeDetail;
+  historyDetail() => state = AppState.historyDetail;
+  scheduleLater() => state = AppState.scheduleLater;
+  history() => state = AppState.history;
+  settings() => state = AppState.settings;
 }

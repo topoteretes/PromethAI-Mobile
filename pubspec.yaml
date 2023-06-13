@@ -1,7 +1,7 @@
 name: prometh_ai
 description: PromethAI.
 publish_to: 'none'
-version: 1.0.12+12
+version: 1.0.13+13
 
 environment:
   sdk: '>=3.0.0 <4.0.0'
@@ -37,6 +37,7 @@ dependencies:
   scrollable_positioned_list: any
   smooth_page_indicator: any
   sound_stream: any
+  fluttertoast: any
   throttling: any
   url_launcher: any
   uuid: any

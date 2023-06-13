@@ -1,12 +1,16 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:prometh_ai/model/pexel_params.dart';
 import 'package:prometh_ai/model/recipe.dart';
 import 'package:prometh_ai/settings.dart';
+import 'package:prometh_ai/state/history.dart';
 import 'package:prometh_ai/state/pexel.dart';
+import 'package:prometh_ai/state/selected_recipe.dart';
 import 'package:prometh_ai/theme.dart';
 import 'package:prometh_ai/widget/circle_button.dart';
+import 'package:prometh_ai/widget/confirm_dialog.dart';
 import 'package:prometh_ai/widget/progress.dart';
 import 'package:prometh_ai/widget/rating.dart';
 import 'package:prometh_ai/widget/round_button.dart';
@@ -15,12 +19,21 @@ import 'package:prometh_ai/widget/vec_pic.dart';
 
 class RecipeCard extends HookConsumerWidget {
   final Recipe recipe;
+  final bool fromHistory;
 
-  const RecipeCard({super.key, required this.recipe});
+  const RecipeCard({
+    super.key,
+    required this.recipe,
+    required this.fromHistory,
+  });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final imageUrl = ref.watch(getPhotoAPI(PexelParams(query: recipe.title, size: "small")));
+    final selectedRecipeNotifier = ref.read(SelectedRecipeNotifier.provider.notifier);
+    final historyNotifier = ref.read(HistoryNotifier.provider.notifier);
+    final isFavorite =
+        ref.watch(HistoryNotifier.provider.select((e) => e.firstWhereOrNull((f) => f.recipe.title == recipe.title)?.favorite ?? false));
 
     return Container(
       margin: const EdgeInsets.only(left: M.normal, right: M.normal, bottom: M.normal),
@@ -84,9 +97,18 @@ class RecipeCard extends HookConsumerWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const CircleButton(icon: "close", size: 64, color: C.front, iconColor: C.front, borderOnly: true),
+                      fromHistory
+                          ? CircleButton(
+                              icon: "close",
+                              size: 64,
+                              color: C.front,
+                              iconColor: C.front,
+                              borderOnly: true,
+                              onPressed: () => confirmDialog(context, onSure: () => historyNotifier.remove(recipe)),
+                            )
+                          : const SizedBox(width: 64),
                       RoundButton(
-                          onPressed: () {},
+                          onPressed: () => selectedRecipeNotifier.store(recipe, fromHistory),
                           title: "Cook now",
                           rightIcon: Container(
                             width: 32,
@@ -99,7 +121,13 @@ class RecipeCard extends HookConsumerWidget {
                               iconSize: 8,
                             ),
                           )),
-                      const CircleButton(icon: "favorite", size: 64, color: C.front),
+                      CircleButton(
+                          icon: "favorite",
+                          size: 64,
+                          color: C.front,
+                          iconColor: isFavorite ? C.front : C.white,
+                          borderOnly: isFavorite,
+                          onPressed: () => historyNotifier.toggleFavorite(recipe)),
                     ],
                   ),
                 ],

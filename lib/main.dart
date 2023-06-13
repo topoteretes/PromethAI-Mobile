@@ -11,6 +11,7 @@ import 'package:prometh_ai/screens/home_screen.dart';
 import 'package:prometh_ai/theme.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'amplifyconfiguration.dart';
+import 'screens/auth/auth_builder.dart';
 import 'state/init_store.dart';
 
 final _deviceInfo = DeviceInfoPlugin();
@@ -75,9 +76,10 @@ class _AppState extends State<App> {
   @override
   Widget build(BuildContext context) => ProviderScope(
         child: Authenticator(
+          authenticatorBuilder: authBuilder,
           child: MaterialApp(
-            debugShowCheckedModeBanner: false,
             builder: Authenticator.builder(),
+            debugShowCheckedModeBanner: false,
             theme: theme,
             home: const HomeScreen(),
           ),

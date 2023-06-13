@@ -5,6 +5,7 @@ part 'recipe.g.dart';
 
 @freezed
 class Recipe with _$Recipe {
+  static const empty = Recipe(title: '', prepTime: '', rating: 0, cookTime: '', description: '', ingredients: [], instructions: []);
   const factory Recipe({
     required String title,
     required double rating,

@@ -42,4 +42,6 @@ extension Ext on Tree {
     }
     return result;
   }
+
+  Tree getLeaf(List<String> path) => getTreeList(path).last;
 }
