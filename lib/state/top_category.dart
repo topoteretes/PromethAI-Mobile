@@ -1,4 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_segment/flutter_segment.dart';
 
 class TopCategoryNotifier extends StateNotifier<String> {
   final Ref ref;
@@ -6,5 +7,8 @@ class TopCategoryNotifier extends StateNotifier<String> {
 
   TopCategoryNotifier(this.ref) : super("");
 
-  update(String category) => state = category;
+  update(String category) {
+    Segment.track(eventName: 'Change top category', properties: {'category': category});
+    state = category;
+  }
 }

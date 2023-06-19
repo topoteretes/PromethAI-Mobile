@@ -12,6 +12,13 @@ PODS:
     - Flutter
   - amplify_secure_storage (0.0.1):
     - Flutter
+  - Amplitude (8.16.3):
+    - AnalyticsConnector (~> 1.0.0)
+  - Analytics (4.1.6)
+  - AnalyticsConnector (1.0.1)
+  - AppsFlyerFramework (6.9.1):
+    - AppsFlyerFramework/Main (= 6.9.1)
+  - AppsFlyerFramework/Main (6.9.1)
   - AWSCore (2.30.4)
   - AWSPluginsCore (1.29.2):
     - Amplify (= 1.29.2)
@@ -26,6 +33,11 @@ PODS:
     - Flutter
   - flutter_secure_storage (6.0.0):
     - Flutter
+  - flutter_segment (3.12.1):
+    - Analytics (= 4.1.6)
+    - Flutter
+    - Segment-Amplitude (= 3.3.2)
+    - segment-appsflyer-ios (= 6.9.1)
   - fluttertoast (0.0.2):
     - Flutter
     - Toast
@@ -40,6 +52,15 @@ PODS:
   - permission_handler_apple (9.0.4):
     - Flutter
   - ReachabilitySwift (5.0.0)
+  - Segment-Amplitude (3.3.2):
+    - Amplitude (~> 8.3)
+    - Analytics
+  - segment-appsflyer-ios (6.9.1):
+    - Analytics
+    - segment-appsflyer-ios/Main (= 6.9.1)
+  - segment-appsflyer-ios/Main (6.9.1):
+    - Analytics
+    - AppsFlyerFramework (= 6.9.1)
   - sound_stream (0.0.1):
     - Flutter
   - sqflite (0.0.2):
@@ -58,6 +79,7 @@ DEPENDENCIES:
   - Flutter (from `Flutter`)
   - flutter_native_splash (from `.symlinks/plugins/flutter_native_splash/ios`)
   - flutter_secure_storage (from `.symlinks/plugins/flutter_secure_storage/ios`)
+  - flutter_segment (from `.symlinks/plugins/flutter_segment/ios`)
   - fluttertoast (from `.symlinks/plugins/fluttertoast/ios`)
   - package_info_plus (from `.symlinks/plugins/package_info_plus/ios`)
   - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/darwin`)
@@ -69,10 +91,16 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - Amplify
+    - Amplitude
+    - Analytics
+    - AnalyticsConnector
+    - AppsFlyerFramework
     - AWSCore
     - AWSPluginsCore
     - FMDB
     - ReachabilitySwift
+    - Segment-Amplitude
+    - segment-appsflyer-ios
     - Toast
 
 EXTERNAL SOURCES:
@@ -92,6 +120,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/flutter_native_splash/ios"
   flutter_secure_storage:
     :path: ".symlinks/plugins/flutter_secure_storage/ios"
+  flutter_segment:
+    :path: ".symlinks/plugins/flutter_segment/ios"
   fluttertoast:
     :path: ".symlinks/plugins/fluttertoast/ios"
   package_info_plus:
@@ -112,6 +142,10 @@ SPEC CHECKSUMS:
   amplify_auth_cognito_ios: 34fde9ef483cc1a822086d70b6b3dc29e4dd8fba
   amplify_flutter_ios: 9da0b5e66278d761b28a6df6af4e6df4829536d9
   amplify_secure_storage: 501cbdac671a050090d48dfcc002d5637d3f4a55
+  Amplitude: 10f20d4436fdcd38ddd5be1da7033fcc21f4143e
+  Analytics: eefe524436f904b8bb3f8c8c3425280e43b34efc
+  AnalyticsConnector: eccd7e1cd3dd18e6bd09ac2506e37d4ed43ba3f4
+  AppsFlyerFramework: dc9aa675faa8e1a2ed40fb295d3c5408ee2b972a
   AWSCore: 19b8233fe2d0ed3ccf5cff833a615814282cdc90
   AWSPluginsCore: 787b6199af91f6662171cbd66ad9a876530aed50
   connectivity_plus: 413a8857dd5d9f1c399a39130850d02fe0feaf7e
@@ -119,12 +153,15 @@ SPEC CHECKSUMS:
   Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
   flutter_native_splash: 52501b97d1c0a5f898d687f1646226c1f93c56ef
   flutter_secure_storage: 23fc622d89d073675f2eaa109381aefbcf5a49be
+  flutter_segment: 8ee2a7ab438ea47f6b5eddcadd6c2c91159dffa5
   fluttertoast: fafc4fa4d01a6a9e4f772ecd190ffa525e9e2d9c
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   package_info_plus: 6c92f08e1f853dc01228d6f553146438dafcd14e
   path_provider_foundation: c68054786f1b4f3343858c1e1d0caaded73f0be9
   permission_handler_apple: 44366e37eaf29454a1e7b1b7d736c2cceaeb17ce
   ReachabilitySwift: 985039c6f7b23a1da463388634119492ff86c825
+  Segment-Amplitude: 6c1e59c8c278a21029ba7a6a788fcb31b9233a2c
+  segment-appsflyer-ios: ddaa1da2fb63480a4766a68032f0011f4fd771a1
   sound_stream: eba0f2a5994b91d9e5009a739df6e98515a7b44f
   sqflite: 6d358c025f5b867b29ed92fc697fd34924e11904
   Toast: 91b396c56ee72a5790816f40d3a94dd357abc196

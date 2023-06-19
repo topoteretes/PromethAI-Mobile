@@ -1,17 +1,19 @@
 import 'package:amplify_flutter/amplify_flutter.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_segment/flutter_segment.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:prometh_ai/screens/error_screen.dart';
 import 'package:prometh_ai/screens/history/history_detail_screen.dart';
-import 'package:prometh_ai/screens/recipe/recipe_result_screen.dart';
 import 'package:prometh_ai/screens/recipe/recipe_detail_screen.dart';
+import 'package:prometh_ai/screens/recipe/recipe_result_screen.dart';
 import 'package:prometh_ai/screens/refine/refine_screen.dart';
 import 'package:prometh_ai/screens/start/start_screen.dart';
 import 'package:prometh_ai/state/app_state.dart';
 import 'package:prometh_ai/state/error.dart';
 import 'package:prometh_ai/state/user_id.dart';
+import 'package:prometh_ai/state/user_name.dart';
 import 'package:prometh_ai/utils/page_creator.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'recipe/schedule_later_screen.dart';
 
@@ -20,6 +22,7 @@ class HomeScreen extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final userNameNotifier = ref.read(UserNameNotifier.provider.notifier);
     final appState = ref.watch(AppStateNotifier.provider);
     final error = ref.watch(ErrorNotifier.provider);
 
@@ -28,8 +31,15 @@ class HomeScreen extends HookConsumerWidget {
       Amplify.Auth.getCurrentUser().then((user) {
         userNotifier.reset(user.userId);
       });
+      userNameNotifier.initialize();
       return null;
     }, []);
+
+    useEffect(() {
+      Segment.track(eventName: 'Navigate', properties: {'screen': appState.name});
+      return null;
+    }, [appState]);
+
     return Navigator(
       onPopPage: (route, result) => false,
       pages: [

@@ -22,6 +22,7 @@ Prompt _$PromptFromJson(Map<String, dynamic> json) {
 mixin _$Prompt {
   String get original => throw _privateConstructorUsedError;
   String get current => throw _privateConstructorUsedError;
+  String get changed => throw _privateConstructorUsedError;
   Map<String, String> get originalMap => throw _privateConstructorUsedError;
   bool get updating => throw _privateConstructorUsedError;
 
@@ -38,6 +39,7 @@ abstract class $PromptCopyWith<$Res> {
   $Res call(
       {String original,
       String current,
+      String changed,
       Map<String, String> originalMap,
       bool updating});
 }
@@ -57,6 +59,7 @@ class _$PromptCopyWithImpl<$Res, $Val extends Prompt>
   $Res call({
     Object? original = null,
     Object? current = null,
+    Object? changed = null,
     Object? originalMap = null,
     Object? updating = null,
   }) {
@@ -68,6 +71,10 @@ class _$PromptCopyWithImpl<$Res, $Val extends Prompt>
       current: null == current
           ? _value.current
           : current // ignore: cast_nullable_to_non_nullable
+              as String,
+      changed: null == changed
+          ? _value.changed
+          : changed // ignore: cast_nullable_to_non_nullable
               as String,
       originalMap: null == originalMap
           ? _value.originalMap
@@ -90,6 +97,7 @@ abstract class _$$_PromptCopyWith<$Res> implements $PromptCopyWith<$Res> {
   $Res call(
       {String original,
       String current,
+      String changed,
       Map<String, String> originalMap,
       bool updating});
 }
@@ -106,6 +114,7 @@ class __$$_PromptCopyWithImpl<$Res>
   $Res call({
     Object? original = null,
     Object? current = null,
+    Object? changed = null,
     Object? originalMap = null,
     Object? updating = null,
   }) {
@@ -117,6 +126,10 @@ class __$$_PromptCopyWithImpl<$Res>
       current: null == current
           ? _value.current
           : current // ignore: cast_nullable_to_non_nullable
+              as String,
+      changed: null == changed
+          ? _value.changed
+          : changed // ignore: cast_nullable_to_non_nullable
               as String,
       originalMap: null == originalMap
           ? _value._originalMap
@@ -136,6 +149,7 @@ class _$_Prompt implements _Prompt {
   const _$_Prompt(
       {required this.original,
       required this.current,
+      required this.changed,
       required final Map<String, String> originalMap,
       required this.updating})
       : _originalMap = originalMap;
@@ -147,6 +161,8 @@ class _$_Prompt implements _Prompt {
   final String original;
   @override
   final String current;
+  @override
+  final String changed;
   final Map<String, String> _originalMap;
   @override
   Map<String, String> get originalMap {
@@ -160,7 +176,7 @@ class _$_Prompt implements _Prompt {
 
   @override
   String toString() {
-    return 'Prompt(original: $original, current: $current, originalMap: $originalMap, updating: $updating)';
+    return 'Prompt(original: $original, current: $current, changed: $changed, originalMap: $originalMap, updating: $updating)';
   }
 
   @override
@@ -171,6 +187,7 @@ class _$_Prompt implements _Prompt {
             (identical(other.original, original) ||
                 other.original == original) &&
             (identical(other.current, current) || other.current == current) &&
+            (identical(other.changed, changed) || other.changed == changed) &&
             const DeepCollectionEquality()
                 .equals(other._originalMap, _originalMap) &&
             (identical(other.updating, updating) ||
@@ -179,7 +196,7 @@ class _$_Prompt implements _Prompt {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, original, current,
+  int get hashCode => Object.hash(runtimeType, original, current, changed,
       const DeepCollectionEquality().hash(_originalMap), updating);
 
   @JsonKey(ignore: true)
@@ -200,6 +217,7 @@ abstract class _Prompt implements Prompt {
   const factory _Prompt(
       {required final String original,
       required final String current,
+      required final String changed,
       required final Map<String, String> originalMap,
       required final bool updating}) = _$_Prompt;
 
@@ -209,6 +227,8 @@ abstract class _Prompt implements Prompt {
   String get original;
   @override
   String get current;
+  @override
+  String get changed;
   @override
   Map<String, String> get originalMap;
   @override

@@ -50,7 +50,7 @@ class BottomPanel extends HookConsumerWidget {
                 children: [
                   Container(
                     margin: const EdgeInsets.only(right: 6),
-                    child: const VecPic("bowl", iconSize: 14, color: C.front),
+                    child: VecPic("bowl", iconSize: 14, color: selectCenter ? C.front : C.white),
                   ),
                   Text(
                     'My Meal',

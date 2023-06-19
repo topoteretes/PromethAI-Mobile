@@ -1,18 +1,14 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:prometh_ai/model/pexel_params.dart';
 import 'package:prometh_ai/model/recipe.dart';
 import 'package:prometh_ai/settings.dart';
 import 'package:prometh_ai/state/history.dart';
-import 'package:prometh_ai/state/pexel.dart';
 import 'package:prometh_ai/state/selected_recipe.dart';
 import 'package:prometh_ai/theme.dart';
 import 'package:prometh_ai/widget/circle_button.dart';
 import 'package:prometh_ai/widget/confirm_dialog.dart';
-import 'package:prometh_ai/widget/progress.dart';
-import 'package:prometh_ai/widget/rating.dart';
+import 'package:prometh_ai/widget/replicate_image.dart';
 import 'package:prometh_ai/widget/round_button.dart';
 import 'package:prometh_ai/widget/theme_selectors.dart';
 import 'package:prometh_ai/widget/vec_pic.dart';
@@ -29,7 +25,6 @@ class RecipeCard extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final imageUrl = ref.watch(getPhotoAPI(PexelParams(query: recipe.title, size: "small")));
     final selectedRecipeNotifier = ref.read(SelectedRecipeNotifier.provider.notifier);
     final historyNotifier = ref.read(HistoryNotifier.provider.notifier);
     final isFavorite =
@@ -45,23 +40,9 @@ class RecipeCard extends HookConsumerWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
+          Expanded(flex: 3, child: ReplicateImage(prompt: recipe.title)),
           Expanded(
-            child: imageUrl.value == null
-                ? const Center(child: Progress())
-                : ClipRRect(
-                    borderRadius: const BorderRadius.only(
-                      topRight: Radius.circular(R.big),
-                      topLeft: Radius.circular(R.big),
-                    ),
-                    child: CachedNetworkImage(
-                      imageUrl: imageUrl.value!,
-                      fit: BoxFit.cover,
-                      width: double.infinity,
-                      filterQuality: FilterQuality.high,
-                    ),
-                  ),
-          ),
-          Expanded(
+            flex: 4,
             child: Padding(
               padding: const EdgeInsets.all(M.normal),
               child: Column(
@@ -79,9 +60,11 @@ class RecipeCard extends HookConsumerWidget {
                     recipe.description,
                     style: tt(context).bodySmall!.copyWith(color: C.black),
                     textAlign: TextAlign.left,
+                    maxLines: 6,
+                    overflow: TextOverflow.ellipsis,
                   ),
                   const SizedBox(height: M.normal),
-                  Row(
+                  /*         Row(
                     children: [
                       Text(
                         (recipe.rating / 20).toStringAsFixed(1),
@@ -92,6 +75,7 @@ class RecipeCard extends HookConsumerWidget {
                       Rating(rating: recipe.rating / 20),
                     ],
                   ),
+                  */
                   const Spacer(),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -134,7 +118,6 @@ class RecipeCard extends HookConsumerWidget {
               ),
             ),
           ),
-          const SizedBox(height: M.normal),
         ],
       ),
     );

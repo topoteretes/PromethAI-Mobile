@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_segment/flutter_segment.dart';
 import 'package:prometh_ai/api/dio/dio_ext.dart';
 import 'package:prometh_ai/model/recipe_request.dart';
 import 'package:prometh_ai/model/recipe_response.dart';
@@ -34,6 +35,7 @@ final recipeAPI = FutureProvider.autoDispose.family<RecipeResponse, String>((ref
 
     final historyNotifier = ref.read(HistoryNotifier.provider.notifier);
     historyNotifier.addAll(result.recipes, prompt);
+    Segment.track(eventName: 'Receive recipes', properties: {'prompt': prompt});
 
     return result;
   } on Exception catch (e) {

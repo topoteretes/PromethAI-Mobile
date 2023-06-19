@@ -571,6 +571,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.0"
+  flutter_segment:
+    dependency: "direct main"
+    description:
+      name: flutter_segment
+      sha256: f6365b4df453b492b7a243243ef8d7db9b9ba83dc1423be63a89af267d9f64c5
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.13.0"
   flutter_svg:
     dependency: "direct main"
     description:
@@ -670,7 +678,7 @@ packages:
     source: hosted
     version: "0.15.2"
   http:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: http
       sha256: "5895291c13fa8a3bd82e76d5627f69e0d85ca6a30dcac95c4ea19a5d555879c2"

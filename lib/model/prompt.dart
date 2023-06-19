@@ -8,6 +8,7 @@ class Prompt with _$Prompt {
   const factory Prompt({
     required String original,
     required String current,
+    required String changed,
     required Map<String, String> originalMap,
     required bool updating,
   }) = _Prompt;

@@ -24,41 +24,36 @@ class RecipeCarousel extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final index = useState(0);
 
-    return Scaffold(
-      body: SafeArea(
-        top: false,
-        child: Column(
-          children: [
-            const SizedBox(height: 24),
-            recipes.isEmpty
-                ? const ExCentProgress()
-                : Expanded(
-                    child: PageView(
-                      onPageChanged: (page) => index.value = page,
-                      children: recipes.mapp((r) => RecipeCard(
-                            recipe: r,
-                            fromHistory: fromHistory,
-                          )),
-                    ),
-                  ),
-            const SizedBox(height: M.tiny),
-            if (recipes.isNotEmpty)
-              AnimatedSmoothIndicator(
-                activeIndex: index.value,
-                count: recipes.length,
-                effect: const WormEffect(
-                    spacing: M.small,
-                    radius: R.normal,
-                    dotWidth: R.normal,
-                    dotHeight: R.normal,
-                    paintStyle: PaintingStyle.fill,
-                    strokeWidth: 1.5,
-                    dotColor: C.grey3,
-                    activeDotColor: C.front),
+    return Column(
+      children: [
+        const SizedBox(height: 24),
+        recipes.isEmpty
+            ? const ExCentProgress()
+            : Expanded(
+                child: PageView(
+                  onPageChanged: (page) => index.value = page,
+                  children: recipes.mapp((r) => RecipeCard(
+                        recipe: r,
+                        fromHistory: fromHistory,
+                      )),
+                ),
               ),
-          ],
-        ),
-      ),
+        const SizedBox(height: M.tiny),
+        if (recipes.isNotEmpty)
+          AnimatedSmoothIndicator(
+            activeIndex: index.value,
+            count: recipes.length,
+            effect: const WormEffect(
+                spacing: M.small,
+                radius: R.normal,
+                dotWidth: R.normal,
+                dotHeight: R.normal,
+                paintStyle: PaintingStyle.fill,
+                strokeWidth: 1.5,
+                dotColor: C.grey3,
+                activeDotColor: C.front),
+          ),
+      ],
     );
   }
 }

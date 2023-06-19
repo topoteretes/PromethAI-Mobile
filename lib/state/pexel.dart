@@ -14,9 +14,8 @@ final getPhotoAPI = FutureProvider.autoDispose.family<String?, PexelParams>((ref
     return cachedURL;
   }
 
-  final result = await ref
-      .watch(_pexel)
-      .searchPhotos(param.query, collection: PexelsCollection.Regular, orientation: PexelsPhotoOrientation.landscape);
+  final result =
+      await ref.read(_pexel).searchPhotos(param.query, collection: PexelsCollection.Regular, orientation: PexelsPhotoOrientation.landscape);
   final resultURL = result?.items.firstOrNull?.sources[param.size]?.link;
   if (resultURL != null) {
     _imageUrlCache[cacheKey] = resultURL;

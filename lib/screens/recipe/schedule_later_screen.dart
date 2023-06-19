@@ -48,7 +48,7 @@ class ScheduleLaterScreen extends HookConsumerWidget {
             style: tt(context).labelMedium,
           ),
         ),
-        const OptionRow(selected: false, disabled: true, title: "Block meal  time in my calendar", padded: true),
+        const OptionRow(selected: false, disabled: true, title: "Block meal time in my calendar", padded: true),
         const OptionRow(selected: false, disabled: true, title: "Order missing ingredients", padded: true),
         const OptionRow(selected: false, disabled: true, title: "Add to calorie tracker", padded: true),
         const Spacer(),

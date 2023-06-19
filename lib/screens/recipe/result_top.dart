@@ -15,11 +15,7 @@ class ResultTop extends HookConsumerWidget {
     final prompt = ref.watch(PromptNotifier.provider);
 
     return Container(
-      padding: const EdgeInsets.only(
-        left: 16,
-        right: 16,
-        bottom: 16,
-      ),
+      padding: const EdgeInsets.only(left: 16, right: 16, bottom: 16, top: 16),
       decoration: const BoxDecoration(
         borderRadius: BorderRadius.only(
           bottomLeft: Radius.circular(32),
@@ -36,7 +32,7 @@ class ResultTop extends HookConsumerWidget {
             SizedBox(
               height: 44,
               child: Text(
-                "Your Meal",
+                "Your Meals",
                 style: tt(context).titleMedium!.copyWith(color: C.white),
               ),
             ),
@@ -45,11 +41,12 @@ class ResultTop extends HookConsumerWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Container(
-                    constraints: const BoxConstraints(
-                      maxWidth: 310,
+                  Center(
+                    child: Text(
+                      prompt.current,
+                      style: tt(context).bodySmall,
+                      maxLines: 5,
                     ),
-                    child: Text(prompt.current, style: tt(context).bodySmall),
                   ),
                 ],
               ),

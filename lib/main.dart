@@ -7,11 +7,13 @@ import 'package:flutter/material.dart';
 import 'package:amplify_authenticator/amplify_authenticator.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_segment/flutter_segment.dart';
 import 'package:prometh_ai/screens/home_screen.dart';
 import 'package:prometh_ai/theme.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'amplifyconfiguration.dart';
 import 'screens/auth/auth_builder.dart';
+import 'settings.dart';
 import 'state/init_store.dart';
 
 final _deviceInfo = DeviceInfoPlugin();
@@ -34,6 +36,7 @@ void main() async {
   await initStore();
   try {
     await _configureAmplify();
+    _configureSegment();
   } on AmplifyAlreadyConfiguredException {
     debugPrint('Amplify configuration failed.');
   }
@@ -47,31 +50,19 @@ _configureAmplify() async {
   await Amplify.configure(amplifyconfig);
 }
 
-class App extends StatefulWidget {
-  const App({super.key});
-
-  @override
-  State<App> createState() => _AppState();
+_configureSegment() {
+  Segment.config(
+    options: SegmentConfig(
+      writeKey: S.segmentApiKey,
+      trackApplicationLifecycleEvents: true,
+      amplitudeIntegrationEnabled: false,
+      debug: true,
+    ),
+  );
 }
 
-class _AppState extends State<App> {
-  @override
-  void initState() {
-    super.initState();
-    _configureAmplify();
-  }
-
-  Future<void> _configureAmplify() async {
-    try {
-      final auth = AmplifyAuthCognito();
-      await Amplify.addPlugin(auth);
-
-      // call Amplify.configure to use the initialized categories in your app
-      await Amplify.configure(amplifyconfig);
-    } on Exception catch (e) {
-      safePrint('An error occurred configuring Amplify: $e');
-    }
-  }
+class App extends StatelessWidget {
+  const App({super.key});
 
   @override
   Widget build(BuildContext context) => ProviderScope(

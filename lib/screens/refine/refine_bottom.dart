@@ -3,6 +3,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:prometh_ai/settings.dart';
 import 'package:prometh_ai/state/app_state.dart';
 import 'package:prometh_ai/state/path.dart';
+import 'package:prometh_ai/state/prompt.dart';
 import 'package:prometh_ai/theme.dart';
 import 'package:prometh_ai/widget/circle_button.dart';
 import 'package:prometh_ai/widget/round_button.dart';
@@ -15,6 +16,7 @@ class RefineBottom extends HookConsumerWidget {
     final path = ref.watch(selectedPath);
     final pathNotifier = ref.read(PathNotifier.provider.notifier);
     final appStateNotifier = ref.read(AppStateNotifier.provider.notifier);
+    final promptNotifier = ref.read(PromptNotifier.provider.notifier);
 
     return Container(
       padding: const EdgeInsets.fromLTRB(16, 16, 16, 32),
@@ -58,7 +60,10 @@ class RefineBottom extends HookConsumerWidget {
                 iconColor: C.front,
                 iconSize: 12,
                 borderOnly: true,
-                onPressed: pathNotifier.back,
+                onPressed: () {
+                  pathNotifier.back();
+                  promptNotifier.rewrite();
+                },
               ),
             ),
           ),

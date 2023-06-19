@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:prometh_ai/api/recipe_api.dart';
+import 'package:prometh_ai/screens/recipe/result_top.dart';
 import 'package:prometh_ai/screens/recipe_carousel.dart';
 import 'package:prometh_ai/state/prompt.dart';
 
@@ -13,9 +14,21 @@ class RecipeResultScreen extends HookConsumerWidget {
     final response = ref.watch(recipeAPI(prompt.current));
     final recipes = response.value?.recipes ?? [];
 
-    return RecipeCarousel(
-      recipes: recipes,
-      fromHistory: false,
+    return Scaffold(
+      body: SafeArea(
+        top: false,
+        child: Column(
+          children: [
+            const ResultTop(),
+            Flexible(
+              child: RecipeCarousel(
+                recipes: recipes,
+                fromHistory: false,
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

@@ -1,13 +1,10 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:prometh_ai/model/pexel_params.dart';
 import 'package:prometh_ai/model/recipe.dart';
 import 'package:prometh_ai/settings.dart';
 import 'package:prometh_ai/state/app_state.dart';
-import 'package:prometh_ai/state/pexel.dart';
 import 'package:prometh_ai/theme.dart';
-import 'package:prometh_ai/widget/progress.dart';
+import 'package:prometh_ai/widget/replicate_image.dart';
 import 'package:prometh_ai/widget/theme_selectors.dart';
 
 class RecipeCompactCard extends HookConsumerWidget {
@@ -17,7 +14,6 @@ class RecipeCompactCard extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final imageUrl = ref.watch(getPhotoAPI(PexelParams(query: recipe.title, size: "small")));
     final appStateNotifier = ref.read(AppStateNotifier.provider.notifier);
 
     return Container(
@@ -31,20 +27,8 @@ class RecipeCompactCard extends HookConsumerWidget {
         children: [
           SizedBox(
             height: 162,
-            child: imageUrl.value == null
-                ? const Center(child: Progress())
-                : ClipRRect(
-                    borderRadius: const BorderRadius.only(
-                      topRight: Radius.circular(R.big),
-                      topLeft: Radius.circular(R.big),
-                    ),
-                    child: CachedNetworkImage(
-                      imageUrl: imageUrl.value!,
-                      fit: BoxFit.cover,
-                      width: double.infinity,
-                      filterQuality: FilterQuality.high,
-                    ),
-                  ),
+            width: double.infinity,
+            child: ReplicateImage(prompt: recipe.title),
           ),
           Padding(
             padding: const EdgeInsets.all(16),
@@ -59,7 +43,7 @@ class RecipeCompactCard extends HookConsumerWidget {
                 ),
                 IconButton(
                     padding: EdgeInsets.zero,
-                    onPressed: appStateNotifier.scheduleLater,
+                    onPressed: appStateNotifier.result,
                     icon: const Icon(
                       Icons.keyboard_arrow_right,
                       color: C.front,

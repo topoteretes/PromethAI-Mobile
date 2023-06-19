@@ -76,7 +76,7 @@ class TreeNotifier extends StateNotifier<List<Tree>> {
           );
       state = response.results;
 
-      final originalMap = {for (var e in state) e.category: e.preference.first};
+      final originalMap = {for (var e in state) e.category: e.preference.first.replaceAll("_", " ")};
       promptNotifier.storeMap(originalMap);
       topCategoryNotifier.update(state.first.category);
       await getCategories();

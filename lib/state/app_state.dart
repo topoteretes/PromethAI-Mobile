@@ -1,6 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_segment/flutter_segment.dart';
 import 'package:prometh_ai/state/deepgram.dart';
 
+import 'prompt.dart';
 import 'tree.dart';
 
 enum AppState {
@@ -39,7 +41,12 @@ class AppStateNotifier extends StateNotifier<AppState> {
     deepgramNotifier.stopRecord();
   }
 
-  result() => state = AppState.recipe;
+  result() {
+    final prompt = ref.read(PromptNotifier.provider);
+    Segment.track(eventName: 'Request meals', properties: {'prompt': prompt.current});
+    state = AppState.recipe;
+  }
+
   inputText() => state = AppState.inputText;
   inputVoice() => state = AppState.inputVoice;
   recipeDetail() => state = AppState.recipeDetail;
