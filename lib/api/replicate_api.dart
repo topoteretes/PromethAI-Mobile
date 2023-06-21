@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:prometh_ai/api/dio/dio_ext.dart';
@@ -40,19 +43,22 @@ final replicateAPI = FutureProvider.autoDispose.family<String, String>((ref, pro
         data: payload.toJson(),
         options: Options(headers: {
           "Authorization": "Token ${S.replicateApiKey}",
-          "Content-Type": " application/json",
+          "Content-Type": "application/json",
         }),
         ref: ref,
         isUri: true,
         rawResponse: true);
 
     while (result.status != "succeeded" || (result.output?.isEmpty ?? true)) {
-      await Future.delayed(const Duration(milliseconds: 500));
+      await Future.delayed(const Duration(milliseconds: 1000));
       result = await dioClient.safeGet(result.urls.get, ReplicateResponse.fromJson,
-          options: Options(headers: {
-            "Authorization": "Token ${S.replicateApiKey}",
-            "Content-Type": " application/json",
-          }),
+          options: Options(
+            headers: {
+              "Authorization": "Token ${S.replicateApiKey}",
+              "Content-Type": "application/json",
+            },
+            responseDecoder: (responseBytes, options, responseBody) => utf8.decode(GZipCodec().decode(responseBytes)),
+          ),
           isUri: true,
           rawResponse: true);
     }

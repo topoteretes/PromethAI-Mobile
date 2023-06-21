@@ -77,7 +77,7 @@ final theme = ThemeData(
     titleMedium: TextStyle(fontSize: 16, height: 1.2125, fontWeight: FontWeight.w700, color: C.front),
     titleLarge: TextStyle(fontSize: 20, height: 24 / 20, fontWeight: FontWeight.w400, color: C.back),
     titleSmall: TextStyle(fontSize: 14, height: 17 / 14, fontWeight: FontWeight.w900, color: C.front),
-    displayLarge: TextStyle(fontSize: 24, height: 24 / 29, fontWeight: FontWeight.w500, color: Colors.black),
+    displayLarge: TextStyle(fontSize: 24, height: 32 / 29, fontWeight: FontWeight.w500, color: Colors.black),
     displaySmall: TextStyle(fontSize: 14, height: 17 / 14, fontWeight: FontWeight.normal, color: C.front, fontStyle: FontStyle.italic),
     labelMedium: TextStyle(fontSize: 12, height: 1, fontWeight: FontWeight.w400, color: C.grey3),
     displayMedium: TextStyle(fontSize: 14, height: 17 / 14, fontWeight: FontWeight.w400, color: C.front),

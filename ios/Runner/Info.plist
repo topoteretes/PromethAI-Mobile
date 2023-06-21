@@ -54,6 +54,6 @@
 		<key>NSMicrophoneUsageDescription</key>
 		<string>microphone</string>
 		<key>NSUserTrackingUsageDescription</key>
-        <string>We use tracking to improve our app and provide personalized content. By tapping 'Agree', you consent to our use of tracking technologies. You can change this at any time in settings. Your data is safe with us. Thank you</string>
+		<string>We use tracking to improve our app and provide personalized content. By tapping 'Agree', you consent to our use of tracking technologies. You can change this at any time in settings. Your data is safe with us. Thank you</string>
 	</dict>
 </plist>

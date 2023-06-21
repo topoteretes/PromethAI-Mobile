@@ -11,8 +11,10 @@ class RecipePlaceholder extends HookConsumerWidget {
   const RecipePlaceholder({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) =>
-      const Image(image: AssetImage('assets/images/recipe_placeholder.jpg'), fit: BoxFit.cover);
+  Widget build(BuildContext context, WidgetRef ref) => const SizedBox(
+        width: double.infinity,
+        child: Image(image: AssetImage('assets/images/recipe_placeholder.jpg'), fit: BoxFit.cover),
+      );
 }
 
 class ReplicateImage extends HookConsumerWidget {
