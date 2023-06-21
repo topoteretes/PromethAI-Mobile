@@ -16,7 +16,7 @@ class WelcomeCard extends HookConsumerWidget {
         children: [
           if (userName != null)
             Text(
-              'Hello $userName,',
+              'Hello ${userName.isEmpty ? "Friend" : userName},',
               style: tt(context).bodyLarge,
             ),
           if (userName != null) const SizedBox(height: 15),

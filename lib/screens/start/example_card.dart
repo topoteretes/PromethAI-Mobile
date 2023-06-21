@@ -5,7 +5,7 @@ import 'package:prometh_ai/widget/round_card.dart';
 import 'package:prometh_ai/widget/theme_selectors.dart';
 import 'package:prometh_ai/widget/vec_pic.dart';
 
-const _examplePrompt = 'Looking for a fast, vegetarian meal under $25, without peanuts due to allergy. Mexican cuisine.';
+const _examplePrompt = 'Looking for a fast, vegetarian meal under \$25, without peanuts due to allergy. Mexican cuisine.';
 
 class ExampleCard extends HookConsumerWidget {
   const ExampleCard({super.key});

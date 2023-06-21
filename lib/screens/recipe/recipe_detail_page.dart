@@ -13,6 +13,7 @@ class RecipeDetailPage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final selected = useState<List<String>>([]);
+    useAutomaticKeepAlive(wantKeepAlive: true);
 
     final toggleSelected = useCallback((String option) {
       if (selected.value.contains(option)) {

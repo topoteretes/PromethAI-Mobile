@@ -1,7 +1,7 @@
 name: prometh_ai
 description: PromethAI.
 publish_to: 'none'
-version: 1.0.14+14
+version: 1.0.15+15
 
 environment:
   sdk: '>=3.0.0 <4.0.0'
@@ -11,6 +11,7 @@ dependencies:
   amplify_auth_cognito: any
   amplify_authenticator: any
   amplify_flutter: any
+  app_tracking_transparency: any
   http: any
   animated_text_kit: any
   async: any
@@ -38,6 +39,7 @@ dependencies:
   pretty_dio_logger: any
   scrollable_positioned_list: any
   smooth_page_indicator: any
+  shared_preferences: any
   sound_stream: any
   fluttertoast: any
   throttling: any

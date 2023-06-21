@@ -31,5 +31,5 @@ class HistoryNotifier extends HydratedStateNotifier<List<HistoryEntry>> {
 
   remove(Recipe recipe) => state = [...state.where((e) => e.recipe.title != recipe.title)];
 
-  removeAll() => [];
+  cleanup() => [];
 }

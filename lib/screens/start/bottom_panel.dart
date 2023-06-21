@@ -38,25 +38,28 @@ class BottomPanel extends HookConsumerWidget {
               color: appState == AppState.settings ? C.white : C.front,
               iconColor: appState == AppState.settings ? C.front : C.white,
             ),
-            Container(
-              padding: const EdgeInsets.fromLTRB(16, 16, 16, 16),
-              height: 49,
-              decoration: BoxDecoration(
-                color: selectCenter ? C.white : C.front,
-                borderRadius: BorderRadius.circular(32),
-              ),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Container(
-                    margin: const EdgeInsets.only(right: 6),
-                    child: VecPic("bowl", iconSize: 14, color: selectCenter ? C.front : C.white),
-                  ),
-                  Text(
-                    'My Meal',
-                    style: tt(context).bodyMedium!.copyWith(color: selectCenter ? C.front : C.white),
-                  ),
-                ],
+            InkWell(
+              onTap: appStateNotifier.start,
+              child: Container(
+                padding: const EdgeInsets.fromLTRB(16, 16, 16, 16),
+                height: 49,
+                decoration: BoxDecoration(
+                  color: selectCenter ? C.white : C.front,
+                  borderRadius: BorderRadius.circular(32),
+                ),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Container(
+                      margin: const EdgeInsets.only(right: 6),
+                      child: VecPic("bowl", iconSize: 14, color: selectCenter ? C.front : C.white),
+                    ),
+                    Text(
+                      'My Meal',
+                      style: tt(context).bodyMedium!.copyWith(color: selectCenter ? C.front : C.white),
+                    ),
+                  ],
+                ),
               ),
             ),
             CircleButton(

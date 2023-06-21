@@ -51,4 +51,6 @@ class UserNameNotifier extends StateNotifier<String?> {
         'A confirmation code has been sent to ${codeDeliveryDetails.destination}. '
         'Please check your ${codeDeliveryDetails.deliveryMedium.name} for the code.',
       );
+
+  cleanup() => state = null;
 }

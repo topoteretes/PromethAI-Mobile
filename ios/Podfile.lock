@@ -16,6 +16,8 @@ PODS:
     - AnalyticsConnector (~> 1.0.0)
   - Analytics (4.1.6)
   - AnalyticsConnector (1.0.1)
+  - app_tracking_transparency (0.0.1):
+    - Flutter
   - AppsFlyerFramework (6.9.1):
     - AppsFlyerFramework/Main (= 6.9.1)
   - AppsFlyerFramework/Main (6.9.1)
@@ -61,6 +63,9 @@ PODS:
   - segment-appsflyer-ios/Main (6.9.1):
     - Analytics
     - AppsFlyerFramework (= 6.9.1)
+  - shared_preferences_foundation (0.0.1):
+    - Flutter
+    - FlutterMacOS
   - sound_stream (0.0.1):
     - Flutter
   - sqflite (0.0.2):
@@ -74,6 +79,7 @@ DEPENDENCIES:
   - amplify_auth_cognito_ios (from `.symlinks/plugins/amplify_auth_cognito_ios/ios`)
   - amplify_flutter_ios (from `.symlinks/plugins/amplify_flutter_ios/ios`)
   - amplify_secure_storage (from `.symlinks/plugins/amplify_secure_storage/ios`)
+  - app_tracking_transparency (from `.symlinks/plugins/app_tracking_transparency/ios`)
   - connectivity_plus (from `.symlinks/plugins/connectivity_plus/ios`)
   - device_info_plus (from `.symlinks/plugins/device_info_plus/ios`)
   - Flutter (from `Flutter`)
@@ -84,6 +90,7 @@ DEPENDENCIES:
   - package_info_plus (from `.symlinks/plugins/package_info_plus/ios`)
   - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/darwin`)
   - permission_handler_apple (from `.symlinks/plugins/permission_handler_apple/ios`)
+  - shared_preferences_foundation (from `.symlinks/plugins/shared_preferences_foundation/darwin`)
   - sound_stream (from `.symlinks/plugins/sound_stream/ios`)
   - sqflite (from `.symlinks/plugins/sqflite/ios`)
   - url_launcher_ios (from `.symlinks/plugins/url_launcher_ios/ios`)
@@ -110,6 +117,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/amplify_flutter_ios/ios"
   amplify_secure_storage:
     :path: ".symlinks/plugins/amplify_secure_storage/ios"
+  app_tracking_transparency:
+    :path: ".symlinks/plugins/app_tracking_transparency/ios"
   connectivity_plus:
     :path: ".symlinks/plugins/connectivity_plus/ios"
   device_info_plus:
@@ -130,6 +139,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/path_provider_foundation/darwin"
   permission_handler_apple:
     :path: ".symlinks/plugins/permission_handler_apple/ios"
+  shared_preferences_foundation:
+    :path: ".symlinks/plugins/shared_preferences_foundation/darwin"
   sound_stream:
     :path: ".symlinks/plugins/sound_stream/ios"
   sqflite:
@@ -145,6 +156,7 @@ SPEC CHECKSUMS:
   Amplitude: 10f20d4436fdcd38ddd5be1da7033fcc21f4143e
   Analytics: eefe524436f904b8bb3f8c8c3425280e43b34efc
   AnalyticsConnector: eccd7e1cd3dd18e6bd09ac2506e37d4ed43ba3f4
+  app_tracking_transparency: 5b1745ef9ade815f7455cb6a0848349589afb7c5
   AppsFlyerFramework: dc9aa675faa8e1a2ed40fb295d3c5408ee2b972a
   AWSCore: 19b8233fe2d0ed3ccf5cff833a615814282cdc90
   AWSPluginsCore: 787b6199af91f6662171cbd66ad9a876530aed50
@@ -162,6 +174,7 @@ SPEC CHECKSUMS:
   ReachabilitySwift: 985039c6f7b23a1da463388634119492ff86c825
   Segment-Amplitude: 6c1e59c8c278a21029ba7a6a788fcb31b9233a2c
   segment-appsflyer-ios: ddaa1da2fb63480a4766a68032f0011f4fd771a1
+  shared_preferences_foundation: e2dae3258e06f44cc55f49d42024fd8dd03c590c
   sound_stream: eba0f2a5994b91d9e5009a739df6e98515a7b44f
   sqflite: 6d358c025f5b867b29ed92fc697fd34924e11904
   Toast: 91b396c56ee72a5790816f40d3a94dd357abc196

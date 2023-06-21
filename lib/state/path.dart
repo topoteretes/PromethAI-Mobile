@@ -39,4 +39,6 @@ class PathNotifier extends StateNotifier<Map<String, List<String>>> {
     final newPath = [...currentPath..removeLast()];
     state = {...state, topCategory: newPath};
   }
+
+  cleanup() => state = {};
 }

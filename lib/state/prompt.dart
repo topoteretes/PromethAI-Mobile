@@ -77,4 +77,6 @@ class PromptNotifier extends StateNotifier<Prompt> {
 
     state = state.copyWith(updating: false);
   }
+
+  cleanup() => reset("");
 }

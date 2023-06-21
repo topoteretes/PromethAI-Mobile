@@ -140,4 +140,6 @@ class TreeNotifier extends StateNotifier<List<Tree>> {
     state = state.mapp((e) => e.category == topCategory ? tree : e);
     promptNotifier.rewrite();
   }
+
+  cleanup() => state = [];
 }

@@ -81,7 +81,7 @@ class InputText extends HookWidget {
         errorMaxLines: 2,
         fillColor: backgroundColor,
         hintText: placeholder,
-        hintStyle: tt(context).labelMedium!.copyWith(color: C.grey3),
+        hintStyle: tt(context).bodySmall!.copyWith(color: C.grey3),
         labelStyle: tt(context).labelSmall,
         filled: true,
         border: OutlineInputBorder(

@@ -1,4 +1,4 @@
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:prometh_ai/screens/history/history_screen.dart';
@@ -19,6 +19,7 @@ class StartContent extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final appState = ref.watch(AppStateNotifier.provider);
     final pageController = usePageController(initialPage: 1);
+    final appStateNotifier = ref.read(AppStateNotifier.provider.notifier);
 
     useEffect(() {
       if (pageController.hasClients) {
@@ -37,18 +38,23 @@ class StartContent extends HookConsumerWidget {
             physics: const NeverScrollableScrollPhysics(),
             children: [
               const SettingScreen(),
-              Column(
-                children: [
-                  const SizedBox(height: 24),
-                  const WelcomeCard(),
-                  const Spacer(),
-                  if (appState == AppState.start) const ExampleCard(),
-                  if (appState == AppState.inputText) const InputCard(),
-                  if (appState == AppState.inputVoice) const InputCard(),
-                  const SizedBox(height: 8),
-                  const InputBox(),
-                  const SizedBox(height: 48),
-                ],
+              InkWell(
+                highlightColor: Colors.transparent,
+                focusColor: Colors.transparent,
+                onTap: appStateNotifier.start,
+                child: Column(
+                  children: [
+                    const SizedBox(height: 24),
+                    const WelcomeCard(),
+                    const Spacer(),
+                    if (appState != AppState.inputText && appState != AppState.inputVoice) const ExampleCard(),
+                    if (appState == AppState.inputText) const InputCard(),
+                    if (appState == AppState.inputVoice) const InputCard(),
+                    const SizedBox(height: 8),
+                    const InputBox(),
+                    const SizedBox(height: 48),
+                  ],
+                ),
               ),
               const HistoryScreen()
             ],

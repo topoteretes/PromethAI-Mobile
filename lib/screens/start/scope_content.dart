@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:prometh_ai/state/app_state.dart';
 import 'package:prometh_ai/widget/option_row.dart';
-import 'package:prometh_ai/widget/prompt_box/prompt_box.dart';
 
 class ScopeContent extends HookConsumerWidget {
   const ScopeContent({super.key});
@@ -27,8 +26,8 @@ class ScopeContent extends HookConsumerWidget {
             const OptionRow(selected: false, disabled: true, title: "Hydration Assist"),
             const OptionRow(selected: false, disabled: true, title: "Marathon Assist"),
             const Spacer(),
-            const PromptBox(title: 'Set goal'),
-            const SizedBox(height: 24)
+            /* const PromptBox(title: 'Set goal'),
+            const SizedBox(height: 24)*/
           ],
         ),
       ),

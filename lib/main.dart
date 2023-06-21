@@ -11,6 +11,7 @@ import 'package:flutter_segment/flutter_segment.dart';
 import 'package:prometh_ai/screens/home_screen.dart';
 import 'package:prometh_ai/theme.dart';
 import 'package:device_info_plus/device_info_plus.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'amplifyconfiguration.dart';
 import 'screens/auth/auth_builder.dart';
 import 'settings.dart';
@@ -18,6 +19,7 @@ import 'state/init_store.dart';
 
 final _deviceInfo = DeviceInfoPlugin();
 var isSimulator = false;
+SharedPreferences? sharedPreferences;
 
 final isTest = Platform.environment.containsKey('FLUTTER_TEST');
 
@@ -40,7 +42,14 @@ void main() async {
   } on AmplifyAlreadyConfiguredException {
     debugPrint('Amplify configuration failed.');
   }
+
+  sharedPreferences = await SharedPreferences.getInstance();
+
   runApp(const App());
+
+/*  if (await AppTrackingTransparency.trackingAuthorizationStatus == TrackingStatus.notDetermined) {
+    final result = await AppTrackingTransparency.requestTrackingAuthorization();
+  }*/
 }
 
 _configureAmplify() async {
