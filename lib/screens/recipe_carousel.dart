@@ -39,7 +39,7 @@ class RecipeCarousel extends HookConsumerWidget {
                 ),
               ),
         const SizedBox(height: M.tiny),
-        if (recipes.isNotEmpty)
+        if (recipes.length > 1)
           AnimatedSmoothIndicator(
             activeIndex: index.value,
             count: recipes.length,

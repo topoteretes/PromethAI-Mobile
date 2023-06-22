@@ -14,20 +14,14 @@ class WelcomeCard extends HookConsumerWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          if (userName != null)
-            Text(
-              'Hello ${userName.isEmpty ? "Friend" : userName},',
-              style: tt(context).bodyLarge,
-            ),
-          if (userName != null) const SizedBox(height: 15),
-          Container(
-            constraints: const BoxConstraints(
-              maxWidth: 310,
-            ),
-            child: Text(
-              'As your AI assistant, l’m here to help you find the meal you crave. \nTo get started, simply describe what you have in mind and we’ll take it from there.',
-              style: tt(context).bodySmall,
-            ),
+          Text(
+            'Hello ${userName == null || userName.isEmpty ? "Friend" : userName},',
+            style: tt(context).bodyLarge,
+          ),
+          const SizedBox(height: 15),
+          Text(
+            'As your AI assistant, l’m here to help you find the meal you crave. \nTo get started, simply describe what you have in mind and we’ll take it from there.',
+            style: tt(context).bodySmall,
           ),
         ],
       ),

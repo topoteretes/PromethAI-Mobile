@@ -3,6 +3,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:prometh_ai/api/recipe_api.dart';
 import 'package:prometh_ai/screens/recipe/result_top.dart';
 import 'package:prometh_ai/screens/recipe_carousel.dart';
+import 'package:prometh_ai/settings.dart';
 import 'package:prometh_ai/state/prompt.dart';
 
 class RecipeResultScreen extends HookConsumerWidget {
@@ -26,6 +27,7 @@ class RecipeResultScreen extends HookConsumerWidget {
                 fromHistory: false,
               ),
             ),
+            const SizedBox(height: M.normal)
           ],
         ),
       ),

@@ -10,6 +10,7 @@ import 'package:prometh_ai/model/replicate_response.dart';
 import 'package:prometh_ai/settings.dart';
 import 'package:prometh_ai/state/error.dart';
 import 'package:prometh_ai/state/thumbnail.dart';
+import 'package:prometh_ai/utils/logger.dart';
 
 import 'api.dart';
 
@@ -41,10 +42,13 @@ final replicateAPI = FutureProvider.autoDispose.family<String, String>((ref, pro
     var result = await dioClient.safePost('https://api.replicate.com/v1/predictions', ReplicateResponse.fromJson,
         cancelToken: _token,
         data: payload.toJson(),
-        options: Options(headers: {
-          "Authorization": "Token ${S.replicateApiKey}",
-          "Content-Type": "application/json",
-        }),
+        options: Options(
+          headers: {
+            "Authorization": "Token ${S.replicateApiKey}",
+            "Content-Type": "application/json",
+          },
+          responseDecoder: gzipMaybeDecoder,
+        ),
         ref: ref,
         isUri: true,
         rawResponse: true);
@@ -57,7 +61,7 @@ final replicateAPI = FutureProvider.autoDispose.family<String, String>((ref, pro
               "Authorization": "Token ${S.replicateApiKey}",
               "Content-Type": "application/json",
             },
-            responseDecoder: (responseBytes, options, responseBody) => utf8.decode(GZipCodec().decode(responseBytes)),
+            responseDecoder: gzipMaybeDecoder,
           ),
           isUri: true,
           rawResponse: true);
@@ -71,3 +75,12 @@ final replicateAPI = FutureProvider.autoDispose.family<String, String>((ref, pro
     rethrow;
   }
 });
+
+String? gzipMaybeDecoder(responseBytes, RequestOptions options, responseBody) {
+  try {
+    return utf8.decode(GZipCodec().decode(responseBytes));
+  } catch (e) {
+    L.e("----->gzipMaybeDecoder.error: $e");
+  }
+  return utf8.decode(responseBytes);
+}

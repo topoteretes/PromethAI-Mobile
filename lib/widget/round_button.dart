@@ -20,7 +20,7 @@ class RoundButton extends StatelessWidget {
         onTap: onPressed,
         borderRadius: const BorderRadius.all(Radius.circular(32)),
         child: Container(
-          height: 64,
+          height: 48,
           padding: const EdgeInsets.only(left: 24, right: 24),
           decoration: const BoxDecoration(
             borderRadius: BorderRadius.all(Radius.circular(32)),

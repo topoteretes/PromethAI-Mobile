@@ -31,7 +31,7 @@ class RecipeCard extends HookConsumerWidget {
         ref.watch(HistoryNotifier.provider.select((e) => e.firstWhereOrNull((f) => f.recipe.title == recipe.title)?.favorite ?? false));
 
     return Container(
-      margin: const EdgeInsets.only(left: M.normal, right: M.normal, bottom: M.normal),
+      margin: const EdgeInsets.only(left: M.normal, right: M.normal, bottom: M.small),
       decoration: const BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.all(Radius.circular(R.big)),
@@ -48,71 +48,66 @@ class RecipeCard extends HookConsumerWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.max,
                 children: [
-                  const SizedBox(height: M.normal),
                   Text(
                     recipe.title,
                     style: tt(context).displayLarge,
                     textAlign: TextAlign.left,
                   ),
                   const SizedBox(height: M.normal),
-                  Text(
-                    recipe.description,
-                    style: tt(context).bodySmall!.copyWith(color: C.black),
-                    textAlign: TextAlign.left,
-                    maxLines: 6,
-                    overflow: TextOverflow.ellipsis,
+                  Expanded(
+                    child: SingleChildScrollView(
+                      child: Text(
+                        recipe.description,
+                        style: tt(context).bodySmall!.copyWith(color: C.black),
+                        textAlign: TextAlign.left,
+                        maxLines: 6,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
                   ),
                   const SizedBox(height: M.normal),
-                  /*         Row(
-                    children: [
-                      Text(
-                        (recipe.rating / 20).toStringAsFixed(1),
-                        style: tt(context).displayLarge!.copyWith(fontSize: 16, height: 19 / 16),
-                        textAlign: TextAlign.left,
-                      ),
-                      const SizedBox(width: M.small),
-                      Rating(rating: recipe.rating / 20),
-                    ],
-                  ),
-                  */
-                  const Spacer(),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      fromHistory
-                          ? CircleButton(
-                              icon: "close",
-                              size: 64,
-                              color: C.front,
-                              iconColor: C.front,
-                              borderOnly: true,
-                              onPressed: () => confirmDialog(context, onSure: () => historyNotifier.remove(recipe)),
-                            )
-                          : const SizedBox(width: 64),
-                      RoundButton(
-                          onPressed: () => selectedRecipeNotifier.store(recipe, fromHistory),
-                          title: "Cook now",
-                          rightIcon: Container(
-                            width: 32,
-                            height: 32,
-                            margin: const EdgeInsets.only(left: 16),
-                            decoration: const BoxDecoration(shape: BoxShape.circle, color: C.white),
-                            child: const VecPic(
-                              "up_arrow",
-                              color: C.front,
-                              iconSize: 8,
-                            ),
-                          )),
-                      CircleButton(
-                          icon: "favorite",
-                          size: 64,
-                          color: C.front,
-                          iconColor: isFavorite ? C.front : C.white,
-                          borderOnly: isFavorite,
-                          onPressed: () => historyNotifier.toggleFavorite(recipe)),
-                    ],
+                  SizedBox(
+                    height: 48,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        fromHistory
+                            ? CircleButton(
+                                icon: "close",
+                                size: 48,
+                                color: C.front,
+                                iconColor: C.front,
+                                borderOnly: true,
+                                onPressed: () => confirmDialog(context, onSure: () => historyNotifier.remove(recipe)),
+                              )
+                            : const SizedBox(width: 48),
+                        RoundButton(
+                            onPressed: () => selectedRecipeNotifier.store(recipe, fromHistory),
+                            title: "Cook now",
+                            rightIcon: Container(
+                              width: 24,
+                              height: 24,
+                              margin: const EdgeInsets.only(left: 12),
+                              decoration: const BoxDecoration(shape: BoxShape.circle, color: C.white),
+                              child: const VecPic(
+                                "up_arrow",
+                                color: C.front,
+                                iconSize: 8,
+                              ),
+                            )),
+                        CircleButton(
+                            icon: "favorite",
+                            size: 48,
+                            color: C.front,
+                            iconColor: isFavorite ? C.front : C.white,
+                            borderOnly: isFavorite,
+                            onPressed: () => historyNotifier.toggleFavorite(recipe)),
+                      ],
+                    ),
                   ),
                 ],
               ),

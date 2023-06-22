@@ -3,10 +3,12 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:prometh_ai/state/app_state.dart';
 import 'package:prometh_ai/state/prompt.dart';
 import 'package:prometh_ai/state/tree.dart';
+import 'package:prometh_ai/theme.dart';
 import 'package:prometh_ai/widget/aclose_button.dart';
 import 'package:prometh_ai/widget/markup_prompt.dart';
 import 'package:prometh_ai/widget/progress.dart';
 import 'package:prometh_ai/widget/round_card.dart';
+import 'package:prometh_ai/widget/theme_selectors.dart';
 import 'package:prometh_ai/widget/top_menu/top_menu.dart';
 import 'package:prometh_ai/widget/top_view.dart';
 
@@ -27,9 +29,13 @@ class RefineTop extends HookConsumerWidget {
         SizedBox(
           height: 44,
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.end,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
+              Text(
+                "Your Query",
+                style: tt(context).titleMedium!.copyWith(color: C.white),
+              ),
               ACloseButton(onPressed: appStateNotifier.start),
             ],
           ),

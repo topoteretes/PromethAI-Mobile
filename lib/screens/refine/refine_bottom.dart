@@ -40,7 +40,7 @@ class RefineBottom extends HookConsumerWidget {
           AnimatedPadding(
               duration: A.fast,
               curve: CV.normal,
-              padding: path.isNotEmpty ? const EdgeInsets.only(left: 78) : EdgeInsets.zero,
+              padding: path.isNotEmpty ? const EdgeInsets.only(left: 62) : EdgeInsets.zero,
               child: RoundButton(
                 title: "Show meals",
                 onPressed: appStateNotifier.result,
@@ -48,14 +48,14 @@ class RefineBottom extends HookConsumerWidget {
           AnimatedPositioned(
             duration: A.fast,
             curve: CV.normal,
-            left: path.isNotEmpty ? 0 : -78,
+            left: path.isNotEmpty ? 0 : -62,
             child: AnimatedOpacity(
               duration: A.fast,
               curve: CV.normal,
               opacity: path.isNotEmpty ? 1 : 0,
               child: CircleButton(
                 icon: "up_arrow",
-                size: 64,
+                size: 48,
                 color: C.front,
                 iconColor: C.front,
                 iconSize: 12,

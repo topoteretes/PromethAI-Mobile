@@ -34,7 +34,15 @@ class RecipeDetailScreen extends HookConsumerWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Text(selectedRecipe.title, style: tt(context).bodyLarge!.copyWith(color: C.front)),
+                Flexible(
+                  child: Text(
+                    selectedRecipe.title,
+                    style: tt(context).bodyLarge!.copyWith(color: C.front),
+                    softWrap: true,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
                 ACloseButton(onPressed: appStateNotifier.result, color: C.front),
               ],
             ),

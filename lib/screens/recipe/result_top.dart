@@ -3,6 +3,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:prometh_ai/state/app_state.dart';
 import 'package:prometh_ai/state/prompt.dart';
 import 'package:prometh_ai/theme.dart';
+import 'package:prometh_ai/widget/aclose_button.dart';
 import 'package:prometh_ai/widget/round_card.dart';
 import 'package:prometh_ai/widget/theme_selectors.dart';
 
@@ -15,7 +16,7 @@ class ResultTop extends HookConsumerWidget {
     final prompt = ref.watch(PromptNotifier.provider);
 
     return Container(
-      padding: const EdgeInsets.only(left: 16, right: 16, bottom: 16, top: 16),
+      padding: const EdgeInsets.only(left: 16, right: 16, bottom: 16, top: 0),
       decoration: const BoxDecoration(
         borderRadius: BorderRadius.only(
           bottomLeft: Radius.circular(32),
@@ -31,9 +32,16 @@ class ResultTop extends HookConsumerWidget {
           children: [
             SizedBox(
               height: 44,
-              child: Text(
-                "Your Meals",
-                style: tt(context).titleMedium!.copyWith(color: C.white),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                    "Your Meals",
+                    style: tt(context).titleMedium!.copyWith(color: C.white),
+                  ),
+                  ACloseButton(onPressed: appStateNotifier.refine),
+                ],
               ),
             ),
             RoundCard(
