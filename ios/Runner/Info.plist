@@ -52,8 +52,19 @@
 		<key>ITSAppUsesNonExemptEncryption</key>
 		<false/>
 		<key>NSMicrophoneUsageDescription</key>
-		<string>microphone</string>
+		<string>Our app requires access to your microphone to enable voice commands. This allows you to interact with the app hands-free and enhances your user experience.</string>
 		<key>NSUserTrackingUsageDescription</key>
 		<string>We use tracking to improve our app and provide personalized content. By tapping 'Agree', you consent to our use of tracking technologies. You can change this at any time in settings. Your data is safe with us. Thank you</string>
+        <key>CFBundleURLTypes</key>
+        <array>
+            <dict>
+                <key>CFBundleTypeRole</key>
+                <string>Editor</string>
+                <key>CFBundleURLSchemes</key>
+                <array>
+                    <string>com.googleusercontent.apps.319035064770-h250dv2i3acrqlinpahs0f19cr8g6sl0</string>
+                </array>
+            </dict>
+        </array>
 	</dict>
 </plist>
