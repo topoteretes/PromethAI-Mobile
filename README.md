@@ -15,22 +15,22 @@
 <p align="center"><i>Open-source framework that gives you AI Agents that help you navigate decision-making, get personalized goals and  execute them </i></p>
 
 <p align="center">
-<a href="https://github.com/topoteretes/PromethAI-Backend-Backend/fork" target="blank">
-<img src="https://img.shields.io/github/forks/topoteretes/PromethAI-Backend-Backend?style=for-the-badge" alt="promethAI forks"/>
+<a href="https://github.com/topoteretes/PromethAI-Mobile/fork" target="blank">
+<img src="https://img.shields.io/github/forks/topoteretes/PromethAI-Mobile?style=for-the-badge" alt="promethAI forks"/>
 </a>
 
-<a href="https://github.com/topoteretes/PromethAI-Backend-Backend/stargazers" target="blank">
-<img src="https://img.shields.io/github/stars/topoteretes/PromethAI-Backend-Backend?style=for-the-badge" alt="promethAI stars"/>
+<a href="https://github.com/topoteretes/PromethAI-Mobile/stargazers" target="blank">
+<img src="https://img.shields.io/github/stars/topoteretes/PromethAI-Mobile?style=for-the-badge" alt="promethAI stars"/>
 </a>
-<a href="https://github.com/topoteretes/PromethAI-Backend-Backend/pulls" target="blank">
-<img src="https://img.shields.io/github/issues-pr/topoteretes/PromethAI-Backend-Backend?style=for-the-badge" alt="promethAI pull-requests"/>
+<a href="https://github.com/topoteretes/PromethAI-Mobile/pulls" target="blank">
+<img src="https://img.shields.io/github/issues-pr/topoteretes/PromethAI-Mobile?style=for-the-badge" alt="promethAI pull-requests"/>
 </a>
-<a href='https://github.com/topoteretes/PromethAI-Backend-Backend/releases'>
-<img src='https://img.shields.io/github/release/topoteretes/PromethAI-Backend-Backend?&label=Latest&style=for-the-badge'>
+<a href='https://github.com/topoteretes/PromethAI-Mobile/releases'>
+<img src='https://img.shields.io/github/release/topoteretes/PromethAI-Mobile?&label=Latest&style=for-the-badge'>
 </a>
 
-<a href="https://github.com/topoteretes/PromethAI-Backend-Backend/commits" target="blank">
-<img src="https://img.shields.io/github/commits-since/topoteretes/PromethAI-Backend-Backend/v0.0.3.svg?style=for-the-badge" alt="promethAI Commits"/>
+<a href="https://github.com/topoteretes/PromethAI-Mobile/commits" target="blank">
+<img src="https://img.shields.io/github/commits-since/topoteretes/PromethAI-Mobile/v0.0.3.svg?style=for-the-badge" alt="promethAI Commits"/>
 </a>
 
 </p>
