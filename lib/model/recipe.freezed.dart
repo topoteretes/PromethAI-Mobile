@@ -21,11 +21,11 @@ Recipe _$RecipeFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Recipe {
   String get title => throw _privateConstructorUsedError;
-  int get rating => throw _privateConstructorUsedError;
+  double get rating => throw _privateConstructorUsedError;
   @JsonKey(name: "prep_time")
-  int get prepTime => throw _privateConstructorUsedError;
+  String get prepTime => throw _privateConstructorUsedError;
   @JsonKey(name: "cook_time")
-  int get cookTime => throw _privateConstructorUsedError;
+  String get cookTime => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
   List<String> get ingredients => throw _privateConstructorUsedError;
   List<String> get instructions => throw _privateConstructorUsedError;
@@ -42,9 +42,9 @@ abstract class $RecipeCopyWith<$Res> {
   @useResult
   $Res call(
       {String title,
-      int rating,
-      @JsonKey(name: "prep_time") int prepTime,
-      @JsonKey(name: "cook_time") int cookTime,
+      double rating,
+      @JsonKey(name: "prep_time") String prepTime,
+      @JsonKey(name: "cook_time") String cookTime,
       String description,
       List<String> ingredients,
       List<String> instructions});
@@ -79,15 +79,15 @@ class _$RecipeCopyWithImpl<$Res, $Val extends Recipe>
       rating: null == rating
           ? _value.rating
           : rating // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
       prepTime: null == prepTime
           ? _value.prepTime
           : prepTime // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       cookTime: null == cookTime
           ? _value.cookTime
           : cookTime // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       description: null == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
@@ -112,9 +112,9 @@ abstract class _$$_RecipeCopyWith<$Res> implements $RecipeCopyWith<$Res> {
   @useResult
   $Res call(
       {String title,
-      int rating,
-      @JsonKey(name: "prep_time") int prepTime,
-      @JsonKey(name: "cook_time") int cookTime,
+      double rating,
+      @JsonKey(name: "prep_time") String prepTime,
+      @JsonKey(name: "cook_time") String cookTime,
       String description,
       List<String> ingredients,
       List<String> instructions});
@@ -146,15 +146,15 @@ class __$$_RecipeCopyWithImpl<$Res>
       rating: null == rating
           ? _value.rating
           : rating // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
       prepTime: null == prepTime
           ? _value.prepTime
           : prepTime // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       cookTime: null == cookTime
           ? _value.cookTime
           : cookTime // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       description: null == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
@@ -191,13 +191,13 @@ class _$_Recipe implements _Recipe {
   @override
   final String title;
   @override
-  final int rating;
+  final double rating;
   @override
   @JsonKey(name: "prep_time")
-  final int prepTime;
+  final String prepTime;
   @override
   @JsonKey(name: "cook_time")
-  final int cookTime;
+  final String cookTime;
   @override
   final String description;
   final List<String> _ingredients;
@@ -269,9 +269,9 @@ class _$_Recipe implements _Recipe {
 abstract class _Recipe implements Recipe {
   const factory _Recipe(
       {required final String title,
-      required final int rating,
-      @JsonKey(name: "prep_time") required final int prepTime,
-      @JsonKey(name: "cook_time") required final int cookTime,
+      required final double rating,
+      @JsonKey(name: "prep_time") required final String prepTime,
+      @JsonKey(name: "cook_time") required final String cookTime,
       required final String description,
       required final List<String> ingredients,
       required final List<String> instructions}) = _$_Recipe;
@@ -281,13 +281,13 @@ abstract class _Recipe implements Recipe {
   @override
   String get title;
   @override
-  int get rating;
+  double get rating;
   @override
   @JsonKey(name: "prep_time")
-  int get prepTime;
+  String get prepTime;
   @override
   @JsonKey(name: "cook_time")
-  int get cookTime;
+  String get cookTime;
   @override
   String get description;
   @override

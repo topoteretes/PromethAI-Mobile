@@ -5,11 +5,12 @@ part 'recipe.g.dart';
 
 @freezed
 class Recipe with _$Recipe {
+  static const empty = Recipe(title: '', prepTime: '', rating: 0, cookTime: '', description: '', ingredients: [], instructions: []);
   const factory Recipe({
     required String title,
-    required int rating,
-    @JsonKey(name: "prep_time") required int prepTime,
-    @JsonKey(name: "cook_time") required int cookTime,
+    required double rating,
+    @JsonKey(name: "prep_time") required String prepTime,
+    @JsonKey(name: "cook_time") required String cookTime,
     required String description,
     required List<String> ingredients,
     required List<String> instructions,

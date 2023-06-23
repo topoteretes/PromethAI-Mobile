@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:prometh_ai/state/deepgram.dart';
 import 'package:prometh_ai/theme.dart';
-import 'package:prometh_ai/widget/aicon_button.dart';
-import 'package:prometh_ai/widget/svg_button.dart';
+import 'package:prometh_ai/widget/circle_icon_button.dart';
+import 'package:prometh_ai/widget/circle_button.dart';
 
 class ReloadButton extends StatelessWidget {
   final VoidCallback onStop;
@@ -22,7 +22,7 @@ class ReloadButton extends StatelessWidget {
 
   Widget _buildContent(BuildContext context) {
     if (isEditing) {
-      return AIconButton(
+      return CircleIconButton(
         onPressed: onDone,
         icon: Icons.check_circle,
         color: C.grey,
@@ -30,29 +30,26 @@ class ReloadButton extends StatelessWidget {
         iconSize: 24,
       );
     }
-    switch (recordState) {
-      case RecordState.idle:
-        return Opacity(
+    return switch (recordState) {
+      RecordState.idle => Opacity(
           opacity: onReload == null ? 0.3 : 1,
-          child: SVGButton(
+          child: CircleButton(
             onPressed: onReload,
-            icon: 'assets/svgs/reload.svg.vec',
+            icon: 'reload',
             color: C.grey,
             iconSize: 24,
             size: 44,
           ),
-        );
-      case RecordState.loading:
-        return const SizedBox();
-      case RecordState.recording:
-        return AIconButton(
+        ),
+      RecordState.loading => const SizedBox(),
+      RecordState.recording => CircleIconButton(
           onPressed: onStop,
           icon: Icons.stop,
           color: C.grey,
           size: 32,
           iconSize: 24,
-        );
-    }
+        )
+    };
   }
 
   @override

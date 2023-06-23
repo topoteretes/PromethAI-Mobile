@@ -1,28 +1,44 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:prometh_ai/model/tree.dart';
-import 'package:prometh_ai/state/app_state.dart';
-import 'package:prometh_ai/state/deepgram.dart';
+import 'package:flutter_segment/flutter_segment.dart';
 
-class PathNotifier extends StateNotifier<List<String>> {
+import 'top_category.dart';
+
+final selectedPath = Provider((ref) {
+  final path = ref.watch(PathNotifier.provider);
+  final topCategory = ref.watch(TopCategoryNotifier.provider);
+  return path[topCategory] ?? [];
+});
+
+class PathNotifier extends StateNotifier<Map<String, List<String>>> {
   final Ref ref;
-  static final provider = StateNotifierProvider<PathNotifier, List<String>>(PathNotifier.new);
+  static final provider = StateNotifierProvider<PathNotifier, Map<String, List<String>>>(PathNotifier.new);
 
-  PathNotifier(this.ref) : super([Tree.starter.children.first.name]);
+  PathNotifier(this.ref) : super({});
 
-  change(String segment) => state = state.isEmpty ? [segment] : [...state..removeLast(), segment];
-
-  add(String segment) => state = [...state, segment];
-
-  back() {
-    final appStateNotifier = ref.read(AppStateNotifier.provider.notifier);
-    final deepgramNotifier = ref.read(DeepgramNotifier.provider.notifier);
-
-    deepgramNotifier.stopRecord(true);
-    state = [...state]..removeLast();
-    if (state.length == 1) {
-      appStateNotifier.start();
-    }
+  change(String segment) {
+    final topCategory = ref.read(TopCategoryNotifier.provider);
+    final currentPath = state[topCategory] ?? [];
+    final newPath = currentPath.isEmpty ? [segment] : [...currentPath..removeLast(), segment];
+    state = {...state, topCategory: newPath};
   }
 
-  reset(List<String> path) => state = path;
+  add(String segment) {
+    final topCategory = ref.read(TopCategoryNotifier.provider);
+    final currentPath = state[topCategory] ?? [];
+    final newPath = [...currentPath, segment];
+
+    Segment.track(eventName: 'Expand subtree', properties: {'path': newPath});
+    state = {...state, topCategory: newPath};
+  }
+
+  back() {
+    final topCategory = ref.read(TopCategoryNotifier.provider);
+    final currentPath = state[topCategory] ?? [];
+
+    Segment.track(eventName: 'Collapse subtree', properties: {'path': currentPath});
+    final newPath = [...currentPath..removeLast()];
+    state = {...state, topCategory: newPath};
+  }
+
+  cleanup() => state = {};
 }

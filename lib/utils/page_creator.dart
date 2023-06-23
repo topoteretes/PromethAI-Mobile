@@ -16,12 +16,12 @@ class APage extends Page {
         reverseTransitionDuration: A.normal,
         pageBuilder: (BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation) => SlideTransition(
           position: Tween<Offset>(
-            begin: Offset(0, isForward ? 1 : -1),
+            begin: Offset(0, isForward ? -1 : 1),
             end: Offset.zero,
           ).animate(
             CurvedAnimation(
               parent: animation,
-              curve: Curves.easeInOut,
+              curve: CV.normal,
             ),
           ),
           child: Container(color: t(context).scaffoldBackgroundColor, child: child),

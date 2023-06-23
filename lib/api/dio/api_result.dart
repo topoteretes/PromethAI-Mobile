@@ -6,8 +6,11 @@ abstract class ApiResult<T> {
   static const String _jsonNodeData = "response";
   static const String _jsonNodeErrors = "errors";
 
-  static ApiResult<T> fromResponse<T>(Response response, T Function(Map<String, dynamic>) mapper) {
+  static ApiResult<T> fromResponse<T>(Response response, T Function(Map<String, dynamic>) mapper, {bool rawResponse = false}) {
     final responseData = response.data;
+    if (rawResponse) {
+      return Success(mapper(response.data));
+    }
 
     if (responseData[_jsonNodeErrors] != null) {
       return ServerError.fromResponse(response);

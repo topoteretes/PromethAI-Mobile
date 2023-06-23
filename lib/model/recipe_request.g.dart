@@ -1,6 +1,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
 // ignore_for_file: non_constant_identifier_names
+
 part of 'recipe_request.dart';
 
 // **************************************************************************
@@ -10,11 +11,13 @@ part of 'recipe_request.dart';
 _$_RecipeRequest _$$_RecipeRequestFromJson(Map<String, dynamic> json) => _$_RecipeRequest(
       userId: json['user_id'] as String,
       sessionId: json['session_id'] as String,
-      factors: (json['factors'] as List<dynamic>).map((e) => NameAmount.fromJson(e as Map<String, dynamic>)).toList(),
+      modelSpeed: json['model_speed'] as String,
+      prompt: json['prompt'] as String,
     );
 
 Map<String, dynamic> _$$_RecipeRequestToJson(_$_RecipeRequest instance) => <String, dynamic>{
       'user_id': instance.userId,
       'session_id': instance.sessionId,
-      'factors': instance.factors,
+      'model_speed': instance.modelSpeed,
+      'prompt': instance.prompt,
     };

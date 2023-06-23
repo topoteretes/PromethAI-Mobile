@@ -8,12 +8,14 @@ part of 'tree.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_Tree _$$_TreeFromJson(Map<String, dynamic> json) => _$_Tree(
-      goal: NameAmount.fromJson(json['goal'] as Map<String, dynamic>),
-      children: (json['children'] as List<dynamic>).map((e) => Tree.fromJson(e as Map<String, dynamic>)).toList(),
+_$_Node _$$_NodeFromJson(Map<String, dynamic> json) => _$_Node(
+      category: json['category'] as String,
+      options: (json['options'] as List<dynamic>?)?.map((e) => Tree.fromJson(e as Map<String, dynamic>)).toList() ?? const [],
+      preference: (json['preference'] as List<dynamic>?)?.map((e) => e as String).toList() ?? const [],
     );
 
-Map<String, dynamic> _$$_TreeToJson(_$_Tree instance) => <String, dynamic>{
-      'goal': instance.goal,
-      'children': instance.children,
+Map<String, dynamic> _$$_NodeToJson(_$_Node instance) => <String, dynamic>{
+      'category': instance.category,
+      'options': instance.options,
+      'preference': instance.preference,
     };

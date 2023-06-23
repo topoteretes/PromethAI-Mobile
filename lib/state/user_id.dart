@@ -5,4 +5,6 @@ class UserIdNotifier extends StateNotifier<String?> {
   static final provider = StateNotifierProvider<UserIdNotifier, String?>(UserIdNotifier.new);
 
   UserIdNotifier(this.ref) : super(null);
+
+  void reset(String userId) => state = userId;
 }

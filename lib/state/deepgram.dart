@@ -36,7 +36,7 @@ class DeepgramNotifier extends StateNotifier<String> {
     state = initialValue;
 
     recordStateNotifier.loading();
-    final permissionStatus = await Permission.microphone.request(); /**/
+    final permissionStatus = await Permission.microphone.request();
     if (![PermissionStatus.granted, PermissionStatus.limited].contains(permissionStatus)) {
       return;
     }

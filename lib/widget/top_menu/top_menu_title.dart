@@ -9,23 +9,28 @@ class TopMenuTitle extends StatelessWidget {
   final Tree node;
   final bool selected;
 
-  const TopMenuTitle({super.key, required this.node, required this.selected});
+  const TopMenuTitle({
+    super.key,
+    required this.node,
+    required this.selected,
+  });
 
   @override
   Widget build(BuildContext context) => Container(
-        alignment: Alignment.bottomCenter,
-        padding: const EdgeInsets.only(bottom: M.small),
-        margin: const EdgeInsets.only(left: M.small, right: M.small),
+        alignment: Alignment.center,
+        height: 24,
+        padding: const EdgeInsets.only(left: M.normal, right: M.normal, bottom: 2),
         decoration: BoxDecoration(
-            border: Border(
-          bottom: BorderSide(
-            color: selected ? C.back : C.front,
-            width: 4,
-          ),
-        )),
+            borderRadius: BorderRadius.circular(12),
+            color: selected ? C.white : C.front,
+            border: Border.all(color: selected ? C.white : C.front, width: 1)),
         child: Text(
-          node.goal.name,
-          style: tt(context).titleLarge!.copyWith(fontWeight: selected ? FontWeight.w700 : FontWeight.normal),
+          node.category.toUpperCase(),
+          style: tt(context).bodySmall!.copyWith(
+                color: selected ? C.front : C.white,
+                fontWeight: selected ? FontWeight.w700 : FontWeight.w500,
+                //height: 1,
+              ),
           softWrap: false,
           overflow: TextOverflow.fade,
         ),

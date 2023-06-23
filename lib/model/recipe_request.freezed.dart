@@ -24,7 +24,9 @@ mixin _$RecipeRequest {
   String get userId => throw _privateConstructorUsedError;
   @JsonKey(name: 'session_id')
   String get sessionId => throw _privateConstructorUsedError;
-  List<NameAmount> get factors => throw _privateConstructorUsedError;
+  @JsonKey(name: "model_speed")
+  String get modelSpeed => throw _privateConstructorUsedError;
+  String get prompt => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -41,7 +43,8 @@ abstract class $RecipeRequestCopyWith<$Res> {
   $Res call(
       {@JsonKey(name: 'user_id') String userId,
       @JsonKey(name: 'session_id') String sessionId,
-      List<NameAmount> factors});
+      @JsonKey(name: "model_speed") String modelSpeed,
+      String prompt});
 }
 
 /// @nodoc
@@ -59,7 +62,8 @@ class _$RecipeRequestCopyWithImpl<$Res, $Val extends RecipeRequest>
   $Res call({
     Object? userId = null,
     Object? sessionId = null,
-    Object? factors = null,
+    Object? modelSpeed = null,
+    Object? prompt = null,
   }) {
     return _then(_value.copyWith(
       userId: null == userId
@@ -70,10 +74,14 @@ class _$RecipeRequestCopyWithImpl<$Res, $Val extends RecipeRequest>
           ? _value.sessionId
           : sessionId // ignore: cast_nullable_to_non_nullable
               as String,
-      factors: null == factors
-          ? _value.factors
-          : factors // ignore: cast_nullable_to_non_nullable
-              as List<NameAmount>,
+      modelSpeed: null == modelSpeed
+          ? _value.modelSpeed
+          : modelSpeed // ignore: cast_nullable_to_non_nullable
+              as String,
+      prompt: null == prompt
+          ? _value.prompt
+          : prompt // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -89,7 +97,8 @@ abstract class _$$_RecipeRequestCopyWith<$Res>
   $Res call(
       {@JsonKey(name: 'user_id') String userId,
       @JsonKey(name: 'session_id') String sessionId,
-      List<NameAmount> factors});
+      @JsonKey(name: "model_speed") String modelSpeed,
+      String prompt});
 }
 
 /// @nodoc
@@ -105,7 +114,8 @@ class __$$_RecipeRequestCopyWithImpl<$Res>
   $Res call({
     Object? userId = null,
     Object? sessionId = null,
-    Object? factors = null,
+    Object? modelSpeed = null,
+    Object? prompt = null,
   }) {
     return _then(_$_RecipeRequest(
       userId: null == userId
@@ -116,10 +126,14 @@ class __$$_RecipeRequestCopyWithImpl<$Res>
           ? _value.sessionId
           : sessionId // ignore: cast_nullable_to_non_nullable
               as String,
-      factors: null == factors
-          ? _value._factors
-          : factors // ignore: cast_nullable_to_non_nullable
-              as List<NameAmount>,
+      modelSpeed: null == modelSpeed
+          ? _value.modelSpeed
+          : modelSpeed // ignore: cast_nullable_to_non_nullable
+              as String,
+      prompt: null == prompt
+          ? _value.prompt
+          : prompt // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -130,8 +144,8 @@ class _$_RecipeRequest implements _RecipeRequest {
   const _$_RecipeRequest(
       {@JsonKey(name: 'user_id') required this.userId,
       @JsonKey(name: 'session_id') required this.sessionId,
-      required final List<NameAmount> factors})
-      : _factors = factors;
+      @JsonKey(name: "model_speed") required this.modelSpeed,
+      required this.prompt});
 
   factory _$_RecipeRequest.fromJson(Map<String, dynamic> json) =>
       _$$_RecipeRequestFromJson(json);
@@ -142,17 +156,15 @@ class _$_RecipeRequest implements _RecipeRequest {
   @override
   @JsonKey(name: 'session_id')
   final String sessionId;
-  final List<NameAmount> _factors;
   @override
-  List<NameAmount> get factors {
-    if (_factors is EqualUnmodifiableListView) return _factors;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_factors);
-  }
+  @JsonKey(name: "model_speed")
+  final String modelSpeed;
+  @override
+  final String prompt;
 
   @override
   String toString() {
-    return 'RecipeRequest(userId: $userId, sessionId: $sessionId, factors: $factors)';
+    return 'RecipeRequest(userId: $userId, sessionId: $sessionId, modelSpeed: $modelSpeed, prompt: $prompt)';
   }
 
   @override
@@ -163,13 +175,15 @@ class _$_RecipeRequest implements _RecipeRequest {
             (identical(other.userId, userId) || other.userId == userId) &&
             (identical(other.sessionId, sessionId) ||
                 other.sessionId == sessionId) &&
-            const DeepCollectionEquality().equals(other._factors, _factors));
+            (identical(other.modelSpeed, modelSpeed) ||
+                other.modelSpeed == modelSpeed) &&
+            (identical(other.prompt, prompt) || other.prompt == prompt));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, userId, sessionId,
-      const DeepCollectionEquality().hash(_factors));
+  int get hashCode =>
+      Object.hash(runtimeType, userId, sessionId, modelSpeed, prompt);
 
   @JsonKey(ignore: true)
   @override
@@ -189,7 +203,8 @@ abstract class _RecipeRequest implements RecipeRequest {
   const factory _RecipeRequest(
       {@JsonKey(name: 'user_id') required final String userId,
       @JsonKey(name: 'session_id') required final String sessionId,
-      required final List<NameAmount> factors}) = _$_RecipeRequest;
+      @JsonKey(name: "model_speed") required final String modelSpeed,
+      required final String prompt}) = _$_RecipeRequest;
 
   factory _RecipeRequest.fromJson(Map<String, dynamic> json) =
       _$_RecipeRequest.fromJson;
@@ -201,7 +216,10 @@ abstract class _RecipeRequest implements RecipeRequest {
   @JsonKey(name: 'session_id')
   String get sessionId;
   @override
-  List<NameAmount> get factors;
+  @JsonKey(name: "model_speed")
+  String get modelSpeed;
+  @override
+  String get prompt;
   @override
   @JsonKey(ignore: true)
   _$$_RecipeRequestCopyWith<_$_RecipeRequest> get copyWith =>

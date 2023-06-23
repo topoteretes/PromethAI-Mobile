@@ -1,133 +1,145 @@
+import 'package:collection/collection.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:prometh_ai/api/api.dart';
 import 'package:prometh_ai/api/dio/dio_ext.dart';
 import 'package:prometh_ai/ext/list_ext.dart';
-import 'package:prometh_ai/model/diet_sub_goal_request.dart';
-import 'package:prometh_ai/model/diet_sub_goal_response.dart';
-import 'package:prometh_ai/model/name_amount.dart';
+import 'package:prometh_ai/ext/string_ext.dart';
+import 'package:prometh_ai/model/prompt_category_request.dart';
+import 'package:prometh_ai/model/prompt_decompose_request.dart';
+import 'package:prometh_ai/model/prompt_response.dart';
 import 'package:prometh_ai/model/tree.dart';
-import 'package:prometh_ai/model/voice_input_request.dart';
-import 'package:prometh_ai/state/app_state.dart';
-import 'package:prometh_ai/state/deepgram.dart';
 import 'package:prometh_ai/state/error.dart';
-import 'package:prometh_ai/state/mode_speed.dart';
-import 'package:prometh_ai/state/user_id.dart';
-import 'package:prometh_ai/utils/logger.dart';
+import 'package:prometh_ai/state/top_category.dart';
 
+import 'mode_speed.dart';
 import 'path.dart';
+import 'prompt.dart';
 import 'session_id.dart';
+import 'user_id.dart';
 
-Map<dynamic, dynamic> _folder(accu, g) => {...accu, g.goalName: g.subGoals.map((g) => Tree(goal: g, children: []))};
+CancelToken? _token;
 
-MapEntry<String, List<Tree>> _sortMapper(key, value) => MapEntry(key, [...value]..sort(_sorter));
+final selectedTree = Provider((ref) {
+  final topCategory = ref.watch(TopCategoryNotifier.provider);
+  final tree = ref.watch(TreeNotifier.provider);
+  return tree.firstWhereOrNull((t) => t.category == topCategory);
+});
 
-int _sorter(Tree a, Tree b) => a.name.compareTo(b.name);
-
-CancelToken? _voiceInputToken;
-CancelToken? _dietSubGoalToken;
-
-class TreeNotifier extends StateNotifier<Tree> {
+class CategoryFetchedNotifier extends StateNotifier<bool> {
   final Ref ref;
-  static final provider = StateNotifierProvider<TreeNotifier, Tree>(TreeNotifier.new);
+  static final provider = StateNotifierProvider<CategoryFetchedNotifier, bool>(CategoryFetchedNotifier.new);
 
-  TreeNotifier(this.ref) : super(Tree.starter);
+  CategoryFetchedNotifier(this.ref) : super(false);
 
-  updateAmount(NameAmount goal) {
-    final path = ref.read(PathNotifier.provider);
-    state = state.updateAmount([...path, goal.name], goal.amount);
-  }
+  reset() => state = false;
+  done() => state = true;
+}
 
-  goDown(Tree node) async {
-    final deepgramNotifier = ref.read(DeepgramNotifier.provider.notifier);
-    final path = ref.read(PathNotifier.provider);
-    final pathNotifier = ref.read(PathNotifier.provider.notifier);
+class TreeNotifier extends StateNotifier<List<Tree>> {
+  final Ref ref;
+  static final provider = StateNotifierProvider<TreeNotifier, List<Tree>>(TreeNotifier.new);
 
-    final selected = state.findSelected(path);
-    pathNotifier.add(node.name);
+  TreeNotifier(this.ref) : super([]);
 
-    final appStateNotifier = ref.read(AppStateNotifier.provider.notifier);
-    deepgramNotifier.stopRecord(true);
-    appStateNotifier.goal();
+  refresh({String promptMaybe = ""}) async {
+    final topCategoryNotifier = ref.read(TopCategoryNotifier.provider.notifier);
+    final promptNotifier = ref.read(PromptNotifier.provider.notifier);
+    final categoryFetchedNotifier = ref.read(CategoryFetchedNotifier.provider.notifier);
 
-    await updateGoals(path, selected.children);
-  }
-
-  reset(Tree tree) => state = tree;
-
-  Future<void> updateGoals(List<String> path, List<Tree> topLevelGoals) async {
-    if (topLevelGoals.first.children.isNotEmpty) {
+    final currentPrompt = ref.read(PromptNotifier.provider);
+    final prompt = promptMaybe.isBlank ? currentPrompt.current : promptMaybe.trim();
+    if (prompt == currentPrompt.current) {
       return;
     }
 
-    final nodeMapByGoalName = await _getGoals(topLevelGoals);
-    final goalsWithChildren = topLevelGoals.map((g) => g.copyWith(children: nodeMapByGoalName[g.name]!)).toList();
-    state = state.updateChildren(path, goalsWithChildren);
-  }
+    categoryFetchedNotifier.reset();
+    promptNotifier.reset(prompt);
+    state = [];
 
-  Future<void> replaceGoals(List<String> path, List<Tree> topLevelGoals, String query) async {
-    final pathNotifier = ref.read(PathNotifier.provider.notifier);
-    pathNotifier.back();
-
-    final nodeMapByGoalName = await _replaceGoals(query);
-
-    final subTree = nodeMapByGoalName.keys.mapp((e) => Tree(goal: NameAmount(name: e, amount: 50), children: nodeMapByGoalName[e]!));
-    L.d("----->subTree: $subTree");
-    L.d("----->path: $subTree");
-    final goalsWithChildren = topLevelGoals.map((g) => g.copyWith(children: subTree)).toList();
-    state = state.updateChildren(path, goalsWithChildren);
-    pathNotifier.add(subTree.first.name);
-  }
-
-  Future<Map<String, List<Tree>>> _getGoals(List<Tree> factors) async {
-    final payload = DietSubGoalRequest(
+    final payload = PromptDecomposeRequest(
       userId: ref.read(UserIdNotifier.provider)!,
       sessionId: ref.read(sessionId)!,
       modelSpeed: ref.read(modelSpeed),
-      factors: factors.mapp((n) => n.goal),
+      prompt: prompt,
     );
-
-    _dietSubGoalToken?.cancel();
-    _dietSubGoalToken = CancelToken();
+    _token?.cancel();
+    _token = CancelToken();
 
     try {
-      final result = await ref.read(dio).safePost(
-            '/generate-diet-sub-goal',
-            DietSubGoalResponse.fromJson,
-            cancelToken: _dietSubGoalToken,
+      final response = await ref.read(dio).safePost(
+            '/prompt-to-choose-meal-tree',
+            PromptResponse.fromJson,
+            cancelToken: _token,
             data: {'payload': payload.toJson()},
             ref: ref,
           );
-      return result.subGoals.fold({}, _folder).map(_sortMapper);
+      state = response.results;
+
+      final originalMap = {for (var e in state) e.category: e.preference.first.replaceAll("_", " ")};
+      promptNotifier.storeMap(originalMap);
+      topCategoryNotifier.update(state.first.category);
+      await getCategories();
+      categoryFetchedNotifier.done();
     } on Exception catch (e) {
       ref.read(ErrorNotifier.provider.notifier).store(e.toString());
       rethrow;
     }
   }
 
-  Future<Map<String, List<Tree>>> _replaceGoals(String query) async {
-    final payload = VoiceInputRequest(
+  getCategories() async {
+    final promptStruct = state.map((e) => "${e.category}=${e.preference.first}").join(";");
+    final payload = PromptCategoryRequest(
       userId: ref.read(UserIdNotifier.provider)!,
       sessionId: ref.read(sessionId)!,
-      query: query,
       modelSpeed: ref.read(modelSpeed),
+      promptStruct: promptStruct,
     );
-    _voiceInputToken?.cancel();
-    _voiceInputToken = CancelToken();
+    _token?.cancel();
+    _token = CancelToken();
 
     try {
-      final result = await ref.read(dio).safePost(
-            '/voice-input',
-            DietSubGoalResponse.fromJson,
-            cancelToken: _voiceInputToken,
+      final response = await ref.read(dio).safePost(
+            '/prompt-to-decompose-meal-tree-categories',
+            PromptResponse.fromJson,
+            cancelToken: _token,
             data: {'payload': payload.toJson()},
             ref: ref,
           );
 
-      return result.subGoals.fold({}, _folder).map(_sortMapper);
+      final existingTopCategories = state.mapp((e) => e.category);
+
+      // filter out suggestions not within the decision points
+      final newTrees = response.results.where((e) => existingTopCategories.contains(e.category));
+
+      // merge new results with tree root, keeping the original option at the top
+      state = state.mapp((e) {
+        final newTree = newTrees.firstWhereOrNull((f) => f.category == e.category);
+        final newOptions = newTree?.options ?? [];
+        final options = [...newOptions, ...e.options]..sort((a, b) => a.category.toLowerCase().compareTo(b.category.toLowerCase()));
+        return e.copyWith(options: options, preference: [...e.preference]);
+      });
     } on Exception catch (e) {
       ref.read(ErrorNotifier.provider.notifier).store(e.toString());
       rethrow;
     }
   }
+
+  togglePreference(Tree selectedTree, String preference) {
+    final promptNotifier = ref.read(PromptNotifier.provider.notifier);
+    final topCategory = ref.read(TopCategoryNotifier.provider);
+    final allPath = ref.read(PathNotifier.provider);
+
+    final path = allPath[topCategory] ?? [];
+    final topTree = state.firstWhere((t) => t.category == topCategory);
+
+    final updatedPreference =
+        selectedTree.preference.contains(preference) && selectedTree.category != topCategory ? <String>[] : [preference];
+    final tree = topTree.updateSubTree(path, selectedTree.copyWith(preference: updatedPreference));
+
+    state = state.mapp((e) => e.category == topCategory ? tree : e);
+    promptNotifier.rewrite();
+  }
+
+  cleanup() => state = [];
 }
