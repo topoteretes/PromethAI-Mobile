@@ -1,6 +1,6 @@
 
 
-# PromethAI Mobile Client (Flutter)
+# PromethAI Mobile Client (Dart/Flutter)
 
 
 <p align="center">
