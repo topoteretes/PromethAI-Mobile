@@ -162,9 +162,7 @@ Given its experimental nature, PromethAI may generate content or perform actions
 
 By utilizing PromethAI, you agree to protect, defend, and absolve the creators, contributors, and any affiliated parties from any claims, damages, losses, liabilities, costs, and expenses (including reasonable attorneys' fees) that arise from your use of this software or your violation of these terms.
 
-# 📝 License
 
-MIT License
 
 
 # Credits: 
