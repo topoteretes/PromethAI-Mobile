@@ -1,4 +1,5 @@
 import 'package:amplify_flutter/amplify_flutter.dart';
+import 'package:app_tracking_transparency/app_tracking_transparency.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_segment/flutter_segment.dart';
@@ -28,6 +29,13 @@ class HomeScreen extends HookConsumerWidget {
     final appState = ref.watch(AppStateNotifier.provider);
     final error = ref.watch(ErrorNotifier.provider);
 
+    enableTracking(TrackingNotifier trackingNotifier) async {
+      if (await AppTrackingTransparency.trackingAuthorizationStatus == TrackingStatus.notDetermined) {
+        final result = await AppTrackingTransparency.requestTrackingAuthorization();
+        trackingNotifier.setTracking(result == TrackingStatus.authorized);
+      }
+    }
+
     useEffect(() {
       final userNotifier = ref.read(UserIdNotifier.provider.notifier);
       final trackingNotifier = ref.read(TrackingNotifier.provider.notifier);
@@ -36,6 +44,7 @@ class HomeScreen extends HookConsumerWidget {
       });
       userNameNotifier.initialize();
       trackingNotifier.init(sharedPreferences!);
+      enableTracking(trackingNotifier);
       return null;
     }, []);
 

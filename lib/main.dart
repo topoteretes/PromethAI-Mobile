@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:amplify_flutter/amplify_flutter.dart';
 import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
+import 'package:app_tracking_transparency/app_tracking_transparency.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:amplify_authenticator/amplify_authenticator.dart';
@@ -46,10 +47,6 @@ void main() async {
   sharedPreferences = await SharedPreferences.getInstance();
 
   runApp(const App());
-
-/*  if (await AppTrackingTransparency.trackingAuthorizationStatus == TrackingStatus.notDetermined) {
-    final result = await AppTrackingTransparency.requestTrackingAuthorization();
-  }*/
 }
 
 _configureAmplify() async {

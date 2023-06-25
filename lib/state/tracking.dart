@@ -6,7 +6,7 @@ class TrackingNotifier extends StateNotifier<bool> {
   final Ref ref;
   static final provider = StateNotifierProvider<TrackingNotifier, bool>(TrackingNotifier.new);
 
-  TrackingNotifier(this.ref) : super(true);
+  TrackingNotifier(this.ref) : super(false);
 
   static const _key = "segment_tracking";
 
@@ -14,11 +14,13 @@ class TrackingNotifier extends StateNotifier<bool> {
 
   init(SharedPreferences sharedPreferences) {
     _sharedPreferences = sharedPreferences;
-    state = _sharedPreferences?.getBool(_key) ?? true;
+    state = _sharedPreferences?.getBool(_key) ?? false;
   }
 
-  toggle() {
-    state = !state;
+  toggle() => setTracking(!state);
+
+  setTracking(bool enabled) {
+    state = enabled;
     if (state) {
       Segment.disable();
     } else {
