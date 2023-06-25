@@ -25,9 +25,9 @@
 <a href="https://github.com/topoteretes/PromethAI-Mobile/pulls" target="blank">
 <img src="https://img.shields.io/github/issues-pr/topoteretes/PromethAI-Mobile?style=for-the-badge" alt="promethAI pull-requests"/>
 </a>
-<a href='https://github.com/topoteretes/PromethAI-Mobile/releases'>
+<!-- <a href='https://github.com/topoteretes/PromethAI-Mobile/releases'>
 <img src='https://img.shields.io/github/release/topoteretes/PromethAI-Mobile?&label=Latest&style=for-the-badge'>
-</a>
+</a> -->
 
 <a href="https://github.com/topoteretes/PromethAI-Mobile/commits" target="blank">
 <img src="https://img.shields.io/github/commits-since/topoteretes/PromethAI-Mobile/v0.0.3.svg?style=for-the-badge" alt="promethAI Commits"/>
