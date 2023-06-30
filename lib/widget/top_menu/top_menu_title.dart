@@ -29,7 +29,6 @@ class TopMenuTitle extends StatelessWidget {
           style: tt(context).bodySmall!.copyWith(
                 color: selected ? C.front : C.white,
                 fontWeight: selected ? FontWeight.w700 : FontWeight.w500,
-                //height: 1,
               ),
           softWrap: false,
           overflow: TextOverflow.fade,

@@ -1,7 +1,7 @@
 name: prometh_ai
 description: PromethAI.
 publish_to: 'none'
-version: 1.0.23+23
+version: 1.0.24+24
 
 environment:
   sdk: '>=3.0.0 <4.0.0'
@@ -40,7 +40,8 @@ dependencies:
   scrollable_positioned_list: any
   smooth_page_indicator: any
   shared_preferences: any
-  sound_stream: any
+  sound_stream:
+    path: plugins/sound_stream-0.3.0
   fluttertoast: any
   throttling: any
   url_launcher: any

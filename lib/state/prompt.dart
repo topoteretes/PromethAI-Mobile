@@ -24,9 +24,9 @@ class PromptNotifier extends StateNotifier<Prompt> {
   Timer? cancelTimer;
   static final provider = StateNotifierProvider<PromptNotifier, Prompt>(PromptNotifier.new);
 
-  PromptNotifier(this.ref) : super((const Prompt(original: "", current: "", changed: "", updating: false, originalMap: {})));
+  PromptNotifier(this.ref) : super((const Prompt(original: "", current: "", changed: [], updating: false, originalMap: {})));
 
-  reset(String newPrompt) => state = Prompt(original: newPrompt, changed: "", current: newPrompt, updating: false, originalMap: {});
+  reset(String newPrompt) => state = Prompt(original: newPrompt, changed: [], current: newPrompt, updating: false, originalMap: {});
 
   storeMap(Map<String, String> map) => state = state.copyWith(originalMap: map);
 
@@ -37,18 +37,19 @@ class PromptNotifier extends StateNotifier<Prompt> {
 
     // Start with the original prompt
     var rawPrompt = state.original.toLowerCase();
-    var changed = "";
+    var changed = <String>[];
 
     // Find every leaf in all categories and rewrite
     for (final t in trees) {
       final category = t.category;
       final path = allPath[category] ?? [];
       final selectedTree = t.getLeaf(path);
+      final parentPreferences = path.isNotEmpty ? t.getLeaf([...path]..removeLast()).preference : [];
       final from = state.originalMap[category]!.toLowerCase();
-      final to = selectedTree.preference.first.toLowerCase();
+      final to = [...selectedTree.preference, ...parentPreferences].join(" & ").toLowerCase();
 
       if (category == topCategory) {
-        changed = to;
+        changed = to.split(" & ");
       }
 
       rawPrompt = rawPrompt.replaceAll(from, to);

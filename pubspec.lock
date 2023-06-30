@@ -1221,10 +1221,9 @@ packages:
   sound_stream:
     dependency: "direct main"
     description:
-      name: sound_stream
-      sha256: "031bba4a342df5d2b9dedf44abe4290fdf1a68a4ccf6601e984ef86631672028"
-      url: "https://pub.dev"
-    source: hosted
+      path: "plugins/sound_stream-0.3.0"
+      relative: true
+    source: path
     version: "0.3.0"
   source_gen:
     dependency: transitive

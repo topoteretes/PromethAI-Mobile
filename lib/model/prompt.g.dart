@@ -11,7 +11,7 @@ part of 'prompt.dart';
 _$_Prompt _$$_PromptFromJson(Map<String, dynamic> json) => _$_Prompt(
       original: json['original'] as String,
       current: json['current'] as String,
-      changed: json['changed'] as String,
+      changed: (json['changed'] as List<dynamic>).map((e) => e as String).toList(),
       originalMap: Map<String, String>.from(json['originalMap'] as Map),
       updating: json['updating'] as bool,
     );

@@ -9,8 +9,10 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_segment/flutter_segment.dart';
 import 'package:prometh_ai/screens/home_screen.dart';
+import 'package:prometh_ai/state/user_id.dart';
 import 'package:prometh_ai/theme.dart';
 import 'package:device_info_plus/device_info_plus.dart';
+import 'package:prometh_ai/utils/after_delay.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'amplifyconfiguration.dart';
 import 'env/.env.dart';
@@ -38,16 +40,20 @@ void main() async {
   await initStore();
 
   sharedPreferences = await SharedPreferences.getInstance();
-  var trackingStatus = await AppTrackingTransparency.trackingAuthorizationStatus;
 
+  var trackingStatus = await AppTrackingTransparency.trackingAuthorizationStatus;
   if (trackingStatus == TrackingStatus.notDetermined) {
     trackingStatus = await AppTrackingTransparency.requestTrackingAuthorization();
-    sharedPreferences?.setBool(TrackingNotifier.attKey, trackingStatus == TrackingStatus.authorized);
+    final trackingEnabled = trackingStatus == TrackingStatus.authorized;
+    sharedPreferences?.setBool(TrackingNotifier.attKey, trackingEnabled);
+
+    final id = trackingEnabled ? await AppTrackingTransparency.getAdvertisingIdentifier() : uuid();
+    sharedPreferences?.setString(UserIdNotifier.key, id);
   }
 
   try {
     await _configureAmplify();
-    _configureSegment(trackingStatus == TrackingStatus.authorized);
+    _configureSegment();
   } on AmplifyAlreadyConfiguredException {
     debugPrint('Amplify configuration failed.');
   }
@@ -62,17 +68,14 @@ _configureAmplify() async {
   await Amplify.configure(amplifyconfig);
 }
 
-_configureSegment(bool trackingEnabled) {
-  Segment.config(
-    options: SegmentConfig(
-      writeKey: Environment.segmentApiKey,
-      trackApplicationLifecycleEvents: true,
-      amplitudeIntegrationEnabled: false,
-      debug: true,
-    ),
-  );
-  trackingEnabled ? Segment.enable() : Segment.disable();
-}
+_configureSegment() => Segment.config(
+      options: SegmentConfig(
+        writeKey: Environment.segmentApiKey,
+        trackApplicationLifecycleEvents: true,
+        amplitudeIntegrationEnabled: false,
+        debug: true,
+      ),
+    );
 
 class App extends StatelessWidget {
   const App({super.key});

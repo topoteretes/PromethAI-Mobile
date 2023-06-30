@@ -7,10 +7,13 @@ import 'package:prometh_ai/state/path.dart';
 import 'package:prometh_ai/state/tree.dart';
 import 'package:prometh_ai/widget/option_row.dart';
 
+import 'cascading_wrapper.dart';
+
 class OneSubTree extends HookConsumerWidget {
   final Tree tree;
+  final List<String> path;
 
-  const OneSubTree({super.key, required this.tree});
+  const OneSubTree({super.key, required this.tree, required this.path});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -21,14 +24,17 @@ class OneSubTree extends HookConsumerWidget {
 
     return ListView(
         padding: const EdgeInsets.fromLTRB(16, 24, 16, 16),
-        physics: const NeverScrollableScrollPhysics(),
         children: nodes.mapp(
-          (n) => OptionRow(
-            title: n.category,
-            selected: tree.preference.contains(n.category),
-            hasOptions: n.options.isNotEmpty,
-            onSelect: () => treeNotifier.togglePreference(tree, n.category),
-            onDetail: () => pathNotifier.add(n.category),
+          (n) => CascadingWrapper(
+            path: path,
+            child: OptionRow(
+              title: n.category,
+              selected: tree.preference.contains(n.category),
+              hasOptions: n.options.isNotEmpty,
+              onSelect: () => treeNotifier.togglePreference(tree, n.category),
+              onDetail: () => pathNotifier.add(n.category),
+              noMargin: true,
+            ),
           ),
         ));
   }

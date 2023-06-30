@@ -14,6 +14,7 @@ class RefineBody extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final topCategoryNotifier = ref.read(TopCategoryNotifier.provider.notifier);
     final tree = ref.watch(TreeNotifier.provider);
     final topCategory = ref.watch(TopCategoryNotifier.provider);
     final categoryFetched = ref.watch(CategoryFetchedNotifier.provider);
@@ -44,7 +45,9 @@ class RefineBody extends HookConsumerWidget {
             Expanded(
               child: PageView(
                 controller: controller,
-                physics: const NeverScrollableScrollPhysics(),
+                onPageChanged: (page) {
+                  topCategoryNotifier.update(tree[page].category);
+                },
                 children: tree.mapp((c) => OneCategory(category: c.category)),
               ),
             ),

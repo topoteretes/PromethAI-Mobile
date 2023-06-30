@@ -45,7 +45,9 @@ class RefineTop extends HookConsumerWidget {
             child: SizedBox(
                 height: 80,
                 child: Center(
-                  child: prompt.updating ? const Progress() : MarkupPrompt(prompt: prompt.current, emphasized: prompt.changed),
+                  child: prompt.updating
+                      ? const Progress()
+                      : SingleChildScrollView(child: MarkupPrompt(prompt: prompt.current, emphasized: prompt.changed)),
                 ))),
         if (tree.isNotEmpty) const SizedBox(height: 24),
         tree.isNotEmpty ? TopMenu(nodes: tree) : const SizedBox()

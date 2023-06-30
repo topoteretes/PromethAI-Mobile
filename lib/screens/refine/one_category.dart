@@ -47,7 +47,7 @@ class OneCategory extends HookConsumerWidget {
         controller: controller,
         physics: const NeverScrollableScrollPhysics(),
         scrollDirection: Axis.vertical,
-        children: pathToTrees.mapp((t) => OneSubTree(tree: t)),
+        children: pathToTrees.mapp((t) => OneSubTree(tree: t, path: path)),
       ),
     );
   }

@@ -116,7 +116,9 @@ class TreeNotifier extends StateNotifier<List<Tree>> {
       state = state.mapp((e) {
         final newTree = newTrees.firstWhereOrNull((f) => f.category == e.category);
         final newOptions = newTree?.options ?? [];
-        final options = [...newOptions, ...e.options]..sort((a, b) => a.category.toLowerCase().compareTo(b.category.toLowerCase()));
+        final options = [
+          ...{...newOptions, ...e.options} // remove duplicates
+        ]..sort((a, b) => a.category.toLowerCase().compareTo(b.category.toLowerCase()));
         return e.copyWith(options: options, preference: [...e.preference]);
       });
     } on Exception catch (e) {
@@ -133,9 +135,21 @@ class TreeNotifier extends StateNotifier<List<Tree>> {
     final path = allPath[topCategory] ?? [];
     final topTree = state.firstWhere((t) => t.category == topCategory);
 
+/*
     final updatedPreference =
         selectedTree.preference.contains(preference) && selectedTree.category != topCategory ? <String>[] : [preference];
-    final tree = topTree.updateSubTree(path, selectedTree.copyWith(preference: updatedPreference));
+*/
+    final alreadyContains = selectedTree.preference.contains(preference);
+    final moreThanOne = selectedTree.preference.length > 1;
+    final updatedPreference = alreadyContains && moreThanOne
+        ? [...selectedTree.preference.whereNot((e) => e == preference)]
+        : [...selectedTree.preference, preference];
+
+    final tree = topTree.updateSubTree(
+        path,
+        selectedTree.copyWith(preference: [
+          ...{...updatedPreference}
+        ]));
 
     state = state.mapp((e) => e.category == topCategory ? tree : e);
     promptNotifier.rewrite();

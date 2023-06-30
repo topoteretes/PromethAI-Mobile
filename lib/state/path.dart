@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_segment/flutter_segment.dart';
 
+import 'prompt.dart';
 import 'top_category.dart';
 
 final selectedPath = Provider((ref) {
@@ -24,11 +25,14 @@ class PathNotifier extends StateNotifier<Map<String, List<String>>> {
 
   add(String segment) {
     final topCategory = ref.read(TopCategoryNotifier.provider);
+    final promptNotifier = ref.read(PromptNotifier.provider.notifier);
     final currentPath = state[topCategory] ?? [];
     final newPath = [...currentPath, segment];
 
     Segment.track(eventName: 'Expand subtree', properties: {'path': newPath});
     state = {...state, topCategory: newPath};
+
+    promptNotifier.rewrite();
   }
 
   back() {

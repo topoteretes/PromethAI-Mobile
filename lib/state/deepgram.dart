@@ -3,6 +3,7 @@ import 'dart:convert';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:prometh_ai/utils/logger.dart';
 import 'package:sound_stream/sound_stream.dart';
 import 'package:web_socket_channel/io.dart';
 
