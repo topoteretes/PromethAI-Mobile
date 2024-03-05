@@ -1,0 +1,72 @@
+name: prometh_ai
+description: PromethAI.
+publish_to: 'none'
+version: 1.0.54+54
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+dependencies:
+  flutter:
+    sdk: flutter
+  amplify_auth_cognito: any
+  amplify_authenticator: any
+  amplify_flutter: any
+  app_tracking_transparency: any
+  http: any
+  animated_text_kit: any
+  async: any
+  cached_network_image: any
+  collection: any
+  collection_ext: any
+  connectivity_plus: any
+  device_info_plus: any
+  dio: any
+  hive: any
+  dio_cache_interceptor: any
+  dio_cache_interceptor_hive_store: any
+  flutter_hooks: any
+  flutter_riverpod: any
+  flutter_secure_storage: any
+  flutter_segment: any
+  flutter_svg: any
+  freezed_annotation: any
+  google_fonts: any
+  hooks_riverpod: any
+  hydrated_riverpod: any
+  intl: any
+  logger: any
+  path: any
+  path_provider: any
+  permission_handler: any
+  pexels_api: any
+  pretty_dio_logger: any
+  scrollable_positioned_list: any
+  smooth_page_indicator: any
+  shared_preferences: any
+  sound_stream:
+    path: plugins/sound_stream-0.3.0
+  fluttertoast: any
+  throttling: any
+  flutter_slidable: any
+  url_launcher: any
+  uuid: any
+  vector_graphics: any
+  vector_graphics_compiler: any
+  vector_math: any
+  web_socket_channel: any
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_native_splash: any
+  flutter_lints: ^2.0.0
+  image_res: any
+  build_runner: any
+  freezed: any
+  json_serializable: any
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/svgs/
+    - assets/images/
